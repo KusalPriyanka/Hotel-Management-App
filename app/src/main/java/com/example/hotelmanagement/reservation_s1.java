@@ -3,6 +3,7 @@ package com.example.hotelmanagement;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
@@ -15,9 +16,9 @@ import java.util.Locale;
 
 public class reservation_s1 extends AppCompatActivity {
 
-    final Calendar myCalendar = Calendar.getInstance();
-    EditText checkin = findViewById(R.id.checkindate);
-    EditText checkout = findViewById(R.id.checkoutdate);
+    private final Calendar myCalendar = Calendar.getInstance();
+    private EditText checkin , checkout , checkintime , checkouttime;
+    private int hour = -1, min = -1;
 
     DatePickerDialog.OnDateSetListener checkInDate = new DatePickerDialog.OnDateSetListener() {
 
@@ -43,10 +44,42 @@ public class reservation_s1 extends AppCompatActivity {
         }
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation_s1);
+
+        checkin = findViewById(R.id.checkindate);
+        checkout = findViewById(R.id.checkoutdate);
+        checkintime = findViewById(R.id.checkintime);
+        checkouttime = findViewById(R.id.checkouttime);
+
+        checkintime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (hour == -1 || min == -1) {
+                    Calendar c = Calendar.getInstance();
+                    hour = c.get(Calendar.HOUR);
+                    min = c.get(Calendar.MINUTE);
+                }
+                showTimeDialogCheckin(view, hour, min);
+            }
+        });
+
+        checkouttime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (hour == -1 || min == -1) {
+                    Calendar c = Calendar.getInstance();
+                    hour = c.get(Calendar.HOUR);
+                    min = c.get(Calendar.MINUTE);
+                }
+                showTimeDialogCheckout(view, hour, min);
+            }
+        });
+
+
 
 
     }
@@ -74,7 +107,37 @@ public class reservation_s1 extends AppCompatActivity {
         else if(status == 1){
             checkout.setText(sdf.format(myCalendar.getTime()));
         }
-
-
     }
+
+    public void showTimeDialogCheckin(View v, int hour, int min) {
+        (new TimePickerDialog(this, timeSetListenerCheckin, hour, min, true)).show();
+    }
+
+    public TimePickerDialog.OnTimeSetListener timeSetListenerCheckin = new TimePickerDialog.OnTimeSetListener() {
+
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+            hour = hourOfDay;
+            min = minute;
+
+            checkintime.setText(hour + " : " + min);
+        }
+    };
+
+    public void showTimeDialogCheckout(View v, int hour, int min) {
+        (new TimePickerDialog(this, timeSetListenerCheckout, hour, min, true)).show();
+    }
+
+    public TimePickerDialog.OnTimeSetListener timeSetListenerCheckout = new TimePickerDialog.OnTimeSetListener() {
+
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+            hour = hourOfDay;
+            min = minute;
+
+            checkouttime.setText(hour + " : " + min);
+        }
+    };
 }
