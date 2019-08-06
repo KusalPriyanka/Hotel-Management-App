@@ -78,5 +78,65 @@
         app:srcCompat="@drawable/booking" />
 
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="#d1d1d1"
+        app:cardCornerRadius="20dp"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.23">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#d1d1d1"
+            android:elevation="4dp"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/cardview_image2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="18dp"
+                android:src="@drawable/booking" />
+
+            <TextView
+                android:id="@+id/cardview_list_title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/cardview_image2"
+                android:paddingBottom="5dp"
+                android:text="Viral Android"
+                android:textStyle="bold"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/short_description2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cardview_list_title2"
+                android:layout_toRightOf="@+id/cardview_image2"
+                android:text="Free android tutorials and examples for beginners and expert."
+                android:textColor="#8b8b8b" />
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,20 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
-        <activity android:name=".Hall_Homes"></activity>
-        <activity android:name=".Dininig_Home" />
-        <activity android:name=".reservation_s1"></activity>
-        <activity android:name=".MainActivity">
-=======
-        <activity android:name=".reservation_s1">
->>>>>>> origin/master
+        <activity android:name=".room_managment">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".reservation_s1">
+
+        </activity>
+
         <activity android:name=".MainActivity">
 
         </activity>
