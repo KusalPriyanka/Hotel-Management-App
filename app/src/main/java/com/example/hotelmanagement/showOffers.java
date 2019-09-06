@@ -1,4 +1,4 @@
-package com.example.hotelapp;
+package com.example.hotelmanagement;
 
 import androidx.appcompat.app.AppCompatActivity;
 

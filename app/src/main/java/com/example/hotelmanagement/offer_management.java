@@ -1,28 +1,27 @@
 package com.example.hotelmanagement;
 
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class offer_management extends AppCompatActivity {
 
-    CardView reservation;
+    Button addOffer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_offer_management);
 
-        reservation = findViewById(R.id.reservation);
+        addOffer = findViewById(R.id.addOffer);
 
-        reservation.setOnClickListener(new View.OnClickListener() {
+        addOffer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,reservation_s1.class);
+                Intent intent = new Intent(offer_management.this,addOffer.class);
                 startActivity(intent);
             }
         });
