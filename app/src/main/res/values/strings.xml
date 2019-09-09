@@ -5,4 +5,66 @@
     <string name="Hello">Hello,</string>
     <string name="desAvatar">Avatar Image</string>
     <string name="title_activity_room_management">room_management</string>
+
+
+    <string name="MainMeals">Main Meals</string>
+    <string name="Pastry_Shop">Pastry Shop</string>
+    <string name="Lobby_bar">Lobby Bar</string>
+    <string name="available_times">Available Times</string>
+    <string name="food_type">Food Type</string>
+    <string name="price">Price</string>
+    <string name="regular">Regular -</string>
+    <string name="large">Large -</string>
+    <string name="end">*******</string>
+    <string name="dinner">Dinner</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="chinese_special_noodles">Chinese Special Noodles</string>
+    <string name="indian_rice_and_curry">Indian Rice And Curry</string>
+    <string name="_350_00">350.00/-</string>
+    <string name="lunch">Lunch</string>
+    <string name="_550_00">550.00/-</string>
+    <string name="thai_sea_food_rice">Thai Sea food Rice</string>
+    <string name="nasi_goreng_dragon_pack">Nasi Goreng Dragon Pack</string>
+    <string name="_799_99">799.99/-</string>
+    <string name="paella_persian_saffron">Paella Persian Saffron</string>
+    <string name="_999_99">999.99/-</string>
+    <string name="lamb_dum_biryani">Lamb Dum Biryani</string>
+    <string name="_699_99">699.99/-</string>
+    <string name="_299_99">299.99/-</string>
+    <string name="_150_00">150.00/-</string>
+    <string name="pastry">Pastry</string>
+    <string name="meal_01">Meal-01</string>
+    <string name="chinese_special_noodloes">Chinese Special Noodloes</string>
+    <string name="enter_meal_name">Enter Meal Name</string>
+    <string name="enter_meal_type">Enter Meal Type</string>
+    <string name="enter_normal_price">Enter Normal Price</string>
+    <string name="enter_large_price">Enter Large Price</string>
+    <string name="filo_pastry">Filo Pastry</string>
+    <string name="egg_york_pastry">Egg York Pastry</string>
+    <string name="_250_00">250.00/-</string>
+    <string name="_99_00">99.00/-</string>
+    <string name="drinks">Drinks</string>
+    <string name="heart_pizza">Heart Pizza</string>
+    <string name="_1999_99">1999.99/-</string>
+    <string name="thanduri_pizza">Thanduri Pizza</string>
+    <string name="_2250_00">2250.00/-</string>
+    <string name="bbq_pizza">BBQ Pizza</string>
+    <string name="_3250_00">3250.00/-</string>
+    <string name="fruit_juices">Fruit Juices</string>
+    <string name="soft_drinks">Soft Drinks</string>
+    <string name="update_details">Update Details</string>
+    <string name="update">Update</string>
+    <string name="chinese">Chinese</string>
+    <string name="are_you_want_to_delete_all">Are You Want To delete All</string>
+
+
+
+
+
+
+
+
+
+
+
 </resources>

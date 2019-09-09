@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".signup"></activity>
+        <activity android:name=".MM_Main_Meals"></activity>
+        <activity android:name=".EM_EventManagementHome"></activity>
+        <activity android:name=".signup" />
         <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,11 +21,9 @@
         </activity>
         <activity android:name=".addOffer" />
         <activity android:name=".showOffers" />
-        <activity android:name=".offer_management">
-
-        </activity>
+        <activity android:name=".offer_management"></activity>
         <activity android:name=".reservation_s1" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
