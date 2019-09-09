@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EM_EventManagementHome"></activity>
+        <activity android:name=".MM_Main_Meals"></activity>
         <activity android:name=".signup" />
         <activity android:name=".Login">
             <intent-filter>
