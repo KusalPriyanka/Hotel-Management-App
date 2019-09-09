@@ -11,6 +11,7 @@ import android.view.View;
 public class MainActivity extends AppCompatActivity {
 
     CardView reservation;
+    CardView mainMeals;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,5 +27,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        mainMeals = findViewById(R.id.mainMeals);
+
+        mainMeals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,MM_Main_Meals.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
