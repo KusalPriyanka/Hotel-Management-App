@@ -25,11 +25,20 @@ public class MM_Main_Meals extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mm__main__meals);
 
-        mainMeals = findViewById(R.id.mainMeal);
+        /*mainMeals = findViewById(R.id.mainMeal);
         mainMeals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MM_Main_Meals.this, MM_Main_Meals.class);
+                startActivity(intent);
+            }
+        });*/
+
+        mainMeals = findViewById(R.id.mainMeal);
+        mainMeals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MM_Main_Meals.this, MM_MealManagement.class);
                 startActivity(intent);
             }
         });
