@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         eventMH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,EM_EventManagementHome.class);
+                Intent intent = new Intent(MainActivity.this,EM_SelectionPage.class);
                 startActivity(intent);
             }
         });
