@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".travel_option"
+    android:background="#FAF9F9">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+
+        android:background="@android:color/holo_blue_light">
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Travel place "
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:textSize="40dp"
+            android:textAlignment="center"
+
+            />
+
+    </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                >
+
+                <androidx.cardview.widget.CardView
+
+                    android:id="@+id/Jaffna"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginRight="30dp">
+
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/images8" />
+
+                    <TextView
+                        android:id="@+id/jaffna"
+                        android:layout_width="151dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="130dp"
+                        android:text="JAFFNA"
+                        android:textAlignment="center"
+                        android:textColor="#000"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+
+                    android:id="@+id/Sigiriya"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="#888b77">
+
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/sigiriya" />
+
+
+                    <TextView
+                        android:id="@+id/sigiriya"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="130dp"
+                        android:text="SIGIRIYA"
+                        android:textAlignment="center"
+                        android:textColor="#000"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                >
+
+                <androidx.cardview.widget.CardView
+
+                    android:id="@+id/Colombo"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+
+
+                    android:layout_marginRight="30dp"
+                    android:background="#888b77">
+
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/train" />
+
+                    <TextView
+                        android:id="@+id/colombo"
+                        android:layout_width="151dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="130dp"
+                        android:text="COLOMBO"
+                        android:textAlignment="center"
+                        android:textColor="#000"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+
+                    android:id="@+id/Kandy"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="20dp">
+
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/nuwara" />
+
+
+                    <TextView
+                        android:id="@+id/kandy"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="130dp"
+                        android:text="KANDY"
+                        android:textAlignment="center"
+                        android:textColor="#000"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>
