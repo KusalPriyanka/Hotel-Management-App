@@ -59,5 +59,9 @@
     <string name="pizza">Pizza</string>
     <string name="meal_management">Meal Management</string>
 
+    <string name="events">EVENTS</string>
+    <string name="weddings">WEDDINGS</string>
+    <string name="calm">Calm</string>
+
 
 </resources>
