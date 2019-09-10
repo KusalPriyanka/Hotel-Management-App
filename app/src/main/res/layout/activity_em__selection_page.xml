@@ -22,7 +22,7 @@
                 android:layout_height="62dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="52dp"
-                android:text="Wedding Events"
+                android:text="BLUE DRAGON"
                 android:textColor="#fff"
                 android:textSize="30dp"
                 android:textStyle="bold"
@@ -42,7 +42,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView24"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/cake" />
+                app:srcCompat="@drawable/emhotel" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
