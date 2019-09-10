@@ -27,7 +27,7 @@ public class MM_MealManagement extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myDialog.setContentView(R.layout.activity_mm__add__main__meal__pu);
+                /*myDialog.setContentView(R.layout.activity_mm__add__main__meal__pu);
                 TextView txtclose;
                 myDialog.setContentView(R.layout.activity_mm__add__main__meal__pu);
                 txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
@@ -38,7 +38,10 @@ public class MM_MealManagement extends AppCompatActivity {
                     }
                 });
                 myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                myDialog.show();
+                myDialog.show();*/
+
+                Intent intent = new Intent(MM_MealManagement.this, MM_Add_Main_Meal_PU.class);
+                startActivity(intent);
 
             }
         });
