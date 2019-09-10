@@ -5,6 +5,7 @@ public class Customer {
     private String userName;
     private String mobileNo;
     private String email;
+    private String role = "Customer";
 
     public Customer() { }
 
