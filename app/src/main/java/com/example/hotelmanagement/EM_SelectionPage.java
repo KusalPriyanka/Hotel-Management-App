@@ -10,6 +10,7 @@ import android.widget.Button;
 public class EM_SelectionPage extends AppCompatActivity {
     Button weddingbtn;
     Button eventbtn;
+    Button adminbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,16 @@ public class EM_SelectionPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        adminbtn = findViewById(R.id.admin);
+        adminbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EM_SelectionPage.this,EM_Addhalls.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 }
