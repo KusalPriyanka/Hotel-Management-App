@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     CardView reservation;
     CardView mainMeals;
     CardView eventMH;
+    CardView travel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         reservation = findViewById(R.id.reservation);
+
 
         reservation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,8 +45,17 @@ public class MainActivity extends AppCompatActivity {
         eventMH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,EM_EventManagementHome.class);
+                Intent intent = new Intent(MainActivity.this,EM_SelectionPage.class);
                 startActivity(intent);
+            }
+        });
+
+        travel = findViewById(R.id.travel);
+        travel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent3 = new Intent(MainActivity.this,travel_option.class);
+                startActivity(intent3);
             }
         });
 

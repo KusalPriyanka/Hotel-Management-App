@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EM_HallView">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@drawable/bc_croped">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView24"
+                        android:layout_width="249dp"
+                        android:layout_height="62dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="52dp"
+                        android:text="MEETING ROOMS"
+                        android:textColor="#fff"
+                        android:textSize="30dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imgevent
+"
+                        android:layout_width="65dp"
+                        android:layout_height="75dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/textView24"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/emproposal" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
+
+            <ViewFlipper
+                android:id="@+id/blueRay"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"></ViewFlipper>
+
+
+
+
+            <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="BLUE RAY reception hall has a large space with modern architecture which provides a prestigeous look for the whole function"
+                        android:textSize="14dp"
+                        android:textColor="#000"
+                        android:layout_marginLeft="15dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="33dp"
+                        android:text="only for 100000/= per day"
+                        android:layout_marginTop="10dp"
+                        android:textSize="14dp"
+                        android:textColor="#000"
+                        android:layout_marginLeft="15dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="Offers 20% discount with flower decarations and poruwa ceramony "
+                        android:layout_marginTop="10dp"
+                        android:textSize="15dp"
+                        android:textColor="#a3003a"
+                        android:layout_marginLeft="15dp"
+                        />
+
+
+
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+            </androidx.cardview.widget.CardView>
+
+
+
+            <ViewFlipper
+                android:id="@+id/redview"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"></ViewFlipper>
+
+
+            <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/slidetwo"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="RED VILA reception hall adapts any stunning colour theme with an antique touch"
+                        android:textSize="14dp"
+                        android:textColor="#000"
+                        android:layout_marginLeft="15dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="33dp"
+                        android:text="only for 20000/= per day"
+                        android:layout_marginTop="10dp"
+                        android:textSize="14dp"
+                        android:textColor="#000"
+                        android:layout_marginLeft="15dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="Offers 30% discount for flower decarations,poruwa ceramony and wedding cake structure "
+                        android:layout_marginTop="10dp"
+                        android:textSize="15dp"
+                        android:textColor="#a3003a"
+                        android:layout_marginLeft="15dp"
+                        />
+
+
+
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+            <ViewFlipper
+                android:id="@+id/royal"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"></ViewFlipper>
+
+
+            <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/slidethree"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="ROYAL TOUCH reception hall furnishings that spell 'royalty' will make you feel as if you have stepped into a beautiful palace with modern amenities. "
+                        android:textSize="14dp"
+                        android:textColor="#000"
+                        android:layout_marginLeft="15dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="33dp"
+                        android:text="only for 400000/= per day"
+                        android:layout_marginTop="10dp"
+                        android:textSize="14dp"
+                        android:textColor="#000"
+                        android:layout_marginLeft="15dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="Offers 30% discount with flower decorations ,poruwa ceramony,cake structure with wedding day dressing room "
+                        android:layout_marginTop="10dp"
+                        android:textSize="15dp"
+                        android:textColor="#a3003a"
+                        android:layout_marginLeft="15dp"
+                        />
+
+
+
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</LinearLayout>

@@ -7,23 +7,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class EM_EventManagementHome extends AppCompatActivity {
-    Button viewmorebtn;
+public class EM_Addhalls extends AppCompatActivity {
+Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_em__event_management_home);
-        viewmorebtn = findViewById(R.id.viewhalls);
+        setContentView(R.layout.activity_em__addhalls);
 
-        viewmorebtn.setOnClickListener(new View.OnClickListener() {
+        button = findViewById(R.id.addHall);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EM_EventManagementHome.this,EM_HallView.class);
+                Intent intent = new Intent(EM_Addhalls.this, EM_AddhallDetails.class);
                 startActivity(intent);
             }
         });
-
-
     }
 }
+

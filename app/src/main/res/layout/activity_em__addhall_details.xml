@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EM_AddhallDetails">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:text="Adding Halls"
+                    android:background="#00766e"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ffff"
+                    android:textSize="30dp"
+
+                    />
+
+
+
+
+
+
+
+            </androidx.cardview.widget.CardView>
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:textSize="20dp"
+                        android:text="Hall name"
+                        android:textColor="#000"
+                        />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:hint="Enter hall Name"
+
+                        />
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:textSize="20dp"
+                        android:text="Hall Price"
+                        android:textColor="#000"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:hint="Enter hall price"
+
+                        />
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:textSize="20dp"
+                        android:text="Hall Type"
+                        android:textColor="#000"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:hint="Enter hall type"
+
+
+                        />
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+
+            </androidx.cardview.widget.CardView>
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="30dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:text="Wedding"
+                        android:textColor="#6638e2"/>
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:text="Event"
+                        android:textColor="#6638e2"
+                        />
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="200dp"
+                        android:layout_height="60dp"
+                        android:layout_marginLeft="50dp"
+                        android:text="Add Hall"
+                        android:textSize="20dp"
+                        android:textColor="#ffff"
+                        android:background="#00948a"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        />
+
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+    </ScrollView>
+
+
+
+
+
+
+
+</LinearLayout>

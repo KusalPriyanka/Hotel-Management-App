@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="numbers">
+
+        <item> 2000Lkr - 250KM - 10 Hours</item>
+        <item> 1500Lkr - 150KM - 8 Hours</item>
+        <item> 1000Lkr - 100KM - 7 Hours</item>
+        <item> 4000Lkr - 300KM - 11 Hours</item>
+        <item> 5000Lkr - 350KM - 12 Hours</item>
+        <item> 6000Lkr - 400KM - 13 Hours</item>
+        <item> 7000Lkr - 450KM - 14 Hours</item>
+        <item> 8000Lkr - 500KM - 15 Hours</item>
+
+    </string-array>
+
+</resources>
