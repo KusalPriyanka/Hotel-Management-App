@@ -73,7 +73,7 @@ tools:context=".MM_Add_Main_Meal_PU">
     app:layout_constraintVertical_bias="0.224" />
 
 <EditText
-    android:id="@+id/editText1"
+    android:id="@+id/mealName"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
@@ -110,7 +110,7 @@ tools:context=".MM_Add_Main_Meal_PU">
     app:layout_constraintVertical_bias="0.35" />
 
 <EditText
-    android:id="@+id/editText2"
+    android:id="@+id/mealType"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
@@ -148,7 +148,7 @@ tools:context=".MM_Add_Main_Meal_PU">
     app:layout_constraintVertical_bias="0.466" />
 
 <EditText
-    android:id="@+id/editText3"
+    android:id="@+id/normalPrice"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
@@ -186,7 +186,7 @@ tools:context=".MM_Add_Main_Meal_PU">
     app:layout_constraintVertical_bias="0.592" />
 
 <EditText
-    android:id="@+id/editText4"
+    android:id="@+id/largePrice"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
@@ -205,7 +205,7 @@ tools:context=".MM_Add_Main_Meal_PU">
     app:layout_constraintVertical_bias="0.6" />
 
 <CheckBox
-    android:id="@+id/checkBox"
+    android:id="@+id/brakfast"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="28dp"
@@ -219,7 +219,7 @@ tools:context=".MM_Add_Main_Meal_PU">
     app:layout_constraintVertical_bias="0.068" />
 
 <CheckBox
-    android:id="@+id/checkBox2"
+    android:id="@+id/lunch"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="136dp"
@@ -233,7 +233,7 @@ tools:context=".MM_Add_Main_Meal_PU">
     app:layout_constraintVertical_bias="0.075" />
 
 <CheckBox
-    android:id="@+id/checkBox3"
+    android:id="@+id/dinner"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="216dp"
@@ -246,25 +246,23 @@ tools:context=".MM_Add_Main_Meal_PU">
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintVertical_bias="0.075" />
 
-<Button
-    android:id="@+id/button2"
-    android:layout_width="wrap_content"
-    android:layout_height="50dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginRight="8dp"
-    android:layout_marginBottom="8dp"
-    android:background="@drawable/button_style"
-    android:text="Add"
-    android:textColor="#fff"
-    android:textSize="15dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/linearLayout"
-    app:layout_constraintVertical_bias="0.891" />
+    <Button
+        android:id="@+id/addMealDB"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_style"
+        android:text="Add"
+        android:textColor="#fff"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.891" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
