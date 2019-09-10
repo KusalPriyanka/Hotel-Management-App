@@ -31,7 +31,7 @@
                         android:layout_height="62dp"
                         android:layout_marginStart="32dp"
                         android:layout_marginTop="52dp"
-                        android:text="WEDDING HALLS"
+                        android:text="MEETING ROOMS"
                         android:textColor="#fff"
                         android:textSize="30dp"
                         android:textStyle="bold"
