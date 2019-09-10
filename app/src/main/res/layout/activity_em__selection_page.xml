@@ -94,8 +94,8 @@
 
     <Button
         android:id="@+id/wedding"
-        android:layout_width="0dp"
-        android:layout_height="47dp"
+        android:layout_width="168dp"
+        android:layout_height="50dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -113,9 +113,9 @@
 
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="0dp"
-        android:layout_height="47dp"
+        android:id="@+id/buttonevent"
+        android:layout_width="135dp"
+        android:layout_height="43dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="152dp"
@@ -126,9 +126,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
 
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/wedding"
         app:layout_constraintTop_toBottomOf="@+id/admin"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.96" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
