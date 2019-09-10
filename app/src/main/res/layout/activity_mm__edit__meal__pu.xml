@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="300dp"
+android:layout_height="500dp"
+android:layout_gravity="center"
+android:background="#fff"
+android:orientation="vertical"
+tools:context=".MM_Edit_Meal_PU">
+
+<LinearLayout
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="75dp"
+    android:layout_marginBottom="8dp"
+    android:background="#32CD32"
+    android:gravity="center"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.0"
+
+    tools:layout_editor_absoluteX="0dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/update_details"
+        android:textColor="#fff"
+        android:textSize="30dp" />
+</LinearLayout>
+
+<TextView
+    android:id="@+id/txtclose1"
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:layout_gravity="end"
+    android:layout_marginStart="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="8dp"
+    android:gravity="center"
+    android:text="X"
+    android:textSize="20dp"
+    android:textColor="#fff"
+    android:textStyle="bold"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="1.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.0" />
+
+<ImageView
+    android:id="@+id/imageView1"
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:layout_marginStart="28dp"
+    android:layout_marginLeft="28dp"
+
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/mm_edit_rec"
+    android:src="@drawable/mm_add_meal"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/editText1"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.224" />
+
+<EditText
+    android:id="@+id/editText1"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="8dp"
+    android:ems="10"
+    android:text="@string/chinese_special_noodles"
+    android:inputType="textPersonName"
+    android:hint="@string/enter_meal_name"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toEndOf="@+id/imageView1"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.225" />
+
+<ImageView
+    android:id="@+id/imageView2"
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:layout_marginStart="28dp"
+    android:layout_marginLeft="28dp"
+
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/mm_edit_rec"
+    android:src="@drawable/mm_ic_assignment_late_black_24dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/editText2"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.35" />
+
+<EditText
+    android:id="@+id/editText2"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="8dp"
+    android:ems="10"
+    android:inputType="textPersonName"
+    android:text="@string/chinese"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toEndOf="@+id/imageView2"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.35" />
+
+
+<ImageView
+    android:id="@+id/imageView3"
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:layout_marginStart="28dp"
+    android:layout_marginLeft="28dp"
+
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/mm_edit_rec"
+    android:src="@drawable/mm_ic_attach_money_black_24dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/editText3"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.466" />
+
+<EditText
+    android:id="@+id/editText3"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="8dp"
+    android:ems="10"
+    android:inputType="number"
+    android:text="299.99"
+    android:hint="@string/enter_normal_price"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toEndOf="@+id/imageView3"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.475" />
+
+
+<ImageView
+    android:id="@+id/imageView4"
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:layout_marginStart="28dp"
+    android:layout_marginLeft="28dp"
+
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/mm_edit_rec"
+    android:src="@drawable/mm_ic_attach_money_black_24dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/editText4"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.592" />
+
+<EditText
+    android:id="@+id/editText4"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="8dp"
+    android:ems="10"
+    android:inputType="number"
+    android:text="350.00"
+    android:hint="@string/enter_large_price"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toEndOf="@+id/imageView4"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.6" />
+
+<CheckBox
+    android:id="@+id/checkBox"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="28dp"
+    android:layout_marginLeft="28dp"
+    android:layout_marginTop="328dp"
+    android:layout_marginBottom="8dp"
+    android:checked="true"
+    android:text="@string/breakfast"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.068" />
+
+<CheckBox
+    android:id="@+id/checkBox2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="136dp"
+    android:layout_marginLeft="136dp"
+    android:layout_marginTop="328dp"
+    android:layout_marginBottom="8dp"
+    android:text="@string/lunch"
+    android:checked="true"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.075" />
+
+<CheckBox
+    android:id="@+id/checkBox3"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="216dp"
+    android:layout_marginLeft="216dp"
+    android:layout_marginTop="328dp"
+    android:layout_marginBottom="8dp"
+    android:text="@string/dinner"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.075" />
+
+<Button
+    android:id="@+id/button2"
+    android:layout_width="wrap_content"
+    android:layout_height="50dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="8dp"
+    android:padding="2dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/mm_edit_button"
+    android:text="@string/update"
+    android:textColor="#fff"
+    android:textSize="15dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/linearLayout"
+    app:layout_constraintVertical_bias="0.944" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

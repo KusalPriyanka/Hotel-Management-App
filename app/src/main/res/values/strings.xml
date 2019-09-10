@@ -57,6 +57,7 @@
     <string name="chinese">Chinese</string>
     <string name="are_you_want_to_delete_all">Are You Want To delete All</string>
     <string name="pizza">Pizza</string>
+    <string name="meal_management">Meal Management</string>
 
 
 </resources>
