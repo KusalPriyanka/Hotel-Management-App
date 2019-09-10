@@ -7,23 +7,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class EM_EventManagementHome extends AppCompatActivity {
-    Button viewmorebtn;
+public class EM_SelectionPage extends AppCompatActivity {
+    Button weddingbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_em__event_management_home);
-        viewmorebtn = findViewById(R.id.viewhalls);
+        setContentView(R.layout.activity_em__selection_page);
 
-        viewmorebtn.setOnClickListener(new View.OnClickListener() {
+        weddingbtn = findViewById(R.id.wedding);
+        weddingbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EM_EventManagementHome.this,EM_HallView.class);
+                Intent intent = new Intent(EM_SelectionPage.this,EM_EventManagementHome.class);
                 startActivity(intent);
             }
         });
-
-
     }
 }
