@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MM_Edit_Meal_PU"></activity>
+        <activity android:name=".activity_payment_account"></activity>
+        <activity android:name=".activity_payment_details" />
+        <activity android:name=".travel_option" />
+        <activity android:name=".activity_location" />
+        <activity android:name=".activity_update__details" />
+        <activity android:name=".MM_Edit_Meal_PU" />
         <activity android:name=".MM_Add_Main_Meal_PU" />
         <activity android:name=".MM_MealManagement" />
         <activity
