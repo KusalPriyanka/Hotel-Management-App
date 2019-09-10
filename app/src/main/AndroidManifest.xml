@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MM_Pastry_Shop"></activity>
+        <activity android:name=".MM_Main_Meal_View_PU"></activity>
+        <activity android:name=".MM_Pastry_Shop" />
         <activity android:name=".MM_Main_Meals" />
         <activity android:name=".EM_EventManagementHome" />
         <activity android:name=".signup" />
