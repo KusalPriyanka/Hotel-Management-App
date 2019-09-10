@@ -43,14 +43,14 @@ public class MM_MealManagement extends AppCompatActivity {
             }
         });
 
-       /* myDialog2 = new Dialog(this);
+        myDialog2 = new Dialog(this);
         imageView = findViewById(R.id.imageView2);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myDialog2.setContentView(R.layout.activity_edit__meal__popup);
+                myDialog2.setContentView(R.layout.activity_mm__edit__meal__pu);
                 TextView txtclose1;
-                myDialog2.setContentView(R.layout.activity_edit__meal__popup);
+                myDialog2.setContentView(R.layout.activity_mm__edit__meal__pu);
                 txtclose1 =(TextView) myDialog2.findViewById(R.id.txtclose1);
                 txtclose1.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -64,6 +64,7 @@ public class MM_MealManagement extends AppCompatActivity {
             }
         });
 
+        /*
         delete = findViewById(R.id.button3);
         myDialog3 = new Dialog(this);
         delete.setOnClickListener(new View.OnClickListener() {
