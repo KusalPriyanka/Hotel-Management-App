@@ -83,7 +83,6 @@ public class activity_payment_details extends AppCompatActivity {
 
                     else {
 
-
                         pd2.setPdate(pdate.getText().toString().trim());
                         pd2.setPtime(ptime.getText().toString().trim());
                         pd2.setSpin(spinner.getSelectedItem().toString().trim());
