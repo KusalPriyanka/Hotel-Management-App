@@ -14,8 +14,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -24,8 +27,9 @@ import Modal.MainMeals;
 public class MM_MealManagement extends AppCompatActivity {
 
     Dialog myDialog, myDialog2, myDialog3;
-    Button addButton, delete;
-    ImageView imageView, view;
+    Button addButton, deleteAll;
+    ImageView imageView, view, delete;
+    private DatabaseReference df;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,10 +115,63 @@ public class MM_MealManagement extends AppCompatActivity {
 
 
 
+        deleteAll = findViewById(R.id.deleteAll);
+        deleteAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DeleteAllMainMeals();
+            }
+        });
+
+        delete = findViewById(R.id.delete);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DeleteMainMeal();
+            }
+        });
 
 
     }
 
+
+    public void DeleteAllMainMeals(){
+        df = FirebaseDatabase.getInstance().getReference().child("MainMeals");
+        df.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(getApplicationContext(), "All Meals are Deleted Successfully!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MM_MealManagement.this, MM_MealManagement.class);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(getApplicationContext(), "Error!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MM_MealManagement.this, MM_MealManagement.class);
+                    startActivity(intent);
+                }
+
+            }
+        });
+    }
+
+    public void DeleteMainMeal(){
+        df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child("1");
+        df.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(getApplicationContext(), "Deleted Successfully!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MM_MealManagement.this, MM_MealManagement.class);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(getApplicationContext(), "Error!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MM_MealManagement.this, MM_MealManagement.class);
+                    startActivity(intent);
+                }
+
+            }
+        });
+    }
 
 
 }
