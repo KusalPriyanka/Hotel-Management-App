@@ -210,8 +210,8 @@
 
                     <Button
                         android:id="@+id/addbuttonhall"
-                        android:layout_width="212dp"
-                        android:layout_height="60dp"
+                        android:layout_width="192dp"
+                        android:layout_height="37dp"
                         android:layout_gravity="center"
                         android:layout_marginLeft="90dp"
                         android:background="@drawable/button_style"
