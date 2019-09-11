@@ -64,6 +64,7 @@
                         />
 
                     <EditText
+                        android:id="@+id/hallname"
                         android:layout_width="wrap_content"
                         android:layout_height="100dp"
                         android:hint="Enter hall Name"
@@ -98,6 +99,7 @@
                         android:textColor="#000"/>
 
                     <EditText
+                        android:id="@+id/hallprice"
                         android:layout_width="wrap_content"
                         android:layout_height="100dp"
                         android:hint="Enter hall price"
@@ -135,6 +137,7 @@
                         android:textColor="#000"/>
 
                     <EditText
+                        android:id="@+id/descrip"
                         android:layout_width="wrap_content"
                         android:layout_height="100dp"
                         android:hint="Enter hall type"
@@ -168,12 +171,14 @@
                     android:orientation="horizontal">
 
                     <CheckBox
+                        android:id="@+id/wedcheck"
                         android:layout_width="100dp"
                         android:layout_height="20dp"
                         android:text="Wedding"
                         android:textColor="#6638e2"/>
 
                     <CheckBox
+                        android:id="@+id/eventcheck"
                         android:layout_width="100dp"
                         android:layout_height="20dp"
                         android:text="Event"
@@ -204,6 +209,7 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/addbuttonhall"
                         android:layout_width="212dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center"
