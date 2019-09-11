@@ -31,7 +31,8 @@ public class MM_Add_Main_Meal_PU extends AppCompatActivity {
     private CheckBox breakfast, lunch, dinner;
     private DatabaseReference fb;
     String primaryKey;
-    ArrayList<String> list = new ArrayList<String>();
+    long count;
+    ArrayList<MainMeals> list = new ArrayList<MainMeals>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,14 +50,26 @@ public class MM_Add_Main_Meal_PU extends AppCompatActivity {
     }
 
     public void insetDataToDb(){
-        fb = FirebaseDatabase.getInstance().getReference().child("MainMeals");
-        /*;
 
-        fb.addValueEventListener(new ValueEventListener() {
+
+        fb = FirebaseDatabase.getInstance().getReference().child("MainMeals");
+
+
+       /* fb.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               while (dataSnapshot.hasChildren()){
-                   *//*list.add(dataSnapshot.child("id").getValue().toString());*//*
+               if(dataSnapshot.exists()){
+
+                 count =  dataSnapshot.getChildrenCount();
+                 ++count;
+
+                  *//* while (dataSnapshot.hasChildren()){
+                       MainMeals mm = dataSnapshot.getValue(MainMeals.class);
+                       list.add(mm);
+                   }*//*
+               }
+               else{
+                   System.out.println("Empty");
                }
             }
 
@@ -65,10 +78,11 @@ public class MM_Add_Main_Meal_PU extends AppCompatActivity {
 
             }
 
-        });
+        });*/
 
-        primaryKey = CommonFunctions.get_id(CommonConstants.MAIN_MEALS_PREFIX, list);
-        System.out.println("csdsj" + list);*/
+        primaryKey = CommonConstants.MAIN_MEALS_PREFIX + CommonConstants.MAIN_MEALS_ID;
+        ++CommonConstants.MAIN_MEALS_ID;
+
 
         mealName = findViewById(R.id.mealName);
         foodType = findViewById(R.id.mealType);
@@ -78,11 +92,11 @@ public class MM_Add_Main_Meal_PU extends AppCompatActivity {
         lunch = findViewById(R.id.lunch);
         dinner = findViewById(R.id.dinner);
 
-        CommonConstants.MAIN_MEALS_ID++;
-        String id = CommonConstants.MAIN_MEALS_PREFIX + CommonConstants.MAIN_MEALS_ID;
+        /*CommonConstants.MAIN_MEALS_ID++;
+        String id = CommonConstants.MAIN_MEALS_PREFIX + CommonConstants.MAIN_MEALS_ID;*/
 
         MainMeals mainMeals = new MainMeals();
-        mainMeals.setId("MM-01");
+        mainMeals.setId(primaryKey);
         mainMeals.setMealName(mealName.getText().toString());
         mainMeals.setType(mealName.getText().toString());
         mainMeals.setNormalPrice(Float.parseFloat(normalPrice.getText().toString()));

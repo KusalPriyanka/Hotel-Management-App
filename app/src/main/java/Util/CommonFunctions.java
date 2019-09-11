@@ -2,10 +2,12 @@ package Util;
 
 import java.util.ArrayList;
 
+import Modal.MainMeals;
+
 public class CommonFunctions {
 
 
-    public static String get_id(String prefix , ArrayList<String> arrayList){
+    public static String get_id(String prefix , ArrayList<MainMeals> arrayList){
 
         String id;
         int next = arrayList.size();
