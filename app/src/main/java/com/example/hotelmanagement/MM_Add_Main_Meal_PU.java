@@ -13,17 +13,25 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 import Modal.MainMeals;
 import Util.CommonConstants;
+import Util.CommonFunctions;
 
 public class MM_Add_Main_Meal_PU extends AppCompatActivity {
     private Button addButton;
     private EditText mealName, foodType, normalPrice, largePrice;
     private CheckBox breakfast, lunch, dinner;
     private DatabaseReference fb;
+    String primaryKey;
+    ArrayList<String> list = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +49,27 @@ public class MM_Add_Main_Meal_PU extends AppCompatActivity {
     }
 
     public void insetDataToDb(){
+        fb = FirebaseDatabase.getInstance().getReference().child("MainMeals");
+        /*;
+
+        fb.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               while (dataSnapshot.hasChildren()){
+                   *//*list.add(dataSnapshot.child("id").getValue().toString());*//*
+               }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+
+        primaryKey = CommonFunctions.get_id(CommonConstants.MAIN_MEALS_PREFIX, list);
+        System.out.println("csdsj" + list);*/
+
         mealName = findViewById(R.id.mealName);
         foodType = findViewById(R.id.mealType);
         normalPrice = findViewById(R.id.normalPrice);
@@ -53,7 +82,7 @@ public class MM_Add_Main_Meal_PU extends AppCompatActivity {
         String id = CommonConstants.MAIN_MEALS_PREFIX + CommonConstants.MAIN_MEALS_ID;
 
         MainMeals mainMeals = new MainMeals();
-        mainMeals.setId("1");
+        mainMeals.setId("MM-01");
         mainMeals.setMealName(mealName.getText().toString());
         mainMeals.setType(mealName.getText().toString());
         mainMeals.setNormalPrice(Float.parseFloat(normalPrice.getText().toString()));
@@ -65,9 +94,9 @@ public class MM_Add_Main_Meal_PU extends AppCompatActivity {
         System.out.println(mainMeals.getMealName());
         System.out.println(mainMeals);
 
-        fb = FirebaseDatabase.getInstance().getReference().child("MainMeals");
 
-        fb.child("1").setValue(mainMeals)
+
+        fb.child(mainMeals.getId()).setValue(mainMeals)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

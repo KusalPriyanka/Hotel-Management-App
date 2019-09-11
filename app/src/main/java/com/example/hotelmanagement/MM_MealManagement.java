@@ -28,7 +28,7 @@ public class MM_MealManagement extends AppCompatActivity {
 
     Dialog myDialog, myDialog2, myDialog3;
     Button addButton, deleteAll;
-    ImageView imageView, view, delete;
+    ImageView edit, view, delete;
     private DatabaseReference df;
 
     @Override
@@ -60,7 +60,18 @@ public class MM_MealManagement extends AppCompatActivity {
             }
         });
 
-        myDialog2 = new Dialog(this);
+        edit = findViewById(R.id.editData);
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MM_MealManagement.this, MM_Edit_Meal_PU.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+        /*myDialog2 = new Dialog(this);
         imageView = findViewById(R.id.imageView2);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +90,7 @@ public class MM_MealManagement extends AppCompatActivity {
                 myDialog2.show();
 
             }
-        });
+        });*/
 
         /*
         delete = findViewById(R.id.button3);
