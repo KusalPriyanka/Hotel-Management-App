@@ -37,14 +37,14 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if((username.getText().toString()).equalsIgnoreCase("admin")){
-                    Intent intent = new Intent(Login.this,offer_management.class);
+                if((username.getText().toString()).equalsIgnoreCase("user")){
+                    Intent intent = new Intent(Login.this,MainActivity.class);
                     startActivity(intent);
 
                 }
                 else{
-                    Intent intent = new Intent(Login.this,MainActivity.class);
-                    startActivity(intent);
+                    //Intent intent = new Intent(Login.this,MainActivity.class);
+                    //startActivity(intent);
                 }
 
 
