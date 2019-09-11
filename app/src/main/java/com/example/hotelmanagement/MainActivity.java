@@ -7,13 +7,16 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     CardView reservation;
     CardView mainMeals;
     CardView eventMH;
-    CardView travel;
+    CardView tpart;
+    TextView textView18;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +53,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        travel = findViewById(R.id.travel);
-        travel.setOnClickListener(new View.OnClickListener() {
+        tpart = findViewById(R.id.tpart);
+        tpart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent3 = new Intent(MainActivity.this,travel_option.class);
-                startActivity(intent3);
+                Intent intent = new Intent(MainActivity.this,travel_option.class);
+                startActivity(intent);
             }
         });
 
+            }
+
+
     }
-}
+
