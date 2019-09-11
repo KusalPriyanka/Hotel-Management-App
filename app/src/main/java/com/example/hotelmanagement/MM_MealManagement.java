@@ -1,6 +1,9 @@
 package com.example.hotelmanagement;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -12,11 +15,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import Modal.MainMeals;
+
 public class MM_MealManagement extends AppCompatActivity {
 
     Dialog myDialog, myDialog2, myDialog3;
     Button addButton, delete;
     ImageView imageView, view;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,5 +107,14 @@ public class MM_MealManagement extends AppCompatActivity {
                 startActivity(intent);
             }
         });*/
+
+
+
+
+
+
     }
+
+
+
 }

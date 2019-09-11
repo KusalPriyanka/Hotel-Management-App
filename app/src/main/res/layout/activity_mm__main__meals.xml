@@ -159,6 +159,17 @@ android:background="#fff"
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/mainMealView"
+                >
+
+
+
+            </androidx.recyclerview.widget.RecyclerView>
+
             <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/card1"
                 android:layout_width="match_parent"
