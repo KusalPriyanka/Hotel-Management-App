@@ -6,26 +6,37 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".travel_option"
-    android:background="#FAF9F9">
+    android:background="@drawable/background">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:gravity="center"
 
-        android:background="@android:color/holo_blue_light">
+        >
 
         <TextView
-            android:layout_marginTop="20dp"
+            android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Travel place "
-            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:text="  Travel place "
             android:textColor="#fff"
             android:textSize="40dp"
-            android:textAlignment="center"
+            android:textStyle="bold"
+
 
             />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="100dp"
+            android:layout_height="75dp"
+            android:layout_alignRight="@+id/text"
+            android:layout_alignBottom="@+id/text"
+            android:layout_marginRight="-2dp"
+            android:layout_marginBottom="2dp"
+            app:srcCompat="@drawable/travel2_place" />
 
     </RelativeLayout>
 
@@ -49,7 +60,7 @@
                 android:orientation="horizontal"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="80dp"
                 >
 
                 <androidx.cardview.widget.CardView

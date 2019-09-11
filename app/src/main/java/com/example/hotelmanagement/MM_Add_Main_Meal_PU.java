@@ -53,7 +53,7 @@ public class MM_Add_Main_Meal_PU extends AppCompatActivity {
         String id = CommonConstants.MAIN_MEALS_PREFIX + CommonConstants.MAIN_MEALS_ID;
 
         MainMeals mainMeals = new MainMeals();
-        mainMeals.setId(id);
+        mainMeals.setId("1");
         mainMeals.setMealName(mealName.getText().toString());
         mainMeals.setType(mealName.getText().toString());
         mainMeals.setNormalPrice(Float.parseFloat(normalPrice.getText().toString()));
@@ -67,7 +67,7 @@ public class MM_Add_Main_Meal_PU extends AppCompatActivity {
 
         fb = FirebaseDatabase.getInstance().getReference().child("MainMeals");
 
-        fb.child("123").setValue(mainMeals)
+        fb.child("1").setValue(mainMeals)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

@@ -179,7 +179,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/travel"
+            android:id="@+id/tpart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
@@ -226,8 +226,7 @@
             app:cardElevation="6dp"
             app:cardCornerRadius="12dp"
             android:layout_margin="12dp"
-            app:cardBackgroundColor="#FFFFFF"
-            >
+            app:cardBackgroundColor="#FFFFFF">
 
             <LinearLayout
                 android:layout_width="match_parent"

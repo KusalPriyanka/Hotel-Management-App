@@ -1,7 +1,10 @@
 package com.example.hotelmanagement;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.content.Intent;
@@ -11,7 +14,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import Modal.Customer;
+import Modal.MainMeals;
 
 
 public class MM_Main_Meals extends AppCompatActivity {
@@ -20,6 +28,8 @@ public class MM_Main_Meals extends AppCompatActivity {
     TextView name,price,text1, text2;
     ImageView im;
     Button mainMeals, pastryShop;
+    private RecyclerView mainMeal;
+    private DatabaseReference df;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,8 +94,36 @@ public class MM_Main_Meals extends AppCompatActivity {
             }
         });
 
-
+       /* df = FirebaseDatabase.getInstance().getReference().child("MainMeals");
+        df.keepSynced(true);
+        mainMeal = (RecyclerView) findViewById(R.id.mainMealView);
+        mainMeal.setHasFixedSize(true);
+        mainMeal.setLayoutManager(new LinearLayoutManager(this));
+*/
     }
+
+    /*@Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseRecyclerAdapter<MainMeals, MM> firebaseRecyclerAdapter =  new FirebaseRecyclerAdapter<MainMeals, MM>
+                (MainMeals.class, R.layout.mm_main_meal_recyclerview, MM.class, df) {
+            @Override
+            protected void populateViewHolder(MM mm, MainMeals mainMeals, int i) {
+                mm.setMealName(mainMeals.getMealName());
+            }
+        };
+        mainMeal.setAdapter(FirebaseRecyclerAdapter);
+    }
+    public static class MM extends RecyclerView.ViewHolder{
+        View mealview;
+        public MM(@NonNull View itemView) {
+            super(itemView);
+            mealview = itemView;
+        }
+        public void setMealName(String mealName){
+            TextView mName = (TextView)mealview.findViewById(R.id.name1);
+        }
+    }*/
 
 
 }
