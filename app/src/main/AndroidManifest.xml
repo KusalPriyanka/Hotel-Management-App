@@ -38,6 +38,12 @@
         <activity android:name=".offer_management" />
         <activity android:name=".reservation_s1" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".activity_location" />
+        <activity android:name=".activity_update__details" />
+        <activity android:name=".activity_payment_details" />
+        <activity android:name=".activity_payment_account" />
+        <activity android:name=".travel_option" />
+
     </application>
 
 </manifest>

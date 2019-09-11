@@ -69,7 +69,7 @@ public class activity_location extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                dbref = FirebaseDatabase.getInstance().getReference().child("PayDetail");
+                dbref = FirebaseDatabase.getInstance().getReference().child("PayDetails");
                 vehicle.setVehicle(cur.getText().toString().trim());
                 dbref.child("vehicle").setValue(vehicle);
 

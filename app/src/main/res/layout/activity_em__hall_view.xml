@@ -31,7 +31,7 @@
                         android:layout_height="62dp"
                         android:layout_marginStart="32dp"
                         android:layout_marginTop="52dp"
-                        android:text="MEETING ROOMS"
+                        android:text="WEDDING HALLS"
                         android:textColor="#fff"
                         android:textSize="30dp"
                         android:textStyle="bold"
@@ -62,7 +62,8 @@
             <ViewFlipper
                 android:id="@+id/blueRay"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"></ViewFlipper>
+                android:layout_height="150dp"
+                android:layout_marginTop="30dp"></ViewFlipper>
 
 
 

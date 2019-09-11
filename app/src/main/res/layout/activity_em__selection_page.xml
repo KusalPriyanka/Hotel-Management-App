@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/wed"
+
     tools:context=".EM_EventManagementHome">
 
     <LinearLayout
@@ -77,7 +77,7 @@
         android:layout_width="146dp"
         android:layout_height="49dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="276dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/button_style"
@@ -86,17 +86,17 @@
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.815"
+        app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.477" />
+        app:layout_constraintVertical_bias="0.0" />
 
 
     <Button
         android:id="@+id/wedding"
-        android:layout_width="168dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="24dp"
+        android:layout_width="131dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
@@ -108,14 +108,14 @@
         app:layout_constraintEnd_toStartOf="@+id/button2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.785" />
+        app:layout_constraintTop_toBottomOf="@+id/admin"
+        app:layout_constraintVertical_bias="0.514" />
 
 
     <Button
         android:id="@+id/buttonevent"
-        android:layout_width="135dp"
-        android:layout_height="43dp"
+        android:layout_width="120dp"
+        android:layout_height="44dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="152dp"
@@ -129,6 +129,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/wedding"
         app:layout_constraintTop_toBottomOf="@+id/admin"
-        app:layout_constraintVertical_bias="0.96" />
+        app:layout_constraintVertical_bias="0.876" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

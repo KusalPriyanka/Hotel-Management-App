@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity_location"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/background">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -21,27 +23,31 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:gravity="center"
 
-                android:background="@android:color/holo_blue_light">
+               >
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="300dp"
-                    android:layout_height="100dp"
-                    >
+
 
                     <TextView
+                        android:id="@+id/text11"
                         android:layout_width="300dp"
                         android:layout_height="100dp"
                         android:layout_marginTop="30dp"
+                        android:layout_marginLeft="20dp"
                         android:text="YOU WILL TRAVEL BY ?"
                         android:textStyle="bold"
                         android:textSize="24dp"
-                        android:textColor="#000"
-                        android:textAlignment="center"
-                        />
+                        android:textColor="#fff"/>
 
-                </androidx.cardview.widget.CardView>
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="111dp"
+                    android:layout_height="83dp"
+                    android:layout_alignRight="@+id/text11"
+                    android:layout_alignBottom="@+id/text11"
+                    android:layout_marginRight="-82dp"
+                    android:layout_marginBottom="37dp"
+                    app:srcCompat="@drawable/travel2_place" />
 
 
             </RelativeLayout>
@@ -55,8 +61,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:background="#fff">
+               >
                 <LinearLayout
+                    android:layout_marginTop="80dp"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:orientation="horizontal"

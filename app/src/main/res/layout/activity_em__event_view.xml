@@ -64,7 +64,8 @@
 
                 android:id="@+id/file"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"></ViewFlipper>
+                android:layout_marginTop="30dp"
+                android:layout_height="180dp"></ViewFlipper>
 
             <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/card1"
