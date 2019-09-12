@@ -32,7 +32,7 @@ public class EM_AddhallDetails extends AppCompatActivity {
         int height = displayMetrics.heightPixels;
 
         getWindow().setLayout((int)(width*.8),(int)(height*.7));
-
+        button =findViewById(R.id.addbuttonhall);
         hallName = findViewById(R.id.hallname);
         hallPrice = findViewById(R.id.hallprice);
         hallType = findViewById(R.id.descrip);
