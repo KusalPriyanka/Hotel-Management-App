@@ -3,6 +3,7 @@ package com.example.hotelmanagement;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,109 +27,11 @@ import Util.CommonConstants;
 import Util.CommonFunctions;
 
 public class MM_Add_Main_Meal_PU extends AppCompatActivity {
-    private Button addButton;
-    private EditText mealName, foodType, normalPrice, largePrice;
-    private CheckBox breakfast, lunch, dinner;
-    private DatabaseReference fb;
-    String primaryKey;
-    long count;
-    ArrayList<MainMeals> list = new ArrayList<MainMeals>();
-    @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mm__add__main__meal__pu);
-        addButton = (Button) findViewById(R.id.addMealDB);
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                insetDataToDb();
-                /**/
-            }
-        });
-
 
     }
 
-    public void insetDataToDb(){
-
-
-        fb = FirebaseDatabase.getInstance().getReference().child("MainMeals");
-
-
-       /* fb.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               if(dataSnapshot.exists()){
-
-                 count =  dataSnapshot.getChildrenCount();
-                 ++count;
-
-                  *//* while (dataSnapshot.hasChildren()){
-                       MainMeals mm = dataSnapshot.getValue(MainMeals.class);
-                       list.add(mm);
-                   }*//*
-               }
-               else{
-                   System.out.println("Empty");
-               }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-
-        });*/
-
-        primaryKey = CommonConstants.MAIN_MEALS_PREFIX + CommonConstants.MAIN_MEALS_ID;
-        ++CommonConstants.MAIN_MEALS_ID;
-
-
-        mealName = findViewById(R.id.mealName);
-        foodType = findViewById(R.id.mealType);
-        normalPrice = findViewById(R.id.normalPrice);
-        largePrice = findViewById(R.id.largePrice);
-        breakfast = findViewById(R.id.brakfast);
-        lunch = findViewById(R.id.lunch);
-        dinner = findViewById(R.id.dinner);
-
-        /*CommonConstants.MAIN_MEALS_ID++;
-        String id = CommonConstants.MAIN_MEALS_PREFIX + CommonConstants.MAIN_MEALS_ID;*/
-
-        MainMeals mainMeals = new MainMeals();
-        mainMeals.setId(primaryKey);
-        mainMeals.setMealName(mealName.getText().toString());
-        mainMeals.setType(mealName.getText().toString());
-        mainMeals.setNormalPrice(Float.parseFloat(normalPrice.getText().toString()));
-        mainMeals.setLargePrice(Float.parseFloat(largePrice.getText().toString()));
-        mainMeals.setBrakfast(breakfast.isChecked());
-        mainMeals.setLunch(lunch.isChecked());
-        mainMeals.setDinner(dinner.isChecked());
-
-        System.out.println(mainMeals.getMealName());
-        System.out.println(mainMeals);
-
-
-
-        fb.child(mainMeals.getId()).setValue(mainMeals)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(getApplicationContext(), "Data Inserted Successfully!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(MM_Add_Main_Meal_PU.this, MM_MealManagement.class);
-                            startActivity(intent);
-                        }else {
-                            Toast.makeText(getApplicationContext(), "Data Not Inserted Successfully!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(MM_Add_Main_Meal_PU.this, MM_MealManagement.class);
-                            startActivity(intent);
-                        }
-
-                    }
-                });
-
-
-
-
-    }
 }
