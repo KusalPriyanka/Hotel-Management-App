@@ -1,7 +1,9 @@
 package com.example.hotelmanagement;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -10,6 +12,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +34,7 @@ public class EM_AddhallDetails extends AppCompatActivity {
     Button buttonAdd;
     Button viewdetails;
     CheckBox updwed,updevent;
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,16 +56,17 @@ public class EM_AddhallDetails extends AppCompatActivity {
         weddingbtn = findViewById(R.id.wedcheck);
         eventbtn = findViewById(R.id.eventcheck);
 
+        id = CommonConstants.EM_PREFIX + CommonConstants.EH_ID;
+        ++CommonConstants.EH_ID;
 
 
-
-        dbf = FirebaseDatabase.getInstance().getReference("EM_HallManagement");
+        dbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement");
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 em = new EM_HallManagement();
-
+                em.setId(id);
                 em.setName(hallName.getText().toString());
                 em.setPrice(Float.parseFloat(hallPrice.getText().toString()));
                 em.setDescription(hallType.getText().toString());
@@ -68,11 +74,25 @@ public class EM_AddhallDetails extends AppCompatActivity {
                 em.setWedding(eventbtn.isChecked());
 
 
-                dbf.child(em.getName()).setValue(em);
+                dbf.child(em.getId()).setValue(em).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(getApplicationContext(), "Data Inserted Successfully!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(EM_AddhallDetails.this, EM_Addhalls.class);
+                            startActivity(intent);
+                        }else {
+                            Toast.makeText(getApplicationContext(), "Data Not Inserted Successfully!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(EM_AddhallDetails.this, EM_Addhalls.class);
+                            startActivity(intent);
+                        }
+
+                    }
+                });;
 
 
 
-                Toast.makeText(getApplicationContext(),"Data Has Been Added",Toast.LENGTH_SHORT).show();
+
             }
         });
 
