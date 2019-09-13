@@ -40,7 +40,7 @@ public class Login extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
 
-        mAuth = FirebaseAuth.getInstance();
+        /*mAuth = FirebaseAuth.getInstance();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -53,14 +53,14 @@ public class Login extends AppCompatActivity {
                 }
 
             }
-        };
+        };*/
 
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //LoginUser();
-                Intent intent = new Intent(Login.this,Login.class);
+                Intent intent = new Intent(Login.this,MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -74,6 +74,7 @@ public class Login extends AppCompatActivity {
         });
     }
 
+/*
 
     @Override
     protected void onStart() {
@@ -115,5 +116,6 @@ public class Login extends AppCompatActivity {
                     });
         }
 
-    }
+
+    }*/
 }
