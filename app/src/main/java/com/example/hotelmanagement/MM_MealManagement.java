@@ -15,6 +15,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -24,9 +25,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,7 +47,7 @@ public class MM_MealManagement extends AppCompatActivity {
     private EditText mealName, foodType, normalPrice, largePrice;
     private CheckBox breakfast, lunch, dinner;
     private DatabaseReference fb;
-    Dialog myDialog, myDialog2, myDialog3, myDialog4, myDialog5;
+    Dialog myDialog, myDialog2, myDialog3, myDialog4, myDialog5, myDialog6;
     Button addButton, deleteAll, addMeal, deleteAllfromDb, canselDAll, editDetails;
     ImageView edit, view, delete , search, upload, uplodedImage;
     private DatabaseReference df;
@@ -58,6 +61,8 @@ public class MM_MealManagement extends AppCompatActivity {
 
     CardView serch;
 
+    List<MainMeals> mealsLists = new ArrayList<>();
+
 
 
     @Override
@@ -65,20 +70,59 @@ public class MM_MealManagement extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mm__meal_management);
 
-        serch = findViewById(R.id.searchCard);
-        serch.setOnClickListener(new View.OnClickListener() {
+        listView = findViewById(R.id.list);
+
+        df = FirebaseDatabase.getInstance().getReference().child("MainMeals");
+        final FirebaseListAdapter<MainMeals> adapter = new FirebaseListAdapter<MainMeals>(
+                this,
+                MainMeals.class,
+                android.R.layout.simple_list_item_1,
+                df
+
+        ) {
             @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "dfbdfdf", Toast.LENGTH_SHORT).show();
+            protected void populateView(View v, MainMeals model, int position) {
+                TextView textView = v.findViewById(android.R.id.text1);
+                textView.setText(model.toString());
+            }
+        };
+
+        listView.setAdapter(adapter);
+
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                MainMeals mainMeals =(MainMeals)adapterView.getAdapter().getItem(i);
+                Intent intent =  new Intent(MM_MealManagement.this,  MM_View_Meal_View.class);
+                intent.putExtra("MainMeals", mainMeals);
+                startActivity(intent);
             }
         });
 
 
 
 
+/*
+        myDialog6 = new Dialog(this);
+        search = findViewById(R.id.imageView5);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                myDialog6.setContentView(R.layout.activity_mm__edit__meal__pu);
+                myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                myDialog.show();
+            }
+        });*/
 
 
-        listView = findViewById(R.id.list);
+
+
+
+
+
 
         myDialog = new Dialog(this);
         addMeal = findViewById(R.id.addMeal);
@@ -467,51 +511,6 @@ public class MM_MealManagement extends AppCompatActivity {
 
     }
 
-    public ArrayList<MainMeals> readAllMainMeal(){
-        mList = new ArrayList<MainMeals>();
-        df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child("MM-01");
-
-/*        df.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                MainMeals mainMeals = dataSnapshot.getValue(MainMeals.class);
-                mList.add(mainMeals);
-                *//*
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    MainMeals mm = postSnapshot.getValue(MainMeals.class);
-                    mList.add(mm);
-                    System.out.println("------------------MAinMal" + mm);
-                    System.out.println("dgdfgdfgdsfgdfgdsfMAinMEAl-----------------------------------------" + mList.size());
-
-
-
-                }*//*
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
-
-        df.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                MainMeals mainMeals = dataSnapshot.getValue(MainMeals.class);
-                mList.add(mainMeals);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-        Toast.makeText(getApplicationContext(),mList.isEmpty()+" ",Toast.LENGTH_LONG).show();
-        return mList;
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -521,6 +520,38 @@ public class MM_MealManagement extends AppCompatActivity {
             uplodedImage.setImageURI(imageUri);
         }
     }
+
+    /*public void read(){
+        final ArrayList<MainMeals> mL = new ArrayList<MainMeals>();
+        df = FirebaseDatabase.getInstance().getReference().child("MainMeals");
+        df.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    MainMeals mm = ds.getValue(MainMeals.class);
+                    mL.add(mm);
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        for (MainMeals mainMeals : mL){
+            System.out.println("#########################################");
+            System.out.println(mainMeals);
+            System.out.println("#########################################");
+        }
+
+        Toast.makeText(getApplicationContext(), mealsLists.size()+"", Toast.LENGTH_LONG).show();
+    }*/
+
+
+
 
 
 
