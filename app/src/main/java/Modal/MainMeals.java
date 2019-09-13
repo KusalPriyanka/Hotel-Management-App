@@ -1,11 +1,66 @@
 package Modal;
 
-public class MainMeals extends Meals {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class MainMeals implements Serializable {
+    protected String id;
+    protected String mealName;
+    protected float normalPrice;
+    protected String imageName;
     private String type;
     private float largePrice;
     private boolean brakfast;
     private boolean lunch;
     private boolean dinner;
+
+
+    public MainMeals() {
+    }
+
+    public MainMeals(String id, String mealName, float normalPrice, String imageName, String type, float largePrice, boolean brakfast, boolean lunch, boolean dinner) {
+        this.id = id;
+        this.mealName = mealName;
+        this.normalPrice = normalPrice;
+        this.imageName = imageName;
+        this.type = type;
+        this.largePrice = largePrice;
+        this.brakfast = brakfast;
+        this.lunch = lunch;
+        this.dinner = dinner;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getMealName() {
+        return mealName;
+    }
+
+    public void setMealName(String mealName) {
+        this.mealName = mealName;
+    }
+
+    public float getNormalPrice() {
+        return normalPrice;
+    }
+
+    public void setNormalPrice(float normalPrice) {
+        this.normalPrice = normalPrice;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
 
     public String getType() {
         return type;
@@ -50,15 +105,15 @@ public class MainMeals extends Meals {
     @Override
     public String toString() {
         return "MainMeals{" +
-                "type='" + type + '\'' +
+                "id='" + id + '\'' +
+                ", mealName='" + mealName + '\'' +
+                ", normalPrice=" + normalPrice +
+                ", imageName='" + imageName + '\'' +
+                ", type='" + type + '\'' +
                 ", largePrice=" + largePrice +
                 ", brakfast=" + brakfast +
                 ", lunch=" + lunch +
                 ", dinner=" + dinner +
-                ", id=" + id +
-                ", mealName='" + mealName + '\'' +
-                ", normalPrice=" + normalPrice +
-                ", imageName='" + imageName + '\'' +
                 '}';
     }
 }
