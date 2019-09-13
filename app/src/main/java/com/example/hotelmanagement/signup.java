@@ -3,10 +3,12 @@ package com.example.hotelmanagement;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,6 +24,7 @@ public class signup extends AppCompatActivity {
     private EditText userName, mobileNo, email, password;
     private Button signup;
     private FirebaseAuth mAuth;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,9 @@ public class signup extends AppCompatActivity {
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         signup = findViewById(R.id.signup);
+
+        progressBar = findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.GONE);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -46,6 +52,8 @@ public class signup extends AppCompatActivity {
     }
 
     private void registerUser(){
+
+        progressBar.setVisibility(View.VISIBLE);
 
         final String userEmail = email.getText().toString().trim();
         final String userPass = password.getText().toString().trim();
@@ -62,18 +70,21 @@ public class signup extends AppCompatActivity {
                             Customer customer = new Customer(username, userMobile, userEmail);
 
 
-                            FirebaseDatabase.getInstance().getReference("Customer")
+                            FirebaseDatabase.getInstance().getReference("Customers")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(customer)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
-
+                                                progressBar.setVisibility(View.GONE);
                                                 if(task.isSuccessful()){
-                                                    Toast.makeText(getApplicationContext(),"User Created",Toast.LENGTH_LONG).show();
+
+                                                    startActivity(new Intent(signup.this,Login.class));
+                                                    Toast.makeText(getApplicationContext(), "Registered Successfully!" ,Toast.LENGTH_LONG).show();
                                                 }
                                                 else{
-                                                    Toast.makeText(getApplicationContext(),"User Error",Toast.LENGTH_LONG).show();
+
+                                                    Toast.makeText(getApplicationContext(),task.getException().getMessage() ,Toast.LENGTH_LONG).show();
                                                 }
 
                                             }
