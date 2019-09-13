@@ -24,39 +24,88 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@drawable/bc_croped">
+                android:background="@drawable/bc_croped"
+
+                >
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
-                        android:id="@+id/textView24"
-                        android:layout_width="249dp"
-                        android:layout_height="62dp"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="52dp"
-                        android:text="ADD HALLS"
-                        android:textColor="#fff"
-                        android:textSize="30dp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
                     <ImageView
-                        android:id="@+id/imgevent"
+                        android:id="@+id/new21"
+                        android:layout_width="25dp"
+                        android:layout_height="16dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginBottom="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.032"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.126"
+                        app:srcCompat="@drawable/back_icon" />
 
-                        android:layout_width="65dp"
-                        android:layout_height="75dp"
+
+                    <TextView
+                        android:id="@+id/new22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="Add Halls"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.13"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.326" />
+
+
+                    <TextView
+                        android:id="@+id/new23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:text="Add Your Hall"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/textView24"
+                        app:layout_constraintHorizontal_bias="0.155"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView4"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <ImageView
+                        android:id="@+id/new24"
+                        android:layout_width="60dp"
+                        android:layout_height="75dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginBottom="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.931"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/cake" />
+                        app:layout_constraintVertical_bias="0.559"
+                        app:srcCompat="@drawable/emhotel" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -79,7 +128,7 @@
                 android:layout_marginRight="51dp"
                 android:layout_marginBottom="50dp"
                 android:paddingLeft="10dp"
-                android:text="Adding Halls"
+
                 android:textColor="#fffafa"
                 android:textSize="30dp"
                 android:textStyle="bold" />
@@ -105,8 +154,8 @@
                     android:layout_gravity="center">
 
                     <ImageView
-                        android:id="@+id/button4"
-                        android:layout_width="52dp"
+                        android:id="@+id/buttonemdelete"
+                        android:layout_width="42dp"
                         android:layout_height="52dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="36dp"
@@ -115,7 +164,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/button3"
+                        app:layout_constraintStart_toEndOf="@+id/buttonemupdate"
                         app:layout_constraintTop_toTopOf="parent"
                         android:src="@drawable/mm_ic_delete_black_24dp"/>
 
@@ -152,22 +201,22 @@
                         android:textColor="#000"
                         android:textSize="20dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/button3"
+                        app:layout_constraintEnd_toStartOf="@+id/buttonemupdate"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@+id/textView2"
                         app:layout_constraintTop_toTopOf="parent" />
 
 
                     <ImageView
-                        android:id="@+id/button3"
-                        android:layout_width="52dp"
+                        android:id="@+id/buttonemupdate"
+                        android:layout_width="42dp"
                         android:layout_height="52dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:layout_marginBottom="8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/button4"
+                        app:layout_constraintEnd_toStartOf="@+id/buttonemdelete"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@+id/textView"
                         app:layout_constraintTop_toTopOf="parent"
@@ -214,10 +263,8 @@
         android:layout_width="125dp"
         android:layout_height="56dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/button_style_delete"
         android:text="Delete ALL"
@@ -227,6 +274,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.563"
 
+        app:layout_constraintStart_toEndOf="@+id/addHall"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.485" />
 

@@ -33,52 +33,9 @@ public class MM_Edit_Meal_PU extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mm__edit__meal__pu);
 
-        mealName = findViewById(R.id.mealName);
-        foodType = findViewById(R.id.mealType);
-        normalPrice = findViewById(R.id.normalPrice);
-        largePrice = findViewById(R.id.largePrice);
-        breakfast = findViewById(R.id.b);
-        lunch = findViewById(R.id.l);
-        dinner = findViewById(R.id.d);
 
 
 
-
-
-        df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child("MM-01");
-        df.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.hasChildren()){
-                    mealName.setText(dataSnapshot.child("mealName").getValue().toString());
-                    foodType.setText(dataSnapshot.child("type").getValue().toString());
-                    normalPrice.setText(dataSnapshot.child("normalPrice").getValue().toString());
-                    largePrice.setText(dataSnapshot.child("largePrice").getValue().toString());
-                    if((Boolean) dataSnapshot.child("brakfast").getValue() == true){
-                        breakfast.setChecked(true);
-                    }
-                    if((Boolean)dataSnapshot.child("lunch").getValue() == true){
-                        lunch.setChecked(true);
-                    }
-                    if((Boolean) dataSnapshot.child("dinner").getValue() == true){
-                        dinner.setChecked(true);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        editDetails =(Button) findViewById(R.id.updateDetails);
-        editDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateMainMealDetails();
-            }
-        });
 
 
     }

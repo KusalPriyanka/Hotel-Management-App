@@ -1,47 +1,91 @@
 package com.example.hotelmanagement;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.os.Bundle;
 
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import Modal.MainMeals;
+import Util.CommonConstants;
 
 public class MM_MealManagement extends AppCompatActivity {
 
-    Dialog myDialog, myDialog2, myDialog3;
-    Button addButton, deleteAll;
-    ImageView edit, view, delete;
+    private EditText mealName, foodType, normalPrice, largePrice;
+    private CheckBox breakfast, lunch, dinner;
+    private DatabaseReference fb;
+    Dialog myDialog, myDialog2, myDialog3, myDialog4, myDialog5;
+    Button addButton, deleteAll, addMeal, deleteAllfromDb, canselDAll, editDetails;
+    ImageView edit, view, delete , search, upload, uplodedImage;
     private DatabaseReference df;
+    String primaryKey;
+    ListView listView;
+    ArrayList<MainMeals> list, mList;
+    TextView header;
+    TextView mealNameText, nPrice, lPrice, tFood, d1;
+    private static final int PICK_FROM_GALLARY = 2;
+    private Uri imageUri;
+
+    CardView serch;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mm__meal_management);
 
-        myDialog = new Dialog(this);
-        addButton = findViewById(R.id.addMeal);
-        addButton.setOnClickListener(new View.OnClickListener() {
+        serch = findViewById(R.id.searchCard);
+        serch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*myDialog.setContentView(R.layout.activity_mm__add__main__meal__pu);
+                Toast.makeText(getApplicationContext(), "dfbdfdf", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+
+
+        listView = findViewById(R.id.list);
+
+        myDialog = new Dialog(this);
+        addMeal = findViewById(R.id.addMeal);
+        addMeal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.setContentView(R.layout.activity_mm__add__main__meal__pu);
                 TextView txtclose;
                 myDialog.setContentView(R.layout.activity_mm__add__main__meal__pu);
                 txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
@@ -52,31 +96,50 @@ public class MM_MealManagement extends AppCompatActivity {
                     }
                 });
                 myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                myDialog.show();*/
+                myDialog.show();
 
-                Intent intent = new Intent(MM_MealManagement.this, MM_Add_Main_Meal_PU.class);
-                startActivity(intent);
+                upload = myDialog.findViewById(R.id.upload);
+                upload.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent =  new Intent();
+                        intent.setType("image/*");
+                        intent.setAction(Intent.ACTION_GET_CONTENT);
+                        startActivityForResult(intent, PICK_FROM_GALLARY);
+                    }
+
+                });
+
+                uplodedImage = myDialog.findViewById(R.id.uplodedImage);
+
+
+                addButton = (Button) myDialog.findViewById(R.id.addMealDB);
+                addButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //insetDataToDb();
+
+                        mealName = myDialog.findViewById(R.id.mealName);
+                        foodType = myDialog.findViewById(R.id.mealType);
+                        normalPrice = myDialog.findViewById(R.id.normalPrice);
+                        largePrice = myDialog.findViewById(R.id.largePrice);
+                        breakfast = myDialog.findViewById(R.id.brakfast);
+                        lunch = myDialog.findViewById(R.id.lunch);
+                        dinner = myDialog.findViewById(R.id.dinner);
+                        insetDataToDb();
+
+                    }
+                });
+
 
             }
         });
 
-        edit = findViewById(R.id.editData);
+        myDialog2 = new Dialog(this);
+        edit = findViewById(R.id.imageView2);
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MM_MealManagement.this, MM_Edit_Meal_PU.class);
-                startActivity(intent);
-            }
-        });
-
-
-
-        /*myDialog2 = new Dialog(this);
-        imageView = findViewById(R.id.imageView2);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myDialog2.setContentView(R.layout.activity_mm__edit__meal__pu);
                 TextView txtclose1;
                 myDialog2.setContentView(R.layout.activity_mm__edit__meal__pu);
                 txtclose1 =(TextView) myDialog2.findViewById(R.id.txtclose1);
@@ -89,18 +152,87 @@ public class MM_MealManagement extends AppCompatActivity {
                 myDialog2.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 myDialog2.show();
 
-            }
-        });*/
+                mealName = myDialog2.findViewById(R.id.mealName);
+                foodType = myDialog2.findViewById(R.id.mealType);
+                normalPrice = myDialog2.findViewById(R.id.normalPrice);
+                largePrice = myDialog2.findViewById(R.id.largePrice);
+                breakfast = myDialog2.findViewById(R.id.b);
+                lunch = myDialog2.findViewById(R.id.l);
+                dinner = myDialog2.findViewById(R.id.d);
 
-        /*
-        delete = findViewById(R.id.button3);
+
+                df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child("MM-01");
+                df.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.hasChildren()){
+                            mealName.setText(dataSnapshot.child("mealName").getValue().toString());
+                            foodType.setText(dataSnapshot.child("type").getValue().toString());
+                            normalPrice.setText(dataSnapshot.child("normalPrice").getValue().toString());
+                            largePrice.setText(dataSnapshot.child("largePrice").getValue().toString());
+                            if((Boolean) dataSnapshot.child("brakfast").getValue() == true){
+                                breakfast.setChecked(true);
+                            }
+                            if((Boolean)dataSnapshot.child("lunch").getValue() == true){
+                                lunch.setChecked(true);
+                            }
+                            if((Boolean) dataSnapshot.child("dinner").getValue() == true){
+                                dinner.setChecked(true);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
+                editDetails =(Button) myDialog2.findViewById(R.id.updateDetails);
+                editDetails.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        MainMeals mainMeals = new MainMeals();
+                        mainMeals.setId("MM-01");
+                        mainMeals.setMealName(mealName.getText().toString());
+                        mainMeals.setType(foodType.getText().toString());
+                        mainMeals.setNormalPrice(Float.parseFloat(normalPrice.getText().toString()));
+                        mainMeals.setLargePrice(Float.parseFloat(largePrice.getText().toString()));
+                        mainMeals.setBrakfast(breakfast.isChecked());
+                        mainMeals.setLunch(lunch.isChecked());
+                        mainMeals.setDinner(dinner.isChecked());
+
+                        df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child("MM-01");
+                        df.setValue(mainMeals).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(getApplicationContext(), "Data Updated Successfully!", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(MM_MealManagement.this, MM_MealManagement.class);
+                                    startActivity(intent);
+                                }else {
+                                    Toast.makeText(getApplicationContext(), "Data Not Updated Successfully!", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(MM_MealManagement.this, MM_MealManagement.class);
+                                    startActivity(intent);
+                                }
+
+                            }
+                        });
+                    }
+                });
+
+            }
+        });
+
+        deleteAll = findViewById(R.id.deleteAll);
         myDialog3 = new Dialog(this);
-        delete.setOnClickListener(new View.OnClickListener() {
+        deleteAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myDialog3.setContentView(R.layout.activity_delete__all);
+                myDialog3.setContentView(R.layout.activity_mm__delete__all__pu);
                 TextView txtclose;
-                myDialog3.setContentView(R.layout.activity_delete__all);
+                myDialog3.setContentView(R.layout.activity_mm__delete__all__pu);
                 txtclose =(TextView) myDialog3.findViewById(R.id.txtclose3);
                 txtclose.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -111,37 +243,142 @@ public class MM_MealManagement extends AppCompatActivity {
                 myDialog3.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 myDialog3.show();
 
+
+                deleteAllfromDb = myDialog3.findViewById(R.id.button5);
+                deleteAllfromDb.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        DeleteAllMainMeals();
+                    }
+                });
+
+                canselDAll = myDialog3.findViewById(R.id.button4);
+                canselDAll.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        myDialog3.dismiss();
+                    }
+                });
+
+
+
+
+
+
+            }
+        });
+
+
+
+        delete = findViewById(R.id.imageView);
+        myDialog4 = new Dialog(this);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                TextView txtclose;
+                myDialog4.setContentView(R.layout.activity_mm__delete__all__pu);
+                header = myDialog4.findViewById(R.id.header);
+                header.setText("Are You Want To delete");
+                txtclose =(TextView) myDialog4.findViewById(R.id.txtclose3);
+                txtclose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        myDialog4.dismiss();
+                    }
+                });
+                myDialog4.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                myDialog4.show();
+
+
+                deleteAllfromDb = myDialog4.findViewById(R.id.button5);
+                deleteAllfromDb.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        DeleteMainMeal();
+                    }
+                });
+
+                canselDAll = myDialog4.findViewById(R.id.button4);
+                canselDAll.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        myDialog4.dismiss();
+                    }
+                });
+
+
+
+
+
+
             }
         });
 
         view = findViewById(R.id.imageView3);
+        myDialog5 = new Dialog(this);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Meal_Management.this, View_Popup.class);
-                startActivity(intent);
-            }
-        });*/
+               myDialog5.setContentView(R.layout.activity_mm__main__meal__view__pu);
+                myDialog5.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                myDialog5.show();
+
+                mealNameText = myDialog5.findViewById(R.id.mealName);
+                nPrice = myDialog5.findViewById(R.id.regularPrice);
+                lPrice = myDialog5.findViewById(R.id.largePrice);
+                d1 = myDialog5.findViewById(R.id.txt3);
+                tFood = myDialog5.findViewById(R.id.foodType);
+
+                df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child("MM-01");
+                df.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.hasChildren()){
+                            StringBuilder available = new StringBuilder();
+                            mealNameText.setText(dataSnapshot.child("mealName").getValue().toString());
+                            tFood.setText(dataSnapshot.child("type").getValue().toString());
+                            nPrice.setText(dataSnapshot.child("normalPrice").getValue().toString() + "/-");
+                            lPrice.setText(dataSnapshot.child("largePrice").getValue().toString() + "/-");
+                            if((Boolean) dataSnapshot.child("brakfast").getValue() == true){
+                                available.append("Breakfast | ");
+                            }
+                            if((Boolean)dataSnapshot.child("lunch").getValue() == true){
+                                available.append("Lunch | ");
+                            }
+                            if((Boolean) dataSnapshot.child("dinner").getValue() == true){
+                                available.append("Dinner");
+                            }
+                            d1.setText(available);
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
 
 
 
-        deleteAll = findViewById(R.id.deleteAll);
-        deleteAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DeleteAllMainMeals();
+
+
+
+
             }
         });
+/*
+        list = readAllMainMeal();
+        System.out.println("====================================================upper" + list.size());
 
-        delete = findViewById(R.id.delete);
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DeleteMainMeal();
-            }
-        });
+        for(MainMeals M : list){
+            System.out.println(M);
+        }
 
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,list);
+        listView.setAdapter(arrayAdapter);*/
 
     }
 
@@ -166,7 +403,7 @@ public class MM_MealManagement extends AppCompatActivity {
     }
 
     public void DeleteMainMeal(){
-        df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child("1");
+        df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child("MM-01");
         df.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -183,6 +420,110 @@ public class MM_MealManagement extends AppCompatActivity {
             }
         });
     }
+
+
+    public void insetDataToDb(){
+
+
+        fb = FirebaseDatabase.getInstance().getReference().child("MainMeals");
+        primaryKey = CommonConstants.MAIN_MEALS_PREFIX + CommonConstants.MAIN_MEALS_ID;
+        ++CommonConstants.MAIN_MEALS_ID;
+
+
+        MainMeals mainMeals = new MainMeals();
+        mainMeals.setId(primaryKey);
+        mainMeals.setMealName(mealName.getText().toString());
+        mainMeals.setType(mealName.getText().toString());
+        mainMeals.setNormalPrice(Float.parseFloat(normalPrice.getText().toString()));
+        mainMeals.setLargePrice(Float.parseFloat(largePrice.getText().toString()));
+        mainMeals.setBrakfast(breakfast.isChecked());
+        mainMeals.setLunch(lunch.isChecked());
+        mainMeals.setDinner(dinner.isChecked());
+
+        System.out.println(mainMeals.getMealName());
+        System.out.println(mainMeals);
+
+
+
+        fb.child(mainMeals.getId()).setValue(mainMeals)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(getApplicationContext(), "Data Inserted Successfully!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(MM_MealManagement.this, MM_MealManagement.class);
+                            startActivity(intent);
+                        }else {
+                            Toast.makeText(getApplicationContext(), "Data Not Inserted Successfully!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(MM_MealManagement.this, MM_MealManagement.class);
+                            startActivity(intent);
+                        }
+
+                    }
+                });
+
+
+
+
+    }
+
+    public ArrayList<MainMeals> readAllMainMeal(){
+        mList = new ArrayList<MainMeals>();
+        df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child("MM-01");
+
+/*        df.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                MainMeals mainMeals = dataSnapshot.getValue(MainMeals.class);
+                mList.add(mainMeals);
+                *//*
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    MainMeals mm = postSnapshot.getValue(MainMeals.class);
+                    mList.add(mm);
+                    System.out.println("------------------MAinMal" + mm);
+                    System.out.println("dgdfgdfgdsfgdfgdsfMAinMEAl-----------------------------------------" + mList.size());
+
+
+
+                }*//*
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
+
+        df.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                MainMeals mainMeals = dataSnapshot.getValue(MainMeals.class);
+                mList.add(mainMeals);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+        Toast.makeText(getApplicationContext(),mList.isEmpty()+" ",Toast.LENGTH_LONG).show();
+        return mList;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == PICK_FROM_GALLARY && resultCode == RESULT_OK && data != null && data.getData() != null){
+            imageUri = data.getData();
+            uplodedImage.setImageURI(imageUri);
+        }
+    }
+
+
+
 
 
 }

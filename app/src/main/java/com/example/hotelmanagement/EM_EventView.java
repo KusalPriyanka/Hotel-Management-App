@@ -46,7 +46,7 @@ public class EM_EventView extends AppCompatActivity {
                 String first_stwo = txf22.getText().toString();
 
 
-                Intent intent = new Intent(EM_EventView.this, EM_EventDetails.class);
+                Intent intent = new Intent(EM_EventView.this,Eventbook.class);
 
                 intent.putExtra("first_head",first_head );
                 intent.putExtra("first_sone",first_sone );
@@ -75,7 +75,7 @@ public class EM_EventView extends AppCompatActivity {
                 String first_stwo = txf22.getText().toString();
 
 
-                Intent intent = new Intent(EM_EventView.this, EM_EventDetails.class);
+                Intent intent = new Intent(EM_EventView.this, Eventbook.class);
 
                 intent.putExtra("first_head",first_head );
                 intent.putExtra("first_sone",first_sone );
@@ -103,7 +103,7 @@ public class EM_EventView extends AppCompatActivity {
                 String first_stwo = txf22.getText().toString();
 
 
-                Intent intent = new Intent(EM_EventView.this, EM_EventDetails.class);
+                Intent intent = new Intent(EM_EventView.this, Eventbook.class);
 
                 intent.putExtra("first_head",first_head );
                 intent.putExtra("first_sone",first_sone );
@@ -131,7 +131,7 @@ public class EM_EventView extends AppCompatActivity {
                 String first_stwo = txf22.getText().toString();
 
 
-                Intent intent = new Intent(EM_EventView.this, EM_EventDetails.class);
+                Intent intent = new Intent(EM_EventView.this,Eventbook.class);
 
                 intent.putExtra("first_head",first_head );
                 intent.putExtra("first_sone",first_sone );

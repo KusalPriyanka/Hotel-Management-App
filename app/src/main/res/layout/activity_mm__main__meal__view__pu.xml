@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
+    android:layout_width="300dp"
+    android:layout_height="500dp"
+    android:layout_gravity="center"
 android:orientation="vertical"
 tools:context=".MM_Main_Meal_View_PU"
 android:background="#02081D">
@@ -46,7 +47,6 @@ android:background="#02081D">
                 android:layout_height="30dp"
                 android:textColor="#fff"
                 android:textSize="20dp"
-
                 android:textStyle="bold|italic" />
         </LinearLayout>
 
@@ -97,24 +97,6 @@ android:background="#02081D">
 
                 />
 
-            <ImageView
-
-                android:layout_width="1dp"
-                android:layout_height="20dp"
-                android:background="@drawable/mm_rectangle_shape"
-                android:layout_marginRight="7dp"
-                android:layout_marginLeft="7dp"
-                />
-
-            <TextView
-                android:id="@+id/txt4"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:textColor="#FCF158"
-                android:textSize="17dp"
-
-
-                />
         </LinearLayout>
 
         <LinearLayout
