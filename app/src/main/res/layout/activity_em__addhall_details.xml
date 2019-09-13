@@ -290,18 +290,34 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:orientation="horizontal">
+                    android:layout_height="200dp"
+                    android:orientation="vertical">
 
                     <Button
                         android:id="@+id/addbuttonhall"
                         android:layout_width="192dp"
                         android:layout_height="37dp"
+                        android:layout_marginRight="80dp"
                         android:layout_gravity="center"
                         android:layout_marginLeft="90dp"
                         android:background="@drawable/button_style"
+                        android:foregroundGravity="center"
                         android:gravity="center"
                         android:text="Add Hall"
+                        android:textColor="#ffff"
+                        android:textSize="20dp" />
+
+                    <Button
+                        android:id="@+id/buttonview"
+                        android:layout_width="192dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_height="37dp"
+                        android:layout_marginRight="80dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="90dp"
+                        android:background="#45B39D"
+                        android:gravity="center"
+                        android:text="VIEW"
                         android:textColor="#ffff"
                         android:textSize="20dp" />
 
