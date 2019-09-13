@@ -63,6 +63,17 @@
     <string name="weddings">WEDDINGS</string>
     <string name="calm">Calm</string>
     <string name="you_will_travel_by">YOU WILL TRAVEL BY ?</string>
+    <string name="sigiriya">SIGIRIYA</string>
+    <string name="colombo">COLOMBO</string>
+    <string name="kandy">KANDY</string>
+    <string name="jaffna">JAFFNA</string>
+    <string name="travel_place">Travel place</string>
+    <string name="mini_car">MINI CAR</string>
+    <string name="taxi">TAXI</string>
+    <string name="car">CAR</string>
+    <string name="payment_details">PAYMENT DETAILS</string>
+    <string name="delete">Delete</string>
+    <string name="customer_payment_details">Customer payment details</string>
 
 
 </resources>

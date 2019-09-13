@@ -13,31 +13,32 @@
         android:layout_width="120dp"
         android:layout_height="70dp"
         android:background="@drawable/button_style"
-        android:layout_marginBottom="132dp"
-        android:layout_marginStart="32dp"
         android:text="Update"
         android:textColor="#fff"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.065"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.109"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.81" />
 
     <Button
         android:id="@+id/Delete"
         android:layout_width="120dp"
         android:layout_height="70dp"
-        android:layout_marginBottom="132dp"
-        android:text="Delete"
         android:background="@drawable/button_style"
+        android:text="@string/delete"
         android:textColor="#fff"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.731"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.81" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -49,11 +50,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:layout_marginLeft="10dp"
             android:id="@+id/PayUpdate"
-            android:layout_width="239dp"
-            android:layout_height="59dp"
+            android:layout_width="259dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="25dp"
+            android:layout_marginEnd="125dp"
+            android:layout_marginRight="25dp"
             android:text="Update Payment"
             android:textColor="#fff"
             android:textSize="30dp"
@@ -61,13 +65,13 @@
 
         <ImageView
             android:id="@+id/imageView10"
-            android:layout_width="255dp"
-            android:layout_height="68dp"
+            android:layout_width="125dp"
+            android:layout_height="48dp"
 
             android:layout_alignRight="@+id/PayUpdate"
             android:layout_alignBottom="@+id/PayUpdate"
-            android:layout_marginRight="-228dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginRight="-87dp"
+            android:layout_marginBottom="-5dp"
             app:srcCompat="@drawable/travel2_place" />
     </RelativeLayout>
 
@@ -75,48 +79,63 @@
         android:id="@+id/spinner1"
         android:layout_width="200dp"
         android:layout_height="73dp"
-        android:background="@drawable/edittext_style"
         android:layout_marginBottom="244dp"
+        android:background="@drawable/edittext_style"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/pdate"
         android:layout_width="174dp"
         android:layout_height="64dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="184dp"
-        android:layout_marginBottom="129dp"
-        android:text="Pick Up Date"
         android:background="@drawable/edittext_style"
+        android:text="Pick Up Date"
 
         android:textAlignment="center"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/spinner"
-        app:layout_constraintEnd_toStartOf="@+id/ptime"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.067"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+        app:layout_constraintTop_toTopOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.355" />
 
     <TextView
         android:id="@+id/ptime"
         android:layout_width="174dp"
         android:layout_height="64dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="184dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="129dp"
+        android:background="@drawable/edittext_style"
         android:text="Pick Up Time"
         android:textAlignment="center"
         android:textSize="20dp"
-        android:background="@drawable/edittext_style"
 
-        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.865"
-        app:layout_constraintStart_toEndOf="@+id/pdate"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+        app:layout_constraintHorizontal_bias="0.898"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.355" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="173dp"
+        android:layout_height="43dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="update pickup date ,pickup time"
+        android:textColor="@android:color/background_light"
+        android:textScaleX="1.2"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.103"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.177" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

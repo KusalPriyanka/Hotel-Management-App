@@ -41,14 +41,13 @@
 
                 <ImageView
                     android:id="@+id/imageView8"
-                    android:layout_width="111dp"
-                    android:layout_height="83dp"
+                    android:layout_width="81dp"
+                    android:layout_height="63dp"
                     android:layout_alignRight="@+id/text11"
                     android:layout_alignBottom="@+id/text11"
-                    android:layout_marginRight="-82dp"
-                    android:layout_marginBottom="37dp"
-
-                     />
+                    android:layout_marginRight="-38dp"
+                    android:layout_marginBottom="32dp"
+                    app:srcCompat="@drawable/travel2_place" />
 
 
             </RelativeLayout>

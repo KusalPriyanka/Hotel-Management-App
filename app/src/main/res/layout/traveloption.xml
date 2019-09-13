@@ -19,23 +19,25 @@
             android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:text="  Travel place "
+            android:layout_marginBottom="24dp"
+            android:text="@string/travel_place"
             android:textColor="#fff"
+
+
             android:textSize="40dp"
-            android:textStyle="bold"
-
-
-            />
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/imageView7"
-            android:layout_width="100dp"
-            android:layout_height="75dp"
+            android:layout_width="64dp"
+            android:layout_height="53dp"
             android:layout_alignRight="@+id/text"
             android:layout_alignBottom="@+id/text"
-            android:layout_marginRight="55dp"
-            android:layout_marginBottom="-3dp"
+            android:layout_marginRight="58dp"
+            android:layout_marginBottom="-5dp"
             app:srcCompat="@drawable/travel2_place" />
 
     </RelativeLayout>
@@ -54,14 +56,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:orientation="horizontal"
                 android:layout_gravity="center"
-                android:gravity="center"
                 android:layout_marginTop="80dp"
-                >
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <androidx.cardview.widget.CardView
 
@@ -81,7 +83,7 @@
                         android:layout_width="151dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="130dp"
-                        android:text="JAFFNA"
+                        android:text="@string/jaffna"
                         android:textAlignment="center"
                         android:textColor="#000"
                         android:textSize="15dp"
@@ -110,7 +112,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:layout_marginTop="130dp"
-                        android:text="SIGIRIYA"
+                        android:text="@string/sigiriya"
                         android:textAlignment="center"
                         android:textColor="#000"
                         android:textSize="15dp"
@@ -123,11 +125,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:orientation="horizontal"
                 android:layout_gravity="center"
-                android:gravity="center"
                 android:layout_marginTop="30dp"
-                >
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <androidx.cardview.widget.CardView
 
@@ -150,7 +151,7 @@
                         android:layout_width="151dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="130dp"
-                        android:text="COLOMBO"
+                        android:text="@string/colombo"
                         android:textAlignment="center"
                         android:textColor="#000"
                         android:textSize="15dp"
@@ -166,19 +167,19 @@
                     android:layout_height="150dp"
                     android:layout_marginLeft="20dp">
 
+
                     <ImageView
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:layout_gravity="center"
                         android:src="@drawable/nuwara" />
 
-
                     <TextView
                         android:id="@+id/kandy"
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:layout_marginTop="130dp"
-                        android:text="KANDY"
+                        android:text="@string/kandy"
                         android:textAlignment="center"
                         android:textColor="#000"
                         android:textSize="15dp"
@@ -194,8 +195,11 @@
 
     </LinearLayout>
 
-
-
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 
 
 </LinearLayout>
