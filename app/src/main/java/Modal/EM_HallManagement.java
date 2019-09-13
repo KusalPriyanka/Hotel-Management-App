@@ -1,6 +1,9 @@
-package com.example.hotelmanagement;
+package Modal;
 
-public class EM_HallManagement {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class EM_HallManagement implements Serializable {
 
     private String id;
     private String name;
@@ -9,6 +12,9 @@ public class EM_HallManagement {
     private  boolean wedding;
     private  boolean events;
     private String imageName;
+
+    public EM_HallManagement() {
+    }
 
     public String getId() {
         return id;
@@ -64,5 +70,18 @@ public class EM_HallManagement {
 
     public void setImageName(String imageName) {
         this.imageName = imageName;
+    }
+
+    @Override
+    public String toString() {
+        return "EM_HallManagement{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", wedding=" + wedding +
+                ", events=" + events +
+                ", imageName='" + imageName + '\'' +
+                '}';
     }
 }

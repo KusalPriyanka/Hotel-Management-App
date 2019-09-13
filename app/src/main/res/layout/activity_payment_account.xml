@@ -22,8 +22,11 @@
             android:id="@+id/text11"
             android:layout_width="200dp"
             android:layout_height="80dp"
+            android:layout_alignParentEnd="true"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="184dp"
+            android:layout_marginRight="15dp"
             android:text="Payment Account"
             android:textColor="#fff"
             android:textSize="25dp">
@@ -32,13 +35,13 @@
 
         <ImageView
             android:id="@+id/imageView11"
-            android:layout_width="80dp"
-            android:layout_height="83dp"
+            android:layout_width="79dp"
+            android:layout_height="wrap_content"
 
             android:layout_alignRight="@+id/text11"
             android:layout_alignBottom="@+id/text11"
-            android:layout_marginRight="-180dp"
-            android:layout_marginBottom="-11dp"
+            android:layout_marginRight="-155dp"
+            android:layout_marginBottom="-14dp"
             app:srcCompat="@drawable/travel2_place" />
 
     </RelativeLayout>
@@ -49,47 +52,47 @@
         android:layout_height="66dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="420dp"
+        android:layout_marginBottom="104dp"
         android:ems="10"
         android:hint="Customer Name"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.628"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.458" />
 
     <EditText
         android:id="@+id/cNo"
         android:layout_width="228dp"
         android:layout_height="60dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:ems="10"
-        android:inputType="number"
         android:hint="Card Number"
+        android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.606"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.532" />
+        app:layout_constraintVertical_bias="0.557" />
 
     <TextView
         android:id="@+id/editText4"
         android:layout_width="224dp"
         android:layout_height="70dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintHorizontal_bias="0.602"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75" />
+        app:layout_constraintVertical_bias="0.744" />
 
     <Button
         android:id="@+id/submit"
@@ -98,27 +101,28 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="40dp"
+        android:background="@drawable/button_style"
         android:text="SUBMIT"
         android:textColor="#fff"
-        android:background="@drawable/button_style"
         android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.922"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.914"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.982" />
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="70dp"
         android:layout_height="46dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="428dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.024"
+        app:layout_constraintHorizontal_bias="0.064"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.404"
         app:srcCompat="@drawable/icon" />
 
     <ImageView
@@ -128,13 +132,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintHorizontal_bias="0.041"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.524"
+        app:layout_constraintVertical_bias="0.568"
         app:srcCompat="@drawable/visa" />
 
     <ImageView
@@ -146,19 +149,20 @@
         android:layout_marginBottom="168dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.074"
+        app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.986"
         app:srcCompat="@drawable/money" />
 
     <Button
         android:id="@+id/payUpdate"
         android:layout_width="150dp"
-        android:background="@drawable/button_style"
-
         android:layout_height="70dp"
-        android:layout_marginBottom="40dp"
-        android:layout_marginEnd="8dp"
+
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button_style"
         android:text="Update"
         android:textColor="#fff"
         android:textSize="25dp"
@@ -168,7 +172,24 @@
         app:layout_constraintHorizontal_bias="0.057"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.922" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="168dp"
+        android:layout_height="61dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/customer_payment_details"
+        android:textColor="@android:color/background_light"
+        android:textScaleX="1.2"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.081"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.191" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
