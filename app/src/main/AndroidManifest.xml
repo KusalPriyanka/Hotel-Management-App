@@ -23,6 +23,7 @@
         <activity android:name=".EM_HallView" />
         <activity android:name=".EM_AddhallDetails" />
         <activity android:name=".EM_EventDetails" />
+        <activity android:name=".Eventbook" />
         <activity
             android:name=".MM_Main_Meal_View_PU"
             android:theme="@style/AppTheme.MainMealPopUp" />
