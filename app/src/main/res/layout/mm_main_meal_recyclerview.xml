@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-android:id="@+id/card1"
-android:layout_width="match_parent"
-android:layout_height="120dp"
-android:layout_marginLeft="10dp"
-android:layout_marginTop="10dp"
-android:layout_marginRight="10dp"
-android:clipChildren="false"
-android:clipToPadding="false"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card1"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginRight="10dp"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    app:cardCornerRadius="20dp"
 
     >
 
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="120dp"
     android:orientation="horizontal"
 
 
     >
     <!--Image-->
     <LinearLayout
+        android:orientation="horizontal"
+
         android:layout_width="130dp"
-        android:layout_height="match_parent"
+        android:layout_height="120dp"
         android:background="@drawable/mm_noodles"
-        ></LinearLayout>
+        >
+
+
+    </LinearLayout>
 
     <!--Text Area-->
     <LinearLayout
