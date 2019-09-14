@@ -294,12 +294,14 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="100dp">
+                    android:layout_height="100dp"
+                   >
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
-                        android:orientation="horizontal">
+                        android:orientation="vertical"
+                        >
 
                         <Button
                             android:id="@+id/udatepagebtn"
@@ -307,13 +309,32 @@
                             android:layout_height="37dp"
                             android:layout_gravity="center"
                             android:layout_marginLeft="90dp"
-                            android:background="#52BE80"
+                            android:background="@drawable/mm_edit_button"
                             android:gravity="center"
                             android:text="UPDATE"
                             android:textStyle="bold"
                             android:textColor="#ffff"
                             android:textSize="20dp"
                             android:foregroundGravity="center"
+                            android:layout_marginRight="80dp"
+
+                            />
+
+                        <Button
+                            android:id="@+id/deletebtn"
+                            android:layout_width="192dp"
+                            android:layout_height="37dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="90dp"
+                            android:background="@drawable/button_style_delete"
+                            android:gravity="center"
+                            android:text="DELETE"
+                            android:layout_marginTop="20dp"
+                            android:textStyle="bold"
+                            android:textColor="#ffff"
+                            android:textSize="20dp"
+                            android:foregroundGravity="center"
+                            android:layout_marginRight="80dp"
 
                             />
 

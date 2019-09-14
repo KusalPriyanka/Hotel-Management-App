@@ -4,11 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,16 +31,21 @@ public class EM_EventDetails extends AppCompatActivity {
     DatabaseReference dbf;
     EM_HallManagement em;
     Button update;
+    EM_HallManagement em_hallManagementl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_em__event_details);
 
+        Intent intent = getIntent();
+        em_hallManagementl = (EM_HallManagement) intent.getSerializableExtra("em_hallManagement");
+
+
+
         update = findViewById(R.id.udatepagebtn);
         updhallName = findViewById(R.id.hallnameupdate);
         updhallPrice = findViewById(R.id.hallpriceupdate);
-        updhallType = findViewById(R.id.hallpriceupdate);
         updhallType = findViewById(R.id.descripudate);
         updweddingbtn = findViewById(R.id.wedcheckupdate);
         updeventbtn = findViewById(R.id.eventcheckupdate);
@@ -46,7 +54,7 @@ public class EM_EventDetails extends AppCompatActivity {
 
 
 
-        dbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement").child("Red room");
+        dbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement").child(em_hallManagementl.getId());
         dbf.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -75,14 +83,15 @@ public class EM_EventDetails extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 EM_HallManagement em = new EM_HallManagement();
-                em.setName("Red room");
+                em.setId(em_hallManagementl.getId());
+                em.setName(updhallName.getText().toString());
                 em.setPrice(Float.parseFloat(updhallPrice.getText().toString()));
                 em.setDescription(updhallType.getText().toString());
                 em.setWedding(updweddingbtn.isChecked());
                 em.setWedding(updeventbtn.isChecked());
 
 
-                dbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement").child("Red room");
+                dbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement").child(em.getId());
                 dbf.setValue(em).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -109,14 +118,7 @@ public class EM_EventDetails extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-
-
     }
+
+
 }
