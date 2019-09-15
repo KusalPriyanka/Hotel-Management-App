@@ -1,6 +1,9 @@
 package Modal;
 
-public class Reservation {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Reservation implements Serializable {
 
     private String checkInDate;
     private String checkInTime;
@@ -9,10 +12,11 @@ public class Reservation {
     private int noOfAdults;
     private int noOfChild;
     private int noOfRooms;
+    private String packageId;
 
     public Reservation() { }
 
-    public Reservation(String checkInDate, String checkInTime, String checkOutDate, String checkOutTime, int noOfAdults, int noOfChild, int noOfRooms) {
+    public Reservation(String checkInDate, String checkInTime, String checkOutDate, String checkOutTime, int noOfAdults, int noOfChild, int noOfRooms, String packageId) {
         this.checkInDate = checkInDate;
         this.checkInTime = checkInTime;
         this.checkOutDate = checkOutDate;
@@ -20,6 +24,7 @@ public class Reservation {
         this.noOfAdults = noOfAdults;
         this.noOfChild = noOfChild;
         this.noOfRooms = noOfRooms;
+        this.packageId = packageId;
     }
 
     public String getCheckInDate() {
@@ -76,6 +81,14 @@ public class Reservation {
 
     public void setNoOfRooms(int noOfRooms) {
         this.noOfRooms = noOfRooms;
+    }
+
+    public String getPackageId() {
+        return packageId;
+    }
+
+    public void setPackageId(String packageId) {
+        this.packageId = packageId;
     }
 
     @Override
