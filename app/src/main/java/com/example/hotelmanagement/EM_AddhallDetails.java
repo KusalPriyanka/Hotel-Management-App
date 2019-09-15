@@ -97,40 +97,6 @@ public class EM_AddhallDetails extends AppCompatActivity {
         });
 
 
-        /*viewdetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//STUDENT IS THE TABLE NAME
-                String enterdValue = hallName.getText().toString();
-                DatabaseReference readref = FirebaseDatabase.getInstance().getReference().child("Student").child(enterdValue);
-
-
-                readref.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                        if(dataSnapshot.hasChildren()){
-                            txtid.setText(dataSnapshot.child("id").getValue().toString());
-                            txtname.setText(dataSnapshot.child("name").getValue().toString());
-                            txtaddress.setText(dataSnapshot.child("address").getValue().toString());
-
-
-                        }else{
-
-                            Toast.makeText(getApplicationContext(),"no source to display",Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-            }
-        });
-*/
 
 
 

@@ -30,7 +30,7 @@ public class EM_EventDetails extends AppCompatActivity {
     CheckBox updweddingbtn,updeventbtn;
     DatabaseReference dbf;
     EM_HallManagement em;
-    Button update,deleteAllbtn;
+    Button update;
     EM_HallManagement em_hallManagementl;
 
     @Override

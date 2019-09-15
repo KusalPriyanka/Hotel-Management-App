@@ -24,7 +24,7 @@ import Modal.MainMeals;
 
 public class EM_Addhalls extends AppCompatActivity {
     Button button;
-    ImageView updatebtn;
+
     Button deleteAllbtn;
     DatabaseReference df;
 
@@ -82,14 +82,7 @@ public class EM_Addhalls extends AppCompatActivity {
             }
         });
 
-        updatebtn = findViewById(R.id.buttonemupdate);
-        updatebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(EM_Addhalls.this, EM_EventDetails.class);
-                startActivity(intent);
-            }
-        });
+
 
 
         deleteAllbtn = findViewById(R.id.buttondelete);
