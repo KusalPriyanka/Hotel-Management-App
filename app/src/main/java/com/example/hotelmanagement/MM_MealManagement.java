@@ -26,10 +26,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -111,7 +108,7 @@ public class MM_MealManagement extends AppCompatActivity {
                     public void onClick(View view) {
 
                        final ProgressBar proSerch = myDialog6.findViewById(R.id.pro);
-                        SerchTag = myDialog6.findViewById(R.id.editText);
+                        SerchTag = myDialog6.findViewById(R.id.offerName);
                         String id =  SerchTag.getText().toString();
 
 
