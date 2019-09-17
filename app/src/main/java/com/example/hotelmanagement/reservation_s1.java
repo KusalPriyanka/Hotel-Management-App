@@ -4,20 +4,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import Modal.Reservation;
+
 public class reservation_s1 extends AppCompatActivity {
 
     private final Calendar myCalendar = Calendar.getInstance();
-    private EditText checkin , checkout , checkintime , checkouttime;
+    private EditText checkin , checkout , checkintime , checkouttime , adults , child , rooms;
+    private Button addReservation;
     private int hour = -1, min = -1;
 
     DatePickerDialog.OnDateSetListener checkInDate = new DatePickerDialog.OnDateSetListener() {
@@ -54,6 +60,10 @@ public class reservation_s1 extends AppCompatActivity {
         checkout = findViewById(R.id.checkoutdate);
         checkintime = findViewById(R.id.checkintime);
         checkouttime = findViewById(R.id.checkouttime);
+        adults = findViewById(R.id.adults);
+        child = findViewById(R.id.children);
+        rooms = findViewById(R.id.rooms);
+        addReservation = findViewById(R.id.addReservation);
 
         checkintime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,8 +89,28 @@ public class reservation_s1 extends AppCompatActivity {
             }
         });
 
+        addReservation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addReservation();
+            }
+        });
 
+    }
 
+    private void addReservation(){
+
+        Reservation reservation = new Reservation();
+
+        reservation.setCheckInDate(checkin.getText().toString());
+        reservation.setCheckInTime(checkintime.getText().toString());
+        reservation.setCheckOutDate(checkout.getText().toString());
+        reservation.setCheckOutTime(checkouttime.getText().toString());
+        reservation.setNoOfAdults(Integer.parseInt(adults.getText().toString()));
+        reservation.setNoOfChild(Integer.parseInt(child.getText().toString()));
+        reservation.setNoOfRooms(Integer.parseInt(rooms.getText().toString()));
+
+        startActivity(new Intent(reservation_s1.this,showOffers.class).putExtra("Res",reservation));
 
     }
 

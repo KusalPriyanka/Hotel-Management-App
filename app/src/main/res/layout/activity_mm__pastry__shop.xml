@@ -36,7 +36,7 @@ android:background="#fff"
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/back"
                     android:layout_width="25dp"
                     android:layout_height="16dp"
                     android:layout_marginStart="8dp"

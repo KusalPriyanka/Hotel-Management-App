@@ -56,7 +56,7 @@ public class EM_Addhalls extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 EM_HallManagement em_hallManagement =(EM_HallManagement)adapterView.getAdapter().getItem(i);
-                Intent intent =  new Intent(EM_Addhalls.this,  EM_EventDetails.class);
+                Intent intent =  new Intent(EM_Addhalls.this, EM_UpdatedView.class);
                 intent.putExtra("em_hallManagement", em_hallManagement);
                 startActivity(intent);
             }

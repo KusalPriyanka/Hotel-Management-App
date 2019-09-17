@@ -213,10 +213,10 @@
                     <TextView
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:textSize="20dp"
+                        android:layout_marginLeft="30dp"
                         android:text="Hall Type"
                         android:textColor="#000"
-                        android:layout_marginLeft="30dp"/>
+                        android:textSize="20dp" />
 
                     <EditText
                         android:id="@+id/descrip"
@@ -258,7 +258,7 @@
                         android:layout_width="100dp"
                         android:layout_height="20dp"
                         android:text="Wedding"
-                        android:textColor="#6638e2"
+                        android:textColor="#21618C"
                         android:layout_marginLeft="30dp"/>
 
                     <CheckBox
@@ -266,7 +266,7 @@
                         android:layout_width="100dp"
                         android:layout_height="20dp"
                         android:text="Event"
-                        android:textColor="#6638e2"
+                        android:textColor="#21618C"
                         android:layout_marginLeft="70dp"
                         />
 
@@ -295,8 +295,8 @@
 
                     <Button
                         android:id="@+id/addbuttonhall"
-                        android:layout_width="192dp"
-                        android:layout_height="37dp"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
                         android:layout_marginRight="80dp"
                         android:layout_gravity="center"
                         android:layout_marginLeft="90dp"
@@ -307,19 +307,7 @@
                         android:textColor="#ffff"
                         android:textSize="20dp" />
 
-                    <Button
-                        android:id="@+id/buttonview"
-                        android:layout_width="192dp"
-                        android:layout_marginTop="30dp"
-                        android:layout_height="37dp"
-                        android:layout_marginRight="80dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="90dp"
-                        android:background="#45B39D"
-                        android:gravity="center"
-                        android:text="VIEW"
-                        android:textColor="#ffff"
-                        android:textSize="20dp" />
+
 
 
 

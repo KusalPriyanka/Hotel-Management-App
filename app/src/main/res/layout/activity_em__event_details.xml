@@ -294,19 +294,19 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="170dp"
                    >
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                        android:layout_height="170dp"
                         android:orientation="vertical"
                         >
 
                         <Button
                             android:id="@+id/udatepagebtn"
-                            android:layout_width="192dp"
-                            android:layout_height="37dp"
+                            android:layout_width="150dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:layout_marginLeft="90dp"
                             android:background="@drawable/mm_edit_button"
@@ -322,8 +322,8 @@
 
                         <Button
                             android:id="@+id/deletebtn"
-                            android:layout_width="192dp"
-                            android:layout_height="37dp"
+                            android:layout_width="150dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:layout_marginLeft="90dp"
                             android:background="@drawable/button_style_delete"

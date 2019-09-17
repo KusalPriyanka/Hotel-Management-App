@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EM_UpdatedView">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="-34dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="700dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="@drawable/bc_croped"
+
+                    >
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/emback1"
+                            android:layout_width="25dp"
+                            android:layout_height="16dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginBottom="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.032"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.126"
+                            app:srcCompat="@drawable/back_icon" />
+
+
+                        <TextView
+                            android:id="@+id/wedh"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="sans-serif-black"
+                            android:text="BLUE DRAGON"
+                            android:textColor="@android:color/background_light"
+                            android:textSize="30sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.13"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.326" />
+
+
+                        <TextView
+                            android:id="@+id/textViewemhome"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Find Your Space"
+                            android:textColor="@android:color/background_light"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.155"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView4"
+                            app:layout_constraintVertical_bias="0.0" />
+
+                        <ImageView
+                            android:id="@+id/imageViewcake"
+                            android:layout_width="60dp"
+                            android:layout_height="75dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginBottom="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.931"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.559"
+                            app:srcCompat="@drawable/emhotel" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </LinearLayout>
+
+
+                <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+
+                    android:background="#fff"
+                    >
+
+
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+
+                            android:id="@+id/imageView3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="20dp"
+
+
+                            android:src="@drawable/redwedding2" />
+
+
+                    \
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="380dp"
+                        android:layout_marginVertical="10dp"
+
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="100dp"
+                                android:layout_height="30dp"
+                                android:textSize="20dp"
+                                android:text="Hall Name"
+                                android:textColor="#2874A6"
+                                android:layout_marginLeft="30dp"
+                                android:textStyle="italic"
+                                />
+
+                            <TextView
+                                android:id="@+id/viewname"
+                                android:layout_width="wrap_content"
+                                android:textSize="20dp"
+                                android:layout_height="30dp"
+                                android:hint="Enter Hall Price"
+                                android:layout_marginLeft="70dp"
+
+
+                                />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="100dp"
+                                android:layout_height="30dp"
+                                android:textSize="20dp"
+                                android:text="Hall Price"
+                                android:textColor="#2874A6"
+                                android:layout_marginLeft="30dp"
+                                android:textStyle="italic"/>
+
+                            <TextView
+                                android:id="@+id/viewprice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                                android:textSize="20dp"
+                            android:hint="Enter Hall Price"
+                            android:layout_marginLeft="70dp"
+
+
+                            />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="100dp"
+                                android:layout_height="30dp"
+                                android:textSize="20dp"
+                                android:text="Hall Type"
+                                android:textColor="#2874A6"
+                                android:layout_marginLeft="30dp"
+                                android:textStyle="italic"/>
+
+                            <TextView
+                                android:id="@+id/viewdes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+
+                                android:textSize="20dp"
+                                android:hint="Enter Hall Price"
+                                android:layout_marginLeft="70dp"
+
+
+                                />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal"
+
+                            >
+
+                            <CheckedTextView
+                                android:id="@+id/wed"
+                                android:layout_width="100dp"
+                                android:layout_height="40dp"
+                                android:textSize="15dp"
+                                android:layout_marginLeft="50dp"
+                                android:text="Wedding"
+                                android:textColor="#2874A6" />
+
+
+                            <CheckedTextView
+                                android:id="@+id/event"
+                                android:layout_width="100dp"
+                                android:layout_height="40dp"
+                                android:textSize="15dp"
+                                android:layout_marginLeft="50dp"
+                                android:text="Events"
+                                android:textColor="#2874A6" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:orientation="vertical"
+                            >
+
+                            <Button
+                                android:id="@+id/udateviewbtn"
+                                android:layout_width="150dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="90dp"
+                                android:layout_marginRight="80dp"
+                                android:background="@drawable/mm_edit_button"
+                                android:foregroundGravity="center"
+                                android:gravity="center"
+                                android:text="UPDATE"
+                                android:textColor="#ffff"
+                                android:textSize="20dp"
+                                android:textStyle="bold"
+
+                                />
+
+
+
+
+
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+
+
+
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
