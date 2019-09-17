@@ -37,7 +37,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
     ImageView edit, view, delete, image;
     private EditText mealName, foodType, normalPrice, largePrice;
     private CheckBox breakfast, lunch, dinner;
-    ImageView mealimage;
+    ImageView mealimage, back;
 
     CheckedTextView br,lu, dn;
     @Override
@@ -45,6 +45,15 @@ public class MM_View_Meal_View extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mm__view__meal__view);
 
+
+        back = (ImageView) findViewById(R.id.backToMa);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MM_View_Meal_View.this, MM_MealManagement.class);
+                startActivity(intent);
+            }
+        });
 
         Intent intent = getIntent();
         final MainMeals mainMeals = (MainMeals)intent.getSerializableExtra("MainMeals");
@@ -63,7 +72,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
 
         ID.setText(mainMeals.getId());
         name.setText(mainMeals.getMealName());
-        nprice.setText("NP : Rs " + mainMeals.getNormalPrice() + "/-");
+        nprice.setText("Rs " + mainMeals.getNormalPrice() + "/-");
 
         if (mainMeals.isBrakfast() == true){
             br.setCheckMarkDrawable(R.drawable.ic_check_circle_black_24dp);
@@ -103,8 +112,8 @@ public class MM_View_Meal_View extends AppCompatActivity {
 
                 mealName.setText(mainMeals.getMealName());
                 foodType.setText(mainMeals.getType());
-                normalPrice.setText(mainMeals.getNormalPrice() + "");
-                largePrice.setText(mainMeals.getLargePrice() + "");
+                normalPrice.setText(mainMeals.getNormalPrice() + "0");
+                largePrice.setText(mainMeals.getLargePrice() + "0");
                 if(mainMeals.isBrakfast() == true){
                     breakfast.setChecked(true);
                 }

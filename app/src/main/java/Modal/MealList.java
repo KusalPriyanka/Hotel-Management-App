@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -50,6 +51,7 @@ public class MealList extends ArrayAdapter<MainMeals> {
 
 
         MainMeals mainMeals = mealsList.get(position);
+
         mealName.setText(mainMeals.getMealName());
         price.setText("RS - " +mainMeals.getNormalPrice() + "0");
         if (mainMeals.isBrakfast() == true){
@@ -61,7 +63,6 @@ public class MealList extends ArrayAdapter<MainMeals> {
         if (mainMeals.isDinner() == true){
             dinner.setCheckMarkDrawable(R.drawable.ic_check_circle_gold_24dp);
         }
-
         Picasso.get().load(mainMeals.getImageName()).into(image);
 
         return view;
