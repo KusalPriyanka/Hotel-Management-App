@@ -43,6 +43,8 @@ public class MealList extends ArrayAdapter<MainMeals> {
         CheckedTextView lunch = (CheckedTextView) view.findViewById(R.id.lunch);
         CheckedTextView dinner = (CheckedTextView) view.findViewById(R.id.dinner);
         image = (ImageView) view.findViewById(R.id.img);
+
+
         MainMeals mainMeals = mealsList.get(position);
         mealName.setText(mainMeals.getMealName());
         price.setText("RS - " +mainMeals.getNormalPrice() + "0");
@@ -56,6 +58,11 @@ public class MealList extends ArrayAdapter<MainMeals> {
             dinner.setCheckMarkDrawable(R.drawable.ic_check_circle_gold_24dp);
         }
 
+        /*Glide.with(getContext())
+                .load("gs://hotel-management-app-bdc4c.appspot.com/MainMealsImages/1568691452791.jpg")
+                .into(image);*/
+
+        image.setImageURI(Uri.parse("gs://hotel-management-app-bdc4c.appspot.com/MainMealsImages/1568691452791.jpg"));
         return view;
 
     }

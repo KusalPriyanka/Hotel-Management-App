@@ -368,11 +368,11 @@ public class MM_MealManagement extends AppCompatActivity {
     public void insetDataToDb(){
 
         fb = FirebaseDatabase.getInstance().getReference().child("MainMeals");
-       /* ;
+
         String img = System.currentTimeMillis() + "." + getFileExtension(imageUri);
         final StorageReference sf = storageReference.child(img);
 
-        sf.putFile(imageUri);*/
+        sf.putFile(imageUri);
 
         final MainMeals mainMeals = new MainMeals();
         primaryKey = CommonConstants.MAIN_MEALS_PREFIX + CommonConstants.MAIN_MEALS_ID;
@@ -386,7 +386,7 @@ public class MM_MealManagement extends AppCompatActivity {
         mainMeals.setBrakfast(breakfast.isChecked());
         mainMeals.setLunch(lunch.isChecked());
         mainMeals.setDinner(dinner.isChecked());
-       // mainMeals.setImageName(img);
+        mainMeals.setImageName(img);
 
 
 
