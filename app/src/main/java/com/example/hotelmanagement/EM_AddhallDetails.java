@@ -40,15 +40,8 @@ public class EM_AddhallDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_em__addhall_details);
-       /* DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-        int width = displayMetrics.widthPixels;
-        int height = displayMetrics.heightPixels;
-*/
-/*
-        getWindow().setLayout((int)(width*.8),(int)(height*.7));
-*/
+
         buttonAdd =findViewById(R.id.addbuttonhall);
         hallName = findViewById(R.id.hallname);
         hallPrice = findViewById(R.id.hallprice);
@@ -56,15 +49,40 @@ public class EM_AddhallDetails extends AppCompatActivity {
         weddingbtn = findViewById(R.id.wedcheck);
         eventbtn = findViewById(R.id.eventcheck);
 
-        id = CommonConstants.EM_PREFIX + CommonConstants.EH_ID;
-        ++CommonConstants.EH_ID;
 
 
-        dbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement");
+
+
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+            if(hallName.getText().toString().isEmpty()){
+                    hallName.setError("Please Enter Name");
+
+
+                }
+                else if(hallPrice.getText().toString().isEmpty()){
+                hallPrice.setError("Please Enter Price");
+
+
+                }else if(hallType.getText().toString().isEmpty()){
+                hallType.setError("Please Enter Description");
+
+
+            }else if(weddingbtn.isChecked() == false && weddingbtn.isChecked() == false){
+                weddingbtn.setError("Please Fill One of the Boxes");
+                eventbtn.setError("Please Fill One of the Boxes");
+
+            }
+
+                else{
+
+                id = CommonConstants.EM_PREFIX + CommonConstants.EH_ID;
+                ++CommonConstants.EH_ID;
+
                 em = new EM_HallManagement();
                 em.setId(id);
                 em.setName(hallName.getText().toString());
@@ -73,6 +91,8 @@ public class EM_AddhallDetails extends AppCompatActivity {
                 em.setEvents(weddingbtn.isChecked());
                 em.setWedding(eventbtn.isChecked());
 
+
+                dbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement");
 
                 dbf.child(em.getId()).setValue(em).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -88,7 +108,10 @@ public class EM_AddhallDetails extends AppCompatActivity {
                         }
 
                     }
-                });;
+                });
+
+            }
+
 
 
 

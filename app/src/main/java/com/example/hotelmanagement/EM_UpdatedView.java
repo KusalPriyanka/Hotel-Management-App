@@ -26,6 +26,7 @@ public class EM_UpdatedView extends AppCompatActivity {
     TextView passedHallname,passedHallprice,passedHalltype;
     CheckedTextView passedWed,passedEvent;
     EM_HallManagement em_hallManagement1;
+    Button update;
 
 
     @Override
@@ -37,6 +38,15 @@ public class EM_UpdatedView extends AppCompatActivity {
 
         Intent intent = getIntent();
         em_hallManagement1 = (EM_HallManagement) intent.getSerializableExtra("em_hallManagement");
+        update = findViewById(R.id.udateviewbtn);
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EM_UpdatedView.this, EM_EventDetails.class);
+                intent.putExtra("em_hallManagement", em_hallManagement1);
+                startActivity(intent);
+            }
+        });
 
         passedHallname = findViewById(R.id.viewname);
         passedHallprice = findViewById(R.id.viewprice);
@@ -61,11 +71,11 @@ public class EM_UpdatedView extends AppCompatActivity {
                     passedHalltype.setText(dataSnapshot.child("description").getValue().toString());
 
                     if((Boolean) dataSnapshot.child("wedding").getValue() == true){
-                        passedWed.setCheckMarkDrawable(R.drawable.mm_ic_edit_black_24dp);
+                        passedWed.setCheckMarkDrawable(R.drawable.tick4);
 
                     }
                     if((Boolean) dataSnapshot.child("events").getValue() == true){
-                        passedEvent.setCheckMarkDrawable(R.drawable.mm_ic_edit_black_24dp);
+                        passedEvent.setCheckMarkDrawable(R.drawable.tick4);
 
                     }
 
@@ -89,6 +99,8 @@ public class EM_UpdatedView extends AppCompatActivity {
 
             }
         });
+
+
 
 
 
