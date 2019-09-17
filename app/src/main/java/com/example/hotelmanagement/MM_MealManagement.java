@@ -4,8 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.ContentResolver;
 import android.os.Bundle;
 
 import android.app.Dialog;
@@ -13,44 +13,52 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Bundle;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.validation.Validator;
+
 import Modal.MainMeals;
+import Modal.MealList;
 import Util.CommonConstants;
 
 public class MM_MealManagement extends AppCompatActivity {
 
-    private EditText mealName, foodType, normalPrice, largePrice;
+    private EditText mealName, foodType, normalPrice, largePrice, SerchTag;
     private CheckBox breakfast, lunch, dinner;
     private DatabaseReference fb;
     Dialog myDialog, myDialog2, myDialog3, myDialog4, myDialog5, myDialog6;
     Button addButton, deleteAll, addMeal, deleteAllfromDb, canselDAll, editDetails;
-    ImageView edit, view, delete , search, upload, uplodedImage;
+    ImageView edit, view, delete , upload, uplodedImage, serchIcon;
     private DatabaseReference df;
+    private StorageReference storageReference;
     String primaryKey;
     ListView listView;
     ArrayList<MainMeals> list, mList;
@@ -58,11 +66,14 @@ public class MM_MealManagement extends AppCompatActivity {
     TextView mealNameText, nPrice, lPrice, tFood, d1;
     private static final int PICK_FROM_GALLARY = 2;
     private Uri imageUri;
-
-    CardView serch;
-
+    private Validator validator;
+    CardView search;
     List<MainMeals> mealsLists = new ArrayList<>();
-
+    MainMeals mmSer;
+    TextView ID, name, type, lprice, nprice, headerDeletePU;
+    CheckedTextView br,lu, dn;
+    private ProgressBar progressBar;
+    private ListView lv;
 
 
     @Override
@@ -70,52 +81,88 @@ public class MM_MealManagement extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mm__meal_management);
 
-        listView = findViewById(R.id.list);
+        storageReference = FirebaseStorage.getInstance().getReference("MainMealsImages");
 
-        df = FirebaseDatabase.getInstance().getReference().child("MainMeals");
-        final FirebaseListAdapter<MainMeals> adapter = new FirebaseListAdapter<MainMeals>(
-                this,
-                MainMeals.class,
-                android.R.layout.simple_list_item_1,
-                df
 
-        ) {
-            @Override
-            protected void populateView(View v, MainMeals model, int position) {
-                TextView textView = v.findViewById(android.R.id.text1);
-                textView.setText(model.toString());
-            }
-        };
-
-        listView.setAdapter(adapter);
+        lv = (ListView) findViewById(R.id.mmList);
 
 
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                MainMeals mainMeals =(MainMeals)adapterView.getAdapter().getItem(i);
-                Intent intent =  new Intent(MM_MealManagement.this,  MM_View_Meal_View.class);
-                intent.putExtra("MainMeals", mainMeals);
-                startActivity(intent);
-            }
-        });
-
-
-
-
-/*
         myDialog6 = new Dialog(this);
-        search = findViewById(R.id.imageView5);
+        search = findViewById(R.id.searchCard);
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                myDialog6.setContentView(R.layout.activity_mm__edit__meal__pu);
-                myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                myDialog.show();
+
+                myDialog6.setContentView(R.layout.activity_mm__search__bar);
+                myDialog6.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                myDialog6.show();
+
+
+
+
+                mmSer = new MainMeals();
+                serchIcon = myDialog6.findViewById(R.id.imageView5);
+
+
+                serchIcon.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                       final ProgressBar proSerch = myDialog6.findViewById(R.id.pro);
+                        SerchTag = myDialog6.findViewById(R.id.editText);
+                        String id =  SerchTag.getText().toString();
+
+
+                        df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child(id);
+                        df.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if(dataSnapshot.hasChildren()){
+
+                                    proSerch.setVisibility(View.VISIBLE);
+                                    mmSer.setId(dataSnapshot.child("id").getValue().toString());
+                                    mmSer.setMealName(dataSnapshot.child("mealName").getValue().toString());
+                                    mmSer.setType(dataSnapshot.child("type").getValue().toString());
+                                    mmSer.setNormalPrice(Float.parseFloat(dataSnapshot.child("normalPrice").getValue().toString()));
+                                    mmSer.setLargePrice(Float.parseFloat(dataSnapshot.child("largePrice").getValue().toString()));
+                                    if((Boolean) dataSnapshot.child("brakfast").getValue() == true){
+                                        mmSer.setBrakfast(true);
+                                    }
+                                    if((Boolean)dataSnapshot.child("lunch").getValue() == true){
+                                        mmSer.setLunch(true);
+                                    }
+                                    if((Boolean) dataSnapshot.child("dinner").getValue() == true){
+                                        mmSer.setDinner(true);
+                                    }
+                                }
+                            }
+
+
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+                        proSerch.setVisibility(View.GONE);
+                        Intent intent =  new Intent(MM_MealManagement.this,  MM_View_Meal_View.class);
+                        intent.putExtra("MainMeals", mmSer);
+                        startActivity(intent);
+                    }
+
+
+
+                });
+
+
+
+
+
             }
-        });*/
+        });
 
 
 
@@ -161,7 +208,7 @@ public class MM_MealManagement extends AppCompatActivity {
                 addButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //insetDataToDb();
+
 
                         mealName = myDialog.findViewById(R.id.mealName);
                         foodType = myDialog.findViewById(R.id.mealType);
@@ -170,104 +217,70 @@ public class MM_MealManagement extends AppCompatActivity {
                         breakfast = myDialog.findViewById(R.id.brakfast);
                         lunch = myDialog.findViewById(R.id.lunch);
                         dinner = myDialog.findViewById(R.id.dinner);
-                        insetDataToDb();
+                        if(mealName.getText().toString().isEmpty()) {
 
-                    }
-                });
+                            mealName.setError("Please Enter Meal Name!");
+                            mealName.clearFocus();
 
+                        }else if(foodType.getText().toString().isEmpty()) {
 
-            }
-        });
+                            foodType.setError("Please Enter Meal Type!");
 
-        myDialog2 = new Dialog(this);
-        edit = findViewById(R.id.imageView2);
-        edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TextView txtclose1;
-                myDialog2.setContentView(R.layout.activity_mm__edit__meal__pu);
-                txtclose1 =(TextView) myDialog2.findViewById(R.id.txtclose1);
-                txtclose1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        myDialog2.dismiss();
-                    }
-                });
-                myDialog2.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                myDialog2.show();
+                        }else if(normalPrice.getText().toString().isEmpty()) {
 
-                mealName = myDialog2.findViewById(R.id.mealName);
-                foodType = myDialog2.findViewById(R.id.mealType);
-                normalPrice = myDialog2.findViewById(R.id.normalPrice);
-                largePrice = myDialog2.findViewById(R.id.largePrice);
-                breakfast = myDialog2.findViewById(R.id.b);
-                lunch = myDialog2.findViewById(R.id.l);
-                dinner = myDialog2.findViewById(R.id.d);
+                            normalPrice.setError("Please Enter Meal Normal Price!");
 
+                        }else if(Float.parseFloat(normalPrice.getText().toString()) == 0) {
 
-                df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child("MM-01");
-                df.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChildren()){
-                            mealName.setText(dataSnapshot.child("mealName").getValue().toString());
-                            foodType.setText(dataSnapshot.child("type").getValue().toString());
-                            normalPrice.setText(dataSnapshot.child("normalPrice").getValue().toString());
-                            largePrice.setText(dataSnapshot.child("largePrice").getValue().toString());
-                            if((Boolean) dataSnapshot.child("brakfast").getValue() == true){
-                                breakfast.setChecked(true);
-                            }
-                            if((Boolean)dataSnapshot.child("lunch").getValue() == true){
-                                lunch.setChecked(true);
-                            }
-                            if((Boolean) dataSnapshot.child("dinner").getValue() == true){
-                                dinner.setChecked(true);
-                            }
+                            normalPrice.setError("Normal Price Can Not Be 0!");
+
+                        }else if(Float.parseFloat(normalPrice.getText().toString()) < 0) {
+
+                            normalPrice.setError("Normal Price Can Not Be Negative!");
+
+                        }else if(largePrice.getText().toString().isEmpty()) {
+
+                            largePrice.setError("Please Enter Meal largePrice Price!");
+
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        else if(Float.parseFloat(largePrice.getText().toString()) == 0) {
 
-                    }
-                });
+                            largePrice.setError("Large Price Can Not Be 0!");
+
+                        }else if(Float.parseFloat(largePrice.getText().toString()) < 0) {
+
+                            largePrice.setError("Large Price Can Not Be Negative!");
+
+                        }
 
 
-                editDetails =(Button) myDialog2.findViewById(R.id.updateDetails);
-                editDetails.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        MainMeals mainMeals = new MainMeals();
-                        mainMeals.setId("MM-01");
-                        mainMeals.setMealName(mealName.getText().toString());
-                        mainMeals.setType(foodType.getText().toString());
-                        mainMeals.setNormalPrice(Float.parseFloat(normalPrice.getText().toString()));
-                        mainMeals.setLargePrice(Float.parseFloat(largePrice.getText().toString()));
-                        mainMeals.setBrakfast(breakfast.isChecked());
-                        mainMeals.setLunch(lunch.isChecked());
-                        mainMeals.setDinner(dinner.isChecked());
+                        else if(largePrice.getText().toString().isEmpty()) {
 
-                        df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child("MM-01");
-                        df.setValue(mainMeals).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
-                                    Toast.makeText(getApplicationContext(), "Data Updated Successfully!", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(MM_MealManagement.this, MM_MealManagement.class);
-                                    startActivity(intent);
-                                }else {
-                                    Toast.makeText(getApplicationContext(), "Data Not Updated Successfully!", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(MM_MealManagement.this, MM_MealManagement.class);
-                                    startActivity(intent);
-                                }
+                            largePrice.setError("Please Enter Meal Large Price!");
 
-                            }
-                        });
+                        }else if (breakfast.isChecked() == false && lunch.isChecked() == false && dinner.isChecked() == false){
+                            Toast.makeText(getApplicationContext(), "Please Enter Meal Time!", Toast.LENGTH_LONG).show();
+                            breakfast.setError("!");
+                            lunch.setError("!");
+                            dinner.setError("!");
+                        }
+
+                        else {
+                            insetDataToDb();
+                        }
+
+
+
+
                     }
                 });
+
 
             }
         });
+
+
 
         deleteAll = findViewById(R.id.deleteAll);
         myDialog3 = new Dialog(this);
@@ -314,105 +327,8 @@ public class MM_MealManagement extends AppCompatActivity {
 
 
 
-        delete = findViewById(R.id.imageView);
-        myDialog4 = new Dialog(this);
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                TextView txtclose;
-                myDialog4.setContentView(R.layout.activity_mm__delete__all__pu);
-                header = myDialog4.findViewById(R.id.header);
-                header.setText("Are You Want To delete");
-                txtclose =(TextView) myDialog4.findViewById(R.id.txtclose3);
-                txtclose.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        myDialog4.dismiss();
-                    }
-                });
-                myDialog4.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                myDialog4.show();
 
 
-                deleteAllfromDb = myDialog4.findViewById(R.id.button5);
-                deleteAllfromDb.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        DeleteMainMeal();
-                    }
-                });
-
-                canselDAll = myDialog4.findViewById(R.id.button4);
-                canselDAll.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        myDialog4.dismiss();
-                    }
-                });
-
-
-
-
-
-
-            }
-        });
-
-        view = findViewById(R.id.imageView3);
-        myDialog5 = new Dialog(this);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               myDialog5.setContentView(R.layout.activity_mm__main__meal__view__pu);
-                myDialog5.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                myDialog5.show();
-
-                mealNameText = myDialog5.findViewById(R.id.mealName);
-                nPrice = myDialog5.findViewById(R.id.regularPrice);
-                lPrice = myDialog5.findViewById(R.id.largePrice);
-                d1 = myDialog5.findViewById(R.id.txt3);
-                tFood = myDialog5.findViewById(R.id.foodType);
-
-                df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child("MM-01");
-                df.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChildren()){
-                            StringBuilder available = new StringBuilder();
-                            mealNameText.setText(dataSnapshot.child("mealName").getValue().toString());
-                            tFood.setText(dataSnapshot.child("type").getValue().toString());
-                            nPrice.setText(dataSnapshot.child("normalPrice").getValue().toString() + "/-");
-                            lPrice.setText(dataSnapshot.child("largePrice").getValue().toString() + "/-");
-                            if((Boolean) dataSnapshot.child("brakfast").getValue() == true){
-                                available.append("Breakfast | ");
-                            }
-                            if((Boolean)dataSnapshot.child("lunch").getValue() == true){
-                                available.append("Lunch | ");
-                            }
-                            if((Boolean) dataSnapshot.child("dinner").getValue() == true){
-                                available.append("Dinner");
-                            }
-                            d1.setText(available);
-
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-
-
-
-
-
-
-
-            }
-        });
 /*
         list = readAllMainMeal();
         System.out.println("====================================================upper" + list.size());
@@ -446,35 +362,22 @@ public class MM_MealManagement extends AppCompatActivity {
         });
     }
 
-    public void DeleteMainMeal(){
-        df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child("MM-01");
-        df.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(getApplicationContext(), "Deleted Successfully!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MM_MealManagement.this, MM_MealManagement.class);
-                    startActivity(intent);
-                }else {
-                    Toast.makeText(getApplicationContext(), "Error!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MM_MealManagement.this, MM_MealManagement.class);
-                    startActivity(intent);
-                }
 
-            }
-        });
-    }
 
 
     public void insetDataToDb(){
 
-
         fb = FirebaseDatabase.getInstance().getReference().child("MainMeals");
+       /* ;
+        String img = System.currentTimeMillis() + "." + getFileExtension(imageUri);
+        final StorageReference sf = storageReference.child(img);
+
+        sf.putFile(imageUri);*/
+
+        final MainMeals mainMeals = new MainMeals();
         primaryKey = CommonConstants.MAIN_MEALS_PREFIX + CommonConstants.MAIN_MEALS_ID;
         ++CommonConstants.MAIN_MEALS_ID;
 
-
-        MainMeals mainMeals = new MainMeals();
         mainMeals.setId(primaryKey);
         mainMeals.setMealName(mealName.getText().toString());
         mainMeals.setType(mealName.getText().toString());
@@ -483,9 +386,11 @@ public class MM_MealManagement extends AppCompatActivity {
         mainMeals.setBrakfast(breakfast.isChecked());
         mainMeals.setLunch(lunch.isChecked());
         mainMeals.setDinner(dinner.isChecked());
+       // mainMeals.setImageName(img);
 
-        System.out.println(mainMeals.getMealName());
-        System.out.println(mainMeals);
+
+
+
 
 
 
@@ -551,8 +456,55 @@ public class MM_MealManagement extends AppCompatActivity {
     }*/
 
 
+    public  String getFileExtension(Uri uri){
+        ContentResolver cr = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return  mime.getExtensionFromMimeType(cr.getType(uri));
+    }
 
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        progressBar = findViewById(R.id.pro);
+        progressBar.setVisibility(View.VISIBLE);
+        df = FirebaseDatabase.getInstance().getReference().child("MainMeals");
+        df.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mealsLists.clear();
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    MainMeals mainMeals = ds.getValue(MainMeals.class);
+                    mealsLists.add(mainMeals);
+                }
+
+                MealList mealList = new MealList(MM_MealManagement.this, mealsLists);
+
+                lv.setAdapter(mealList);
+                progressBar.setVisibility(View.GONE);
+
+                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        MainMeals mainMeals =(MainMeals)adapterView.getAdapter().getItem(i);
+
+                        Intent intent =  new Intent(MM_MealManagement.this,  MM_View_Meal_View.class);
+                        intent.putExtra("MainMeals", mainMeals);
+                        startActivity(intent);
+
+
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 
 
 
