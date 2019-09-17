@@ -22,6 +22,8 @@
         <activity android:name=".EM_Addhalls" />
         <activity android:name=".EM_HallView" />
         <activity android:name=".EM_AddhallDetails" />
+        <activity android:name=".TravelHome" />
+        <activity android:name=".travel_admin" />
         <activity android:name=".EM_EventDetails" />
         <activity android:name=".Eventbook" />
         <activity

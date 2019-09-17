@@ -9,11 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -165,6 +167,8 @@ class VehicleViewAdapter extends RecyclerView.Adapter {
 
         VehicleViewHolder vehicleViewHolder = (VehicleViewHolder) holder;
 
+        vehicleViewHolder.imageView.setVisibility(View.VISIBLE);
+
         vehicleViewHolder.tv_type.setText(vehicle.getName().toUpperCase());
         vehicleViewHolder.tv_price.setText(vehicle.getPrice() + " per KM");
 
@@ -192,6 +196,8 @@ class VehicleViewHolder extends RecyclerView.ViewHolder {
 
     public TextView tv_type, tv_price;
     public Button btn_remove;
+    public ConstraintLayout cons_lay;
+    public ImageView imageView;
 
     public VehicleViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -199,6 +205,8 @@ class VehicleViewHolder extends RecyclerView.ViewHolder {
         tv_price = itemView.findViewById(R.id.tv_vpriceview);
         tv_type = itemView.findViewById(R.id.tv_vtypeview);
         btn_remove = itemView.findViewById(R.id.btn_removevtype);
+        cons_lay = itemView.findViewById(R.id.cons_lay_v_view);
+        imageView = itemView.findViewById(R.id.imgview_vtype);
 
     }
 }
