@@ -10,12 +10,6 @@ android:background="#fff"
     >
 
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        >
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -235,23 +229,35 @@ android:background="#fff"
 
 
 
-            <LinearLayout
+            <ProgressBar
+                android:layout_marginTop="200dp"
+                android:id="@+id/pro"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:outlineSpotShadowColor="#000"
+                android:outlineAmbientShadowColor="#000"
+                />
+
+            <ListView
+                android:id="@+id/mmList"
                 android:layout_width="match_parent"
-                android:layout_height="500dp">
+                android:layout_height="400dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="10dp"
+                android:dividerHeight="10dp"
+                android:background="#fff"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:divider="#fff"
+                android:paddingTop="10dp"
 
-
-                <ListView
-                    android:id="@+id/list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                </ListView>
-            </LinearLayout>
-
+                ></ListView>
 
         </LinearLayout>
 
 
-    </ScrollView>
+
 </LinearLayout>
 

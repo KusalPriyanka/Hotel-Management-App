@@ -18,9 +18,29 @@ android:background="#02081D">
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/txtclose1"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/ic_panorama_fish_eye_black_24dp"
+            android:gravity="center"
+            android:text="X"
+            android:textColor="#fff"
+            android:textSize="15dp"
+            android:padding="2dp"
+            android:textStyle="bold"
+
+            />
+
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_marginTop="10dp"
+
             android:id="@+id/image1"
             android:layout_width="match_parent"
             android:layout_height="170dp"
@@ -43,9 +63,10 @@ android:background="#02081D">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_gravity="center"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp">
 
             <ImageView
 
@@ -74,7 +95,7 @@ android:background="#02081D">
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginTop="10dp"
+
             >
 
             <ImageView
@@ -161,31 +182,26 @@ android:background="#02081D">
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:textColor="#fff"
-
                 android:textSize="17dp"
                 android:text="@string/food_type"
                 />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            >
+
+
             <TextView
                 android:id="@+id/foodType"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:textColor="#FCF158"
                 android:textSize="17dp"
+                android:layout_gravity="center"
+                android:gravity="center"
 
                 />
 
 
-        </LinearLayout>
+
 
 
         <LinearLayout
@@ -194,7 +210,6 @@ android:background="#02081D">
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginTop="10dp"
             >
 
             <ImageView
@@ -230,7 +245,7 @@ android:background="#02081D">
                 android:layout_height="20dp"
                 android:textColor="#FCF158"
                 android:textSize="17dp"
-                android:text="Regular Price - RS : "
+                android:text="Regular Price : "
                 />
 
             <TextView
@@ -260,7 +275,7 @@ android:background="#02081D">
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textSize="17dp"
-                android:text="Large Price - RS : "
+                android:text="Large Price : "
                 />
             <TextView
                 android:id="@+id/largePrice"
@@ -270,7 +285,6 @@ android:background="#02081D">
                 android:layout_height="20dp"
                 android:textColor="#FFFF0E00"
                 android:textSize="17dp"
-                android:text="350.00/-"
                 />
 
 

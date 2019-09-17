@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.ContentResolver;
 import android.os.Bundle;
 
 import android.app.Dialog;
@@ -13,23 +14,31 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +46,7 @@ import java.util.List;
 import javax.xml.validation.Validator;
 
 import Modal.MainMeals;
+import Modal.MealList;
 import Util.CommonConstants;
 
 public class MM_MealManagement extends AppCompatActivity {
@@ -48,6 +58,7 @@ public class MM_MealManagement extends AppCompatActivity {
     Button addButton, deleteAll, addMeal, deleteAllfromDb, canselDAll, editDetails;
     ImageView edit, view, delete , upload, uplodedImage, serchIcon;
     private DatabaseReference df;
+    private StorageReference storageReference;
     String primaryKey;
     ListView listView;
     ArrayList<MainMeals> list, mList;
@@ -57,10 +68,12 @@ public class MM_MealManagement extends AppCompatActivity {
     private Uri imageUri;
     private Validator validator;
     CardView search;
-
     List<MainMeals> mealsLists = new ArrayList<>();
     MainMeals mmSer;
-
+    TextView ID, name, type, lprice, nprice, headerDeletePU;
+    CheckedTextView br,lu, dn;
+    private ProgressBar progressBar;
+    private ListView lv;
 
 
     @Override
@@ -68,39 +81,10 @@ public class MM_MealManagement extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mm__meal_management);
 
-
-        listView = findViewById(R.id.list);
-
-        df = FirebaseDatabase.getInstance().getReference().child("MainMeals");
-        final FirebaseListAdapter<MainMeals> adapter = new FirebaseListAdapter<MainMeals>(
-                this,
-                MainMeals.class,
-                android.R.layout.simple_list_item_1,
-                df
-
-        ) {
-            @Override
-            protected void populateView(View v, MainMeals model, int position) {
-                TextView textView = v.findViewById(android.R.id.text1);
-                textView.setText(model.toString());
-            }
-        };
-
-        listView.setAdapter(adapter);
+        storageReference = FirebaseStorage.getInstance().getReference("MainMealsImages");
 
 
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                MainMeals mainMeals =(MainMeals)adapterView.getAdapter().getItem(i);
-                Intent intent =  new Intent(MM_MealManagement.this,  MM_View_Meal_View.class);
-                intent.putExtra("MainMeals", mainMeals);
-                startActivity(intent);
-            }
-        });
-
-
+        lv = (ListView) findViewById(R.id.mmList);
 
 
 
@@ -115,6 +99,9 @@ public class MM_MealManagement extends AppCompatActivity {
                 myDialog6.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 myDialog6.show();
 
+
+
+
                 mmSer = new MainMeals();
                 serchIcon = myDialog6.findViewById(R.id.imageView5);
 
@@ -122,13 +109,19 @@ public class MM_MealManagement extends AppCompatActivity {
                 serchIcon.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+                       final ProgressBar proSerch = myDialog6.findViewById(R.id.pro);
                         SerchTag = myDialog6.findViewById(R.id.editText);
                         String id =  SerchTag.getText().toString();
+
+
                         df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child(id);
                         df.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if(dataSnapshot.hasChildren()){
+
+                                    proSerch.setVisibility(View.VISIBLE);
                                     mmSer.setId(dataSnapshot.child("id").getValue().toString());
                                     mmSer.setMealName(dataSnapshot.child("mealName").getValue().toString());
                                     mmSer.setType(dataSnapshot.child("type").getValue().toString());
@@ -153,6 +146,8 @@ public class MM_MealManagement extends AppCompatActivity {
 
                             }
                         });
+
+                        proSerch.setVisibility(View.GONE);
                         Intent intent =  new Intent(MM_MealManagement.this,  MM_View_Meal_View.class);
                         intent.putExtra("MainMeals", mmSer);
                         startActivity(intent);
@@ -213,7 +208,7 @@ public class MM_MealManagement extends AppCompatActivity {
                 addButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //insetDataToDb();
+
 
                         mealName = myDialog.findViewById(R.id.mealName);
                         foodType = myDialog.findViewById(R.id.mealType);
@@ -243,7 +238,13 @@ public class MM_MealManagement extends AppCompatActivity {
 
                             normalPrice.setError("Normal Price Can Not Be Negative!");
 
-                        }else if(Float.parseFloat(largePrice.getText().toString()) == 0) {
+                        }else if(largePrice.getText().toString().isEmpty()) {
+
+                            largePrice.setError("Please Enter Meal largePrice Price!");
+
+                        }
+
+                        else if(Float.parseFloat(largePrice.getText().toString()) == 0) {
 
                             largePrice.setError("Large Price Can Not Be 0!");
 
@@ -366,13 +367,17 @@ public class MM_MealManagement extends AppCompatActivity {
 
     public void insetDataToDb(){
 
-
         fb = FirebaseDatabase.getInstance().getReference().child("MainMeals");
+       /* ;
+        String img = System.currentTimeMillis() + "." + getFileExtension(imageUri);
+        final StorageReference sf = storageReference.child(img);
+
+        sf.putFile(imageUri);*/
+
+        final MainMeals mainMeals = new MainMeals();
         primaryKey = CommonConstants.MAIN_MEALS_PREFIX + CommonConstants.MAIN_MEALS_ID;
         ++CommonConstants.MAIN_MEALS_ID;
 
-
-        MainMeals mainMeals = new MainMeals();
         mainMeals.setId(primaryKey);
         mainMeals.setMealName(mealName.getText().toString());
         mainMeals.setType(mealName.getText().toString());
@@ -381,9 +386,11 @@ public class MM_MealManagement extends AppCompatActivity {
         mainMeals.setBrakfast(breakfast.isChecked());
         mainMeals.setLunch(lunch.isChecked());
         mainMeals.setDinner(dinner.isChecked());
+       // mainMeals.setImageName(img);
 
-        System.out.println(mainMeals.getMealName());
-        System.out.println(mainMeals);
+
+
+
 
 
 
@@ -449,8 +456,55 @@ public class MM_MealManagement extends AppCompatActivity {
     }*/
 
 
+    public  String getFileExtension(Uri uri){
+        ContentResolver cr = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return  mime.getExtensionFromMimeType(cr.getType(uri));
+    }
 
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        progressBar = findViewById(R.id.pro);
+        progressBar.setVisibility(View.VISIBLE);
+        df = FirebaseDatabase.getInstance().getReference().child("MainMeals");
+        df.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mealsLists.clear();
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    MainMeals mainMeals = ds.getValue(MainMeals.class);
+                    mealsLists.add(mainMeals);
+                }
+
+                MealList mealList = new MealList(MM_MealManagement.this, mealsLists);
+
+                lv.setAdapter(mealList);
+                progressBar.setVisibility(View.GONE);
+
+                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        MainMeals mainMeals =(MainMeals)adapterView.getAdapter().getItem(i);
+
+                        Intent intent =  new Intent(MM_MealManagement.this,  MM_View_Meal_View.class);
+                        intent.putExtra("MainMeals", mainMeals);
+                        startActivity(intent);
+
+
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 
 
 

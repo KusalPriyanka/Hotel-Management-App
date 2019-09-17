@@ -12,12 +12,16 @@
     android:clipToPadding="false"
     app:cardCornerRadius="20dp"
 
+
+
     >
 
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="120dp"
     android:orientation="horizontal"
+
+
 
 
     >
@@ -27,8 +31,12 @@
 
         android:layout_width="130dp"
         android:layout_height="120dp"
-        android:background="@drawable/mm_noodles"
+
         >
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
 
     </LinearLayout>
@@ -56,7 +64,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_marginTop="14dp"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="32dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="6dp"
                 android:src="@drawable/mm_ic_room_service_black_24dp"
@@ -82,8 +90,8 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@drawable/mm_rectangle_shape"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
             android:layout_gravity="center"
             />
 
@@ -101,23 +109,23 @@
                 android:layout_width="19dp"
                 android:layout_height="19dp"
 
-                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+
                 android:layout_marginTop="14dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_gravity="center"
+                android:layout_marginBottom="13dp"
                 android:src="@drawable/mm_ic_access_time_black_24dp"
 
                 />
 
-            <TextView
-                android:id="@+id/tb1"
-                android:layout_width="55dp"
+            <CheckedTextView
+                android:id="@+id/brakfast"
+                android:layout_width="50dp"
                 android:layout_height="20dp"
                 android:text="@string/breakfast"
                 android:textColor="#000000"
                 android:layout_marginTop="14dp"
-                android:textSize="12dp"
+                android:textSize="8dp"
                 android:textStyle="bold"
                 android:layout_marginRight="10dp"
                 android:layout_gravity="center"
@@ -132,17 +140,41 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
                 />
-            <TextView
-                android:id="@+id/tl1"
-                android:layout_width="55dp"
+            <CheckedTextView
+                android:id="@+id/lunch"
+                android:layout_width="36dp"
+                android:layout_height="20dp"
+                android:text="@string/lunch"
+                android:textColor="#000000"
+                android:layout_marginTop="14dp"
+                android:textSize="8dp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                />
+            <ImageView
+
+                android:layout_width="1dp"
+                android:layout_height="20dp"
+                android:background="@drawable/mm_rectangle_shape"
+                android:layout_marginTop="13dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="8dp"
+                />
+
+            <CheckedTextView
+                android:id="@+id/dinner"
+                android:layout_width="40dp"
                 android:layout_height="20dp"
                 android:text="@string/dinner"
                 android:textColor="#000000"
                 android:layout_marginTop="14dp"
-                android:textSize="12dp"
+                android:textSize="8dp"
                 android:textStyle="bold"
                 android:layout_gravity="center"
                 android:layout_marginBottom="8dp"
+
                 />
 
         </LinearLayout>
@@ -151,8 +183,8 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@drawable/mm_rectangle_shape"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             />
 
         <LinearLayout

@@ -147,7 +147,13 @@ public class MM_View_Meal_View extends AppCompatActivity {
 
                             normalPrice.setError("Normal Price Can Not Be Negative!");
 
-                        }else if(Float.parseFloat(largePrice.getText().toString()) == 0) {
+                        }else if(largePrice.getText().toString().isEmpty()) {
+
+                            largePrice.setError("Please Enter Meal largePrice Price!");
+
+                        }
+
+                        else if(Float.parseFloat(largePrice.getText().toString()) == 0) {
 
                             largePrice.setError("Large Price Can Not Be 0!");
 
@@ -265,35 +271,20 @@ public class MM_View_Meal_View extends AppCompatActivity {
                 dn = myDialog5.findViewById(R.id.dinner);
                 type = myDialog5.findViewById(R.id.foodType);
 
-                df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child(mainMeals.getId());
-                df.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChildren()){
 
-                            name.setText(dataSnapshot.child("mealName").getValue().toString());
-                            type.setText(dataSnapshot.child("type").getValue().toString());
-                            nprice.setText(dataSnapshot.child("normalPrice").getValue().toString() + "/-");
-                            lprice.setText(dataSnapshot.child("largePrice").getValue().toString() + "/-");
-                            if((Boolean) dataSnapshot.child("brakfast").getValue() == true){
-                                br.setCheckMarkDrawable(R.drawable.ic_check_circle_black_24dp);
-                            }
-                            if((Boolean)dataSnapshot.child("lunch").getValue() == true){
-                                lu.setCheckMarkDrawable(R.drawable.ic_check_circle_black_24dp);
-                            }
-                            if((Boolean) dataSnapshot.child("dinner").getValue() == true){
-                                dn.setCheckMarkDrawable(R.drawable.ic_check_circle_black_24dp);
-                            }
-
-
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+                name.setText(mainMeals.getMealName());
+                type.setText(mainMeals.getType());
+                nprice.setText("RS - " + mainMeals.getNormalPrice() + "0");
+                lprice.setText("RS - " + mainMeals.getLargePrice() + "0");
+                if(mainMeals.isBrakfast() == true){
+                    br.setCheckMarkDrawable(R.drawable.ic_check_circle_gold_24dp);
+                }
+                if(mainMeals.isLunch() == true){
+                    lu.setCheckMarkDrawable(R.drawable.ic_check_circle_gold_24dp);
+                }
+                if(mainMeals.isDinner() == true){
+                    dn.setCheckMarkDrawable(R.drawable.ic_check_circle_gold_24dp);
+                }
 
 
 
