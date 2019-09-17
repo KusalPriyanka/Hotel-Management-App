@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         tpart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,travel_option.class);
+                Intent intent = new Intent(MainActivity.this,TravelHome.class);
                 startActivity(intent);
             }
         });
