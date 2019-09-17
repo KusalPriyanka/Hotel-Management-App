@@ -92,17 +92,17 @@ public class EM_EventDetails extends AppCompatActivity {
                 em.setWedding(updeventbtn.isChecked());
 
 
-                dbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement").child(em.getId());
+                dbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement").child(em_hallManagementl.getId());
                 dbf.setValue(em).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(getApplicationContext(), "Data Updating is Successfull", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(EM_EventDetails.this, EM_UpdatedView.class);
+                            Intent intent = new Intent(EM_EventDetails.this, EM_Addhalls.class);
                             startActivity(intent);
                         }else {
                             Toast.makeText(getApplicationContext(), "Data Updating is Not Successfull", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(EM_EventDetails.this, EM_EventDetails.class);
+                            Intent intent = new Intent(EM_EventDetails.this, EM_Addhalls.class);
                             startActivity(intent);
                         }
 
