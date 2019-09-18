@@ -1,166 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity_location"
-    android:orientation="vertical"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    tools:context=".activity_location">
 
-    <ScrollView
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="64dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/travel2_place" />
+
+    <TextView
+        android:id="@+id/text11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/you_will_travel_by"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_vtypeviewc"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-
-               >
-
-
-
-                    <TextView
-                        android:id="@+id/text11"
-                        android:layout_width="300dp"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginLeft="20dp"
-                        android:text="@string/you_will_travel_by"
-                        android:textStyle="bold"
-                        android:textSize="24dp"
-                        android:textColor="@color/white"/>
-
-                <ImageView
-                    android:id="@+id/imageView8"
-                    android:layout_width="81dp"
-                    android:layout_height="63dp"
-                    android:layout_alignRight="@+id/text11"
-                    android:layout_alignBottom="@+id/text11"
-                    android:layout_marginRight="-38dp"
-                    android:layout_marginBottom="32dp"
-                    app:srcCompat="@drawable/travel2_place" />
-
-
-            </RelativeLayout>
-
-
-
-
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-               >
-                <LinearLayout
-                    android:layout_marginTop="80dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    >
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/mcar"
-                        android:layout_width="150dp"
-
-
-                        android:layout_height="150dp">
-
-                        <ImageView
-                            android:id="@+id/mini"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/car1" />
-
-                        <TextView
-                            android:id="@+id/mbus"
-                            android:layout_width="151dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="130dp"
-                            android:text="MINI CAR"
-                            android:textAlignment="center"
-                            android:textColor="#000"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/taxi"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:layout_marginLeft="20dp">
-
-                        <ImageView
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/taxi1" />
-
-
-                        <TextView
-                            android:id="@+id/txy"
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="130dp"
-                            android:text="TAXI"
-                            android:textAlignment="center"
-                            android:textColor="#000"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                    </androidx.cardview.widget.CardView>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="270dp"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center"
-                    android:gravity="center">
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/car"
-                        android:layout_width="250dp"
-                        android:layout_height="150dp">
-
-                        <ImageView
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/taxi" />
-
-
-                        <TextView
-                            android:id="@+id/cur"
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="130dp"
-                            android:text="CAR"
-                            android:textAlignment="center"
-                            android:textColor="#000"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                    </androidx.cardview.widget.CardView>
-                </LinearLayout>
-
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

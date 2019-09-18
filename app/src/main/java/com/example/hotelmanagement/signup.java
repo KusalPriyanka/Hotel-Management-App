@@ -38,7 +38,7 @@ public class signup extends AppCompatActivity {
         mobileNo = findViewById(R.id.mobileNo);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
-        signup = findViewById(R.id.signup);
+        signup = findViewById(R.id.addoffers);
 
         progressBar = findViewById(R.id.progressbar);
         progressBar.setVisibility(View.GONE);

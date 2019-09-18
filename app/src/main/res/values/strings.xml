@@ -74,6 +74,16 @@
     <string name="payment_details">PAYMENT DETAILS</string>
     <string name="delete">Delete</string>
     <string name="customer_payment_details">Customer payment details</string>
+    <string name="admin_home">Admin Home</string>
+    <string name="vehicle_manage">Vehicle Manage</string>
+    <string name="add">Add</string>
+    <string name="view_vehicle_types">View Vehicle Types</string>
+    <string name="admin_home2">Admin Home</string>
+    <string name="travel_options">Travel Options</string>
+    <string name="travel_home">Travel Home</string>
+    <string name="registered_vehicles">Registered Vehicles</string>
+    <string name="all_vehicle_types">All Vehicle Types</string>
+    <string name="remove">Remove</string>
 
 
 </resources>

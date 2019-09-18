@@ -37,6 +37,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 
 import java.util.ArrayList;
@@ -63,8 +64,10 @@ public class MM_Main_Meals extends AppCompatActivity {
     private CheckBox breakfast, lunch, dinner;
     TextView ID, name, type, lprice, nprice, headerDeletePU;
     CheckedTextView br,lu, dn;
-
     ListView lv;
+    ImageView image;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -146,27 +149,6 @@ public class MM_Main_Meals extends AppCompatActivity {
     }
 
 
-   /* @Override
-    protected void onStart() {
-        super.onStart();
-        if(adapter != null){
-            adapter.startListening();
-        }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(adapter != null){
-            adapter.stopListening();
-        }
-    }
-
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        adapter.startListening();
-    }*/
 
 
     @Override
@@ -205,7 +187,7 @@ public class MM_Main_Meals extends AppCompatActivity {
                         lu = myDialog5.findViewById(R.id.lunch);
                         dn = myDialog5.findViewById(R.id.dinner);
                         type = myDialog5.findViewById(R.id.foodType);
-
+                        image = myDialog5.findViewById(R.id.image1);
 
                         name.setText(mainMeals.getMealName());
                         type.setText(mainMeals.getType());
@@ -220,7 +202,7 @@ public class MM_Main_Meals extends AppCompatActivity {
                         if(mainMeals.isDinner() == true){
                             dn.setCheckMarkDrawable(R.drawable.check_view);
                         }
-
+                        Picasso.get().load(mainMeals.getImageName()).into(image);
 
 
                     }

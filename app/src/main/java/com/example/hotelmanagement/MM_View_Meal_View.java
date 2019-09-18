@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import Modal.MainMeals;
 
@@ -33,9 +34,10 @@ public class MM_View_Meal_View extends AppCompatActivity {
     DatabaseReference df;
     Dialog myDialog2, myDialog4, myDialog5;
     Button editDetails, deleteAllfromDb, canselDAll;
-    ImageView edit, view, delete;
+    ImageView edit, view, delete, image;
     private EditText mealName, foodType, normalPrice, largePrice;
     private CheckBox breakfast, lunch, dinner;
+    ImageView mealimage, back;
 
     CheckedTextView br,lu, dn;
     @Override
@@ -44,24 +46,33 @@ public class MM_View_Meal_View extends AppCompatActivity {
         setContentView(R.layout.activity_mm__view__meal__view);
 
 
+        back = (ImageView) findViewById(R.id.backToMa);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MM_View_Meal_View.this, MM_MealManagement.class);
+                startActivity(intent);
+            }
+        });
+
         Intent intent = getIntent();
         final MainMeals mainMeals = (MainMeals)intent.getSerializableExtra("MainMeals");
 
+        mealimage = (ImageView) findViewById(R.id.meallImage);
+        Picasso.get().load(mainMeals.getImageName()).into(mealimage);
+
+
         ID = findViewById(R.id.textView4);
-        name = findViewById(R.id.name);
-        type = findViewById(R.id.type);
-        nprice = findViewById(R.id.normalPrice);
-        lprice = findViewById(R.id.largePrice);
-        br = findViewById(R.id.brakfastCh);
-        lu = findViewById(R.id.lunchCh);
-        dn = findViewById(R.id.dinnerCh);
+        name = findViewById(R.id.name1);
+        nprice = findViewById(R.id.price1);
+        br = findViewById(R.id.brakfast);
+        lu = findViewById(R.id.lunch);
+        dn = findViewById(R.id.dinner);
 
 
         ID.setText(mainMeals.getId());
         name.setText(mainMeals.getMealName());
-        type.setText(mainMeals.getType());
-        nprice.setText("NP : Rs " + mainMeals.getNormalPrice() + "/-");
-        lprice.setText("LP : Rs " + mainMeals.getLargePrice() + "/-");
+        nprice.setText("Rs " + mainMeals.getNormalPrice() + "/-");
 
         if (mainMeals.isBrakfast() == true){
             br.setCheckMarkDrawable(R.drawable.ic_check_circle_black_24dp);
@@ -101,8 +112,8 @@ public class MM_View_Meal_View extends AppCompatActivity {
 
                 mealName.setText(mainMeals.getMealName());
                 foodType.setText(mainMeals.getType());
-                normalPrice.setText(mainMeals.getNormalPrice() + "");
-                largePrice.setText(mainMeals.getLargePrice() + "");
+                normalPrice.setText(mainMeals.getNormalPrice() + "0");
+                largePrice.setText(mainMeals.getLargePrice() + "0");
                 if(mainMeals.isBrakfast() == true){
                     breakfast.setChecked(true);
                 }
@@ -112,14 +123,6 @@ public class MM_View_Meal_View extends AppCompatActivity {
                 if(mainMeals.isDinner() == true){
                     dinner.setChecked(true);
                 }
-
-
-
-
-
-
-
-
 
                 editDetails =(Button) myDialog2.findViewById(R.id.updateDetails);
                 editDetails.setOnClickListener(new View.OnClickListener() {
@@ -270,7 +273,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
                 lu = myDialog5.findViewById(R.id.lunch);
                 dn = myDialog5.findViewById(R.id.dinner);
                 type = myDialog5.findViewById(R.id.foodType);
-
+                image = myDialog5.findViewById(R.id.image1);
 
                 name.setText(mainMeals.getMealName());
                 type.setText(mainMeals.getType());
@@ -285,13 +288,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
                 if(mainMeals.isDinner() == true){
                     dn.setCheckMarkDrawable(R.drawable.ic_check_circle_gold_24dp);
                 }
-
-
-
-
-
-
-
+                Picasso.get().load(mainMeals.getImageName()).into(image);
 
             }
         });

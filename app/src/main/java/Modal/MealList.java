@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,9 @@ import androidx.fragment.app.FragmentTransaction;
 import com.bumptech.glide.Glide;
 import com.example.hotelmanagement.MainActivity;
 import com.example.hotelmanagement.R;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+
 
 
 import java.io.File;
@@ -26,6 +30,7 @@ public class MealList extends ArrayAdapter<MainMeals> {
     private Activity context;
     private List<MainMeals> mealsList;
     ImageView image;
+    StorageReference storageReference;
 
     public MealList(Activity context,List<MainMeals> mealsList) {
         super(context, R.layout.mm_main_meal_recyclerview, mealsList);
@@ -46,6 +51,7 @@ public class MealList extends ArrayAdapter<MainMeals> {
 
 
         MainMeals mainMeals = mealsList.get(position);
+
         mealName.setText(mainMeals.getMealName());
         price.setText("RS - " +mainMeals.getNormalPrice() + "0");
         if (mainMeals.isBrakfast() == true){
@@ -57,12 +63,8 @@ public class MealList extends ArrayAdapter<MainMeals> {
         if (mainMeals.isDinner() == true){
             dinner.setCheckMarkDrawable(R.drawable.ic_check_circle_gold_24dp);
         }
+        Picasso.get().load(mainMeals.getImageName()).into(image);
 
-        /*Glide.with(getContext())
-                .load("gs://hotel-management-app-bdc4c.appspot.com/MainMealsImages/1568691452791.jpg")
-                .into(image);*/
-
-        image.setImageURI(Uri.parse("gs://hotel-management-app-bdc4c.appspot.com/MainMealsImages/1568691452791.jpg"));
         return view;
 
     }
