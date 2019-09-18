@@ -14,10 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.firebase.ui.database.FirebaseListOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import Modal.EM_HallManagement;
 import Modal.MainMeals;
@@ -30,6 +32,8 @@ public class EM_Addhalls extends AppCompatActivity {
 
     ListView listView;
 
+    private FirebaseListAdapter<EM_HallManagement> adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +42,8 @@ public class EM_Addhalls extends AppCompatActivity {
 
         listView = findViewById(R.id.listView);
 
-        df = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement");
+   /*     df = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement");
+
         FirebaseListAdapter<EM_HallManagement> adapter = new FirebaseListAdapter<EM_HallManagement>(
                 this,EM_HallManagement.class, android.R.layout.simple_list_item_1, df
         ) {
@@ -50,7 +55,28 @@ public class EM_Addhalls extends AppCompatActivity {
         };
         listView.setAdapter(adapter);
 
+*/
 
+        Query query = FirebaseDatabase.getInstance()
+                .getReference()
+                .child("EM_HallManagement");
+
+        FirebaseListOptions<EM_HallManagement> options = new FirebaseListOptions.Builder<EM_HallManagement>()
+                .setQuery(query, EM_HallManagement.class)
+                .setLayout(android.R.layout.simple_list_item_1)
+                .build();
+
+         adapter = new FirebaseListAdapter<EM_HallManagement>(options) {
+            @Override
+            protected void populateView(View v, EM_HallManagement model, int position) {
+
+                TextView textView = v.findViewById(android.R.id.text1);
+                textView.setText(model.toString());
+
+            }
+        };
+
+        listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -62,17 +88,6 @@ public class EM_Addhalls extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
-
-
-
-
-
         button = findViewById(R.id.addHall);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,9 +97,6 @@ public class EM_Addhalls extends AppCompatActivity {
             }
         });
 
-
-
-
         deleteAllbtn = findViewById(R.id.buttondelete);
         deleteAllbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,9 +105,8 @@ public class EM_Addhalls extends AppCompatActivity {
             }
         });
 
-
-
     }
+
     public void DeleteAllHalls(){
         DatabaseReference deletedbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement");
         deletedbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement");
@@ -115,6 +126,18 @@ public class EM_Addhalls extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 }
 

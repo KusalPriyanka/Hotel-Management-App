@@ -11,6 +11,7 @@ import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentTransaction;
@@ -63,8 +64,8 @@ public class MealList extends ArrayAdapter<MainMeals> {
         if (mainMeals.isDinner() == true){
             dinner.setCheckMarkDrawable(R.drawable.ic_check_circle_gold_24dp);
         }
-        Picasso.get().load(mainMeals.getImageName()).into(image);
 
+        Glide.with(getContext()).load(mainMeals.getImageName()).into(image);
         return view;
 
     }
