@@ -76,51 +76,6 @@ public class MM_Main_Meals extends AppCompatActivity {
         mealsLists = new ArrayList<MainMeals>();
         myDialog5 = new Dialog(this);
 
-       /* mainMealsRV= findViewById(R.id.mainMealRecycleView);
-        mainMealsRV.hasFixedSize();
-
-        df = FirebaseDatabase.getInstance().getReference().child("MainMeals");
-
-        mainMealsop = new FirebaseRecyclerOptions.Builder<MainMeals>().setQuery(df, MainMeals.class).build();
-
-        adapter = new FirebaseRecyclerAdapter<MainMeals, MainMealsViewHolder>(mainMealsop ) {
-            @Override
-            protected void onBindViewHolder(@NonNull MainMealsViewHolder mainMealsViewHolder, int i, @NonNull MainMeals mainMeals) {
-                Picasso.get().load(mainMeals.getImageName()).into(mainMealsViewHolder.iv, new Callback() {
-                    @Override
-                    public void onSuccess() {
-
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-                        Toast.makeText(getApplicationContext(), "Err Image", Toast.LENGTH_LONG).show();
-                    }
-
-
-                });
-
-                mainMealsViewHolder.t1.setText(mainMeals.getMealName());
-            }
-
-            @NonNull
-            @Override
-            public MainMealsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mm_main_meal_recyclerview, parent, false);
-                return new MainMealsViewHolder(view);
-            }
-        };
-
-
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),1);
-        mainMealsRV.setLayoutManager(gridLayoutManager);
-        adapter.startListening();
-        mainMealsRV.setAdapter(adapter);
-*/
-
-
-
         lv = (ListView) findViewById(R.id.mmList);
 
 
@@ -142,14 +97,7 @@ public class MM_Main_Meals extends AppCompatActivity {
             }
         });
 
-
-
-
-
     }
-
-
-
 
     @Override
     protected void onStart() {

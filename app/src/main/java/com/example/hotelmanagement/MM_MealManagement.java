@@ -15,6 +15,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -46,6 +47,7 @@ import javax.xml.validation.Validator;
 import Modal.MainMeals;
 import Modal.MealList;
 import Util.CommonConstants;
+import Util.CommonFunctions;
 
 public class MM_MealManagement extends AppCompatActivity {
 
@@ -67,13 +69,14 @@ public class MM_MealManagement extends AppCompatActivity {
     private Validator validator;
     CardView search;
     List<MainMeals> mealsLists = new ArrayList<>();
+    List<String> mealID = new ArrayList<>();
     MainMeals mmSer;
     TextView ID, name, type, lprice, nprice, headerDeletePU;
     CheckedTextView br,lu, dn;
     private ProgressBar progressBar, addImagePro;
     private ListView lv;
     String ImagePath;
-    long count = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,9 +103,6 @@ public class MM_MealManagement extends AppCompatActivity {
                 final ProgressBar proSerch = myDialog6.findViewById(R.id.pro);
                 proSerch.setVisibility(View.INVISIBLE);
 
-
-
-                mmSer = new MainMeals();
                 serchIcon = myDialog6.findViewById(R.id.imageView5);
 
 
@@ -111,56 +111,45 @@ public class MM_MealManagement extends AppCompatActivity {
                     public void onClick(View view) {
 
 
-                       proSerch.setVisibility(View.VISIBLE);
+
                         SerchTag = myDialog6.findViewById(R.id.offerName);
 
-                       final ProgressBar proSerch = myDialog6.findViewById(R.id.pro);
-                        SerchTag = myDialog6.findViewById(R.id.offerName);
 
                         String id =  SerchTag.getText().toString();
+                        if(id.isEmpty()){
+                            SerchTag.setError("");
+                            Toast.makeText(getApplicationContext(), "Please Enter Key For Search", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            proSerch.setVisibility(View.VISIBLE);
+                            df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child(id);
+                            df.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                        df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child(id);
-                        df.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                if(dataSnapshot.hasChildren()){
+                                    MainMeals mainMeals = dataSnapshot.getValue(MainMeals.class);
 
-                                    proSerch.setVisibility(View.VISIBLE);
-                                    mmSer.setId(dataSnapshot.child("id").getValue().toString());
-                                    mmSer.setMealName(dataSnapshot.child("mealName").getValue().toString());
-                                    mmSer.setType(dataSnapshot.child("type").getValue().toString());
-                                    mmSer.setNormalPrice(Float.parseFloat(dataSnapshot.child("normalPrice").getValue().toString()));
-                                    mmSer.setLargePrice(Float.parseFloat(dataSnapshot.child("largePrice").getValue().toString()));
-                                    if((Boolean) dataSnapshot.child("brakfast").getValue() == true){
-                                        mmSer.setBrakfast(true);
+                                    if(mainMeals != null){
+                                        proSerch.setVisibility(View.GONE);
+                                        Intent intent =  new Intent(MM_MealManagement.this,  MM_View_Meal_View.class);
+                                        intent.putExtra("MainMeals", mainMeals);
+                                        startActivity(intent);
+                                    }else {
+                                        proSerch.setVisibility(View.GONE);
+                                        Toast.makeText(getApplicationContext(), "Please Enter Valid Id!", Toast.LENGTH_LONG).show();
                                     }
-                                    if((Boolean)dataSnapshot.child("lunch").getValue() == true){
-                                        mmSer.setLunch(true);
-                                    }
-                                    if((Boolean) dataSnapshot.child("dinner").getValue() == true){
-                                        mmSer.setDinner(true);
-                                    }
-
-                                    count  = dataSnapshot.getChildrenCount();
 
                                 }
-                            }
 
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
-                        if(count > 1){
-                            proSerch.setVisibility(View.GONE);
-                            Intent intent =  new Intent(MM_MealManagement.this,  MM_View_Meal_View.class);
-                            intent.putExtra("MainMeals", mmSer);
-                            startActivity(intent);
-                        }else {
-                            Toast.makeText(getApplicationContext(), "Please Enter Valid Id!", Toast.LENGTH_LONG).show();
+                                }
+                            });
                         }
+
+
+
 
 
                     }
@@ -362,10 +351,39 @@ public class MM_MealManagement extends AppCompatActivity {
 
     public void insetDataToDb(){
 
+
+
+        addImagePro.setVisibility(View.VISIBLE);
+        df = FirebaseDatabase.getInstance().getReference().child("MainMeals");
+        df.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mealsLists.clear();
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    String id = ds.child("id").getValue().toString();
+                    mealID.add(id);
+                }
+
+        }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+
         fb = FirebaseDatabase.getInstance().getReference().child("MainMeals");
         final MainMeals mainMeals = new MainMeals();
-        primaryKey = CommonConstants.MAIN_MEALS_PREFIX + CommonConstants.MAIN_MEALS_ID;
-        ++CommonConstants.MAIN_MEALS_ID;
+        /*primaryKey = CommonConstants.MAIN_MEALS_PREFIX + CommonConstants.MAIN_MEALS_ID;
+        ++CommonConstants.MAIN_MEALS_ID;*/
+
+        primaryKey = CommonFunctions.get_id(CommonConstants.MAIN_MEALS_PREFIX, mealsLists);
+
+
 
         mainMeals.setId(primaryKey);
         mainMeals.setMealName(mealName.getText().toString());
@@ -383,6 +401,7 @@ public class MM_MealManagement extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(getApplicationContext(), "Data Inserted Successfully!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(MM_MealManagement.this, MM_MealManagement.class);
                             startActivity(intent);

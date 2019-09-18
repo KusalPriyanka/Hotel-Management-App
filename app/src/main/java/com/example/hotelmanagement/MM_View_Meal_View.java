@@ -2,6 +2,7 @@ package com.example.hotelmanagement;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.widget.CheckBox;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,11 +36,13 @@ public class MM_View_Meal_View extends AppCompatActivity {
     DatabaseReference df;
     Dialog myDialog2, myDialog4, myDialog5;
     Button editDetails, deleteAllfromDb, canselDAll;
-    ImageView edit, view, delete, image;
+    ImageView edit, view, delete, image, serchIcon;
     private EditText mealName, foodType, normalPrice, largePrice;
     private CheckBox breakfast, lunch, dinner;
     ImageView mealimage, back;
-
+    CardView search;
+    Dialog myDialog6;
+    private EditText SerchTag;
     CheckedTextView br,lu, dn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +76,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
 
         ID.setText(mainMeals.getId());
         name.setText(mainMeals.getMealName());
-        nprice.setText("Rs " + mainMeals.getNormalPrice() + "/-");
+        nprice.setText("Rs " + mainMeals.getNormalPrice() + "0/-");
 
         if (mainMeals.isBrakfast() == true){
             br.setCheckMarkDrawable(R.drawable.ic_check_circle_black_24dp);
@@ -293,6 +297,82 @@ public class MM_View_Meal_View extends AppCompatActivity {
             }
         });
 
+
+
+        myDialog6 = new Dialog(this);
+        search = findViewById(R.id.searchCard);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                myDialog6.setContentView(R.layout.activity_mm__search__bar);
+                myDialog6.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                myDialog6.show();
+                final ProgressBar proSerch = myDialog6.findViewById(R.id.pro);
+                proSerch.setVisibility(View.INVISIBLE);
+
+                serchIcon = myDialog6.findViewById(R.id.imageView5);
+
+
+                serchIcon.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+
+
+                        SerchTag = myDialog6.findViewById(R.id.offerName);
+
+
+                        String id =  SerchTag.getText().toString();
+                        if(id.isEmpty()){
+                            SerchTag.setError("");
+                            Toast.makeText(getApplicationContext(), "Please Enter Key For Search", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            proSerch.setVisibility(View.VISIBLE);
+                            df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child(id);
+                            df.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                    MainMeals mainMeals = dataSnapshot.getValue(MainMeals.class);
+
+                                    if(mainMeals != null){
+                                        proSerch.setVisibility(View.GONE);
+                                        Intent intent =  new Intent(MM_View_Meal_View.this,  MM_View_Meal_View.class);
+                                        intent.putExtra("MainMeals", mainMeals);
+                                        startActivity(intent);
+                                    }else {
+                                        proSerch.setVisibility(View.GONE);
+                                        Toast.makeText(getApplicationContext(), "Please Enter Valid Id!", Toast.LENGTH_LONG).show();
+                                    }
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                        }
+
+
+
+
+
+                    }
+
+
+
+                });
+
+
+
+
+
+            }
+        });
 
 
 
