@@ -126,6 +126,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/hallviewname"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:text="BLUE RAY reception hall has a large space with modern architecture which provides a prestigeous look for the whole function"

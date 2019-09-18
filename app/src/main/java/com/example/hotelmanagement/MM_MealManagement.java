@@ -36,9 +36,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
+/*import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
+import com.google.firebase.storage.UploadTask;*/
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +58,7 @@ public class MM_MealManagement extends AppCompatActivity {
     Button addButton, deleteAll, addMeal, deleteAllfromDb, canselDAll, editDetails;
     ImageView edit, view, delete , upload, uplodedImage, serchIcon;
     private DatabaseReference df;
-    private StorageReference storageReference;
+    //private StorageReference storageReference;
     String primaryKey;
     ListView listView;
     ArrayList<MainMeals> list, mList;
@@ -81,18 +81,18 @@ public class MM_MealManagement extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mm__meal_management);
 
-        storageReference = FirebaseStorage.getInstance().getReference("MainMealsImages");
+        //storageReference = FirebaseStorage.getInstance().getReference("MainMealsImages");
 
 
         lv = (ListView) findViewById(R.id.mmList);
 
 
 
-        myDialog6 = new Dialog(this);
-        search = findViewById(R.id.searchCard);
-        search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            myDialog6 = new Dialog(this);
+            search = findViewById(R.id.searchCard);
+            search.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
 
                 myDialog6.setContentView(R.layout.activity_mm__search__bar);
@@ -370,9 +370,9 @@ public class MM_MealManagement extends AppCompatActivity {
         fb = FirebaseDatabase.getInstance().getReference().child("MainMeals");
 
         String img = System.currentTimeMillis() + "." + getFileExtension(imageUri);
-        final StorageReference sf = storageReference.child(img);
+        //final StorageReference sf = storageReference.child(img);
 
-        sf.putFile(imageUri);
+        //sf.putFile(imageUri);
 
         final MainMeals mainMeals = new MainMeals();
         primaryKey = CommonConstants.MAIN_MEALS_PREFIX + CommonConstants.MAIN_MEALS_ID;
