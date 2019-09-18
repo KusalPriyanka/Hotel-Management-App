@@ -84,6 +84,9 @@
     <string name="registered_vehicles">Registered Vehicles</string>
     <string name="all_vehicle_types">All Vehicle Types</string>
     <string name="remove">Remove</string>
+    <string name="location_manage">Location Manage</string>
+    <string name="enter_location_details">Enter Location Details</string>
+    <string name="blue_dragon_hotel">Blue Dragon Hotel</string>
 
 
 </resources>

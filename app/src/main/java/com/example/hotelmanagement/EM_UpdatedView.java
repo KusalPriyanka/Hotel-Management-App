@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import Modal.EM_HallManagement;
 
 public class EM_UpdatedView extends AppCompatActivity {
-    TextView passedHallname,passedHallprice,passedHalltype;
+    TextView passedHallname,passedHallprice,passedHalltype,passedhallid;
     CheckedTextView passedWed,passedEvent;
     EM_HallManagement em_hallManagement1;
     Button update;
@@ -48,6 +48,7 @@ public class EM_UpdatedView extends AppCompatActivity {
             }
         });
 
+        passedhallid = findViewById(R.id.textVieweid);
         passedHallname = findViewById(R.id.viewname);
         passedHallprice = findViewById(R.id.viewprice);
         passedHalltype = findViewById(R.id.viewdes);
@@ -65,7 +66,7 @@ public class EM_UpdatedView extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()){
 
-
+                    passedhallid.setText(dataSnapshot.child("id").getValue().toString());
                     passedHallname.setText(dataSnapshot.child("name").getValue().toString());
                     passedHallprice.setText(dataSnapshot.child("price").getValue().toString());
                     passedHalltype.setText(dataSnapshot.child("description").getValue().toString());
