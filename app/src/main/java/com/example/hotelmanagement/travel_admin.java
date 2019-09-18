@@ -16,13 +16,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import Classes.Validations;
+import Modal.Place;
 import Modal.Vehicle;
 
 public class travel_admin extends AppCompatActivity {
 
-    EditText et_price, et_name;
-    Button btn_add, btn_view;
-    DatabaseReference mdb;
+    EditText et_price, et_name,et_lname,et_ldetails;
+    Button btn_add, btn_view,btn_ladd,btn_lview;
+    DatabaseReference mdb,mdb2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,12 +95,78 @@ public class travel_admin extends AppCompatActivity {
             }
         });
 
+
+        btn_ladd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (et_lname.getText().toString().equals("") || et_ldetails.getText().toString().equals("")) {
+                    Toast.makeText(travel_admin.this, "Some details are empty.", Toast.LENGTH_SHORT).show();
+                } else {
+
+                        mdb2.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                System.out.println(dataSnapshot.getChildrenCount());
+                                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+
+                                boolean isFound = false;
+                                Place place;
+
+                                for (DataSnapshot ds : children) {
+
+                                    place = ds.getValue(Place.class);
+
+                                    if (et_name.getText().toString().toLowerCase().equals(place.getName().toLowerCase())) {
+                                        isFound = true;
+                                        break;
+                                    }
+
+                                }
+
+                                if (isFound) {
+                                    Toast.makeText(travel_admin.this, "Location Already Added.", Toast.LENGTH_SHORT).show();
+                                } else {
+
+                                    mdb2.push().setValue(new Place(et_lname.getText().toString(), et_ldetails.getText().toString()));
+
+                                    et_lname.setText("");
+                                    et_ldetails.setText("");
+
+                                    Toast.makeText(travel_admin.this, "Location Added Successfully.", Toast.LENGTH_SHORT).show();
+
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+                }
+
+            }
+        });
+
+
         btn_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 DialogVehicleView dialogVehicleView = new DialogVehicleView();
                 dialogVehicleView.show(getSupportFragmentManager(),null);
+
+            }
+        });
+
+        btn_lview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DialogLocationView dialogLocationView= new DialogLocationView();
+                dialogLocationView.show(getSupportFragmentManager(),null);
 
             }
         });
@@ -115,6 +182,14 @@ public class travel_admin extends AppCompatActivity {
         btn_view = findViewById(R.id.btn_showveh);
 
         mdb = FirebaseDatabase.getInstance().getReference().child("PayDetails").child("vehicle");
+
+        et_lname = findViewById(R.id.et_adlocname);
+        et_ldetails = findViewById(R.id.et_adlocdetails);
+
+        btn_ladd = findViewById(R.id.btn_addloc);
+        btn_lview = findViewById(R.id.btn_showloc);
+
+        mdb2 = FirebaseDatabase.getInstance().getReference().child("PayDetails").child("place");
 
     }
 }
