@@ -16,6 +16,16 @@ public class EM_HallManagement implements Serializable {
     public EM_HallManagement() {
     }
 
+    public EM_HallManagement(String id, String name, Float price, String description, boolean wedding, boolean events, String imageName) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.wedding = wedding;
+        this.events = events;
+        this.imageName = imageName;
+    }
+
     public String getId() {
         return id;
     }
