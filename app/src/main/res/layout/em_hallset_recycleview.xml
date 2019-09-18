@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <ImageView
+
+                android:id="@+id/imageView3"
+                android:layout_width="167dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:background="#000"
+               />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="Blue Diamond"
+                    android:textSize="20dp"
+                    android:textColor="#000"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:textSize="15dp"
+                    android:textColor="#000"
+                    android:textStyle="italic"
+                    android:layout_marginTop="15dp"
+                    android:text="10000/= only"
+                    android:layout_marginHorizontal="10dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:textSize="15dp"
+                    android:textColor="#000"
+                    android:textStyle="italic"
+                    android:layout_marginTop="15dp"
+                    android:text="Showcase your wedding space."
+                    android:layout_marginHorizontal="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <CheckedTextView
+                        android:id="@+id/wedrecycle"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:textSize="15dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:text="Wedding"
+                        android:textColor="#2874A6" />
+
+                    <CheckedTextView
+                        android:id="@+id/eventrecycle"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:textSize="15dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:text="Event"
+                        android:textColor="#2874A6" />
+
+                </LinearLayout>
+
+
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

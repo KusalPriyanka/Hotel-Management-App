@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +31,9 @@ public class EM_Addhalls extends AppCompatActivity {
     DatabaseReference df;
 
     ListView listView;
+    ImageView emSearchIcon;
+    EditText emSearchBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,34 @@ public class EM_Addhalls extends AppCompatActivity {
 
 
         listView = findViewById(R.id.listView);
+        emSearchIcon = findViewById(R.id.searchbtn);
+        emSearchBar = findViewById(R.id.emsrchbar);
+
+        emSearchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final ProgressBar proSerch = findViewById(R.id.emprogress);
+                proSerch.setVisibility(View.INVISIBLE);
+                EM_HallManagement emSrch = new EM_HallManagement();
+
+                emSearchBar = findViewById(R.id.emsrchbar);
+                String serchTag = emSearchBar.getText().toString();
+
+                if(serchTag == null){
+                    emSearchBar.setError("Please Enter ");
+                }else{
+
+
+
+                }
+
+            }
+        });
+
+
+
+
 
         df = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement");
         FirebaseListAdapter<EM_HallManagement> adapter = new FirebaseListAdapter<EM_HallManagement>(

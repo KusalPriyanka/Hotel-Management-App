@@ -16,27 +16,11 @@ android:background="#02081D">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
+        >
 
-        <TextView
-            android:id="@+id/txtclose1"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_gravity="end"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:background="@drawable/ic_panorama_fish_eye_black_24dp"
-            android:gravity="center"
-            android:text="X"
-            android:textColor="#fff"
-            android:textSize="15dp"
-            android:padding="2dp"
-            android:textStyle="bold"
 
-            />
 
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -165,7 +149,7 @@ android:background="#02081D">
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             >
 
             <ImageView
@@ -210,6 +194,7 @@ android:background="#02081D">
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:gravity="center"
+            android:layout_marginTop="5dp"
             >
 
             <ImageView

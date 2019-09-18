@@ -158,7 +158,8 @@ android:background="#fff"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
                 android:layout_gravity="center"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_marginTop="10dp">
 
 
                 <androidx.cardview.widget.CardView
@@ -202,7 +203,7 @@ android:background="#fff"
                             app:layout_constraintVertical_bias="1.0" />
 
                         <TextView
-                            android:id="@+id/editText"
+                            android:id="@+id/offerName"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -242,7 +243,7 @@ android:background="#fff"
             <ListView
                 android:id="@+id/mmList"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="271dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="10dp"

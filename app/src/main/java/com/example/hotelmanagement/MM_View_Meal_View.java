@@ -2,6 +2,7 @@ package com.example.hotelmanagement;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.widget.CheckBox;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import Modal.MainMeals;
 
@@ -33,10 +36,13 @@ public class MM_View_Meal_View extends AppCompatActivity {
     DatabaseReference df;
     Dialog myDialog2, myDialog4, myDialog5;
     Button editDetails, deleteAllfromDb, canselDAll;
-    ImageView edit, view, delete;
+    ImageView edit, view, delete, image, serchIcon;
     private EditText mealName, foodType, normalPrice, largePrice;
     private CheckBox breakfast, lunch, dinner;
-
+    ImageView mealimage, back;
+    CardView search;
+    Dialog myDialog6;
+    private EditText SerchTag;
     CheckedTextView br,lu, dn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,24 +50,33 @@ public class MM_View_Meal_View extends AppCompatActivity {
         setContentView(R.layout.activity_mm__view__meal__view);
 
 
+        back = (ImageView) findViewById(R.id.backToMa);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MM_View_Meal_View.this, MM_MealManagement.class);
+                startActivity(intent);
+            }
+        });
+
         Intent intent = getIntent();
         final MainMeals mainMeals = (MainMeals)intent.getSerializableExtra("MainMeals");
 
+        mealimage = (ImageView) findViewById(R.id.meallImage);
+        Picasso.get().load(mainMeals.getImageName()).into(mealimage);
+
+
         ID = findViewById(R.id.textView4);
-        name = findViewById(R.id.name);
-        type = findViewById(R.id.type);
-        nprice = findViewById(R.id.normalPrice);
-        lprice = findViewById(R.id.largePrice);
-        br = findViewById(R.id.brakfastCh);
-        lu = findViewById(R.id.lunchCh);
-        dn = findViewById(R.id.dinnerCh);
+        name = findViewById(R.id.name1);
+        nprice = findViewById(R.id.price1);
+        br = findViewById(R.id.brakfast);
+        lu = findViewById(R.id.lunch);
+        dn = findViewById(R.id.dinner);
 
 
         ID.setText(mainMeals.getId());
         name.setText(mainMeals.getMealName());
-        type.setText(mainMeals.getType());
-        nprice.setText("NP : Rs " + mainMeals.getNormalPrice() + "/-");
-        lprice.setText("LP : Rs " + mainMeals.getLargePrice() + "/-");
+        nprice.setText("Rs " + mainMeals.getNormalPrice() + "0/-");
 
         if (mainMeals.isBrakfast() == true){
             br.setCheckMarkDrawable(R.drawable.ic_check_circle_black_24dp);
@@ -101,8 +116,8 @@ public class MM_View_Meal_View extends AppCompatActivity {
 
                 mealName.setText(mainMeals.getMealName());
                 foodType.setText(mainMeals.getType());
-                normalPrice.setText(mainMeals.getNormalPrice() + "");
-                largePrice.setText(mainMeals.getLargePrice() + "");
+                normalPrice.setText(mainMeals.getNormalPrice() + "0");
+                largePrice.setText(mainMeals.getLargePrice() + "0");
                 if(mainMeals.isBrakfast() == true){
                     breakfast.setChecked(true);
                 }
@@ -112,14 +127,6 @@ public class MM_View_Meal_View extends AppCompatActivity {
                 if(mainMeals.isDinner() == true){
                     dinner.setChecked(true);
                 }
-
-
-
-
-
-
-
-
 
                 editDetails =(Button) myDialog2.findViewById(R.id.updateDetails);
                 editDetails.setOnClickListener(new View.OnClickListener() {
@@ -270,7 +277,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
                 lu = myDialog5.findViewById(R.id.lunch);
                 dn = myDialog5.findViewById(R.id.dinner);
                 type = myDialog5.findViewById(R.id.foodType);
-
+                image = myDialog5.findViewById(R.id.image1);
 
                 name.setText(mainMeals.getMealName());
                 type.setText(mainMeals.getType());
@@ -285,9 +292,80 @@ public class MM_View_Meal_View extends AppCompatActivity {
                 if(mainMeals.isDinner() == true){
                     dn.setCheckMarkDrawable(R.drawable.ic_check_circle_gold_24dp);
                 }
+                Picasso.get().load(mainMeals.getImageName()).into(image);
+
+            }
+        });
 
 
 
+        myDialog6 = new Dialog(this);
+        search = findViewById(R.id.searchCard);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                myDialog6.setContentView(R.layout.activity_mm__search__bar);
+                myDialog6.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                myDialog6.show();
+                final ProgressBar proSerch = myDialog6.findViewById(R.id.pro);
+                proSerch.setVisibility(View.INVISIBLE);
+
+                serchIcon = myDialog6.findViewById(R.id.imageView5);
+
+
+                serchIcon.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+
+
+                        SerchTag = myDialog6.findViewById(R.id.offerName);
+
+
+                        String id =  SerchTag.getText().toString();
+                        if(id.isEmpty()){
+                            SerchTag.setError("");
+                            Toast.makeText(getApplicationContext(), "Please Enter Key For Search", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            proSerch.setVisibility(View.VISIBLE);
+                            df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child(id);
+                            df.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                    MainMeals mainMeals = dataSnapshot.getValue(MainMeals.class);
+
+                                    if(mainMeals != null){
+                                        proSerch.setVisibility(View.GONE);
+                                        Intent intent =  new Intent(MM_View_Meal_View.this,  MM_View_Meal_View.class);
+                                        intent.putExtra("MainMeals", mainMeals);
+                                        startActivity(intent);
+                                    }else {
+                                        proSerch.setVisibility(View.GONE);
+                                        Toast.makeText(getApplicationContext(), "Please Enter Valid Id!", Toast.LENGTH_LONG).show();
+                                    }
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                        }
+
+
+
+
+
+                    }
+
+
+
+                });
 
 
 
@@ -295,7 +373,6 @@ public class MM_View_Meal_View extends AppCompatActivity {
 
             }
         });
-
 
 
 

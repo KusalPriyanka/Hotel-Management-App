@@ -27,16 +27,22 @@
     >
     <!--Image-->
     <LinearLayout
+        android:id="@+id/imageBack"
         android:orientation="horizontal"
 
         android:layout_width="130dp"
         android:layout_height="120dp"
 
         >
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
             android:id="@+id/img"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:civ_border_color="#FCF158"
+            app:civ_border_width="2dp"
+            />
 
 
     </LinearLayout>
@@ -89,11 +95,10 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@drawable/mm_rectangle_shape"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
             android:layout_gravity="center"
-            />
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="7dp"
+            android:background="@drawable/mm_rectangle_shape" />
 
 
         <LinearLayout
@@ -180,12 +185,12 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/pa"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@drawable/mm_rectangle_shape"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            />
+            android:background="@drawable/mm_rectangle_shape" />
 
         <LinearLayout
             android:layout_width="match_parent"

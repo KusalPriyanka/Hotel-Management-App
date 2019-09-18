@@ -286,14 +286,21 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <ProgressBar
+                android:id="@+id/emprogress"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"/>
+
 
             <ListView
 
                 android:id="@+id/listView"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="48dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="30dp"
+
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="8dp"
