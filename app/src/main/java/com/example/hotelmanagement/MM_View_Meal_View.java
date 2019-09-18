@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -26,7 +27,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import Modal.MainMeals;
 
@@ -63,8 +63,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
         final MainMeals mainMeals = (MainMeals)intent.getSerializableExtra("MainMeals");
 
         mealimage = (ImageView) findViewById(R.id.meallImage);
-        Picasso.get().load(mainMeals.getImageName()).into(mealimage);
-
+        Glide.with(MM_View_Meal_View.this).load(mainMeals.getImageName()).into(mealimage);
 
         ID = findViewById(R.id.textView4);
         name = findViewById(R.id.name1);
@@ -292,7 +291,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
                 if(mainMeals.isDinner() == true){
                     dn.setCheckMarkDrawable(R.drawable.ic_check_circle_gold_24dp);
                 }
-                Picasso.get().load(mainMeals.getImageName()).into(image);
+                Glide.with(MM_View_Meal_View.this).load(mainMeals.getImageName()).into(mealimage);
 
             }
         });

@@ -1,37 +1,25 @@
 package Modal;
 
 import android.app.Activity;
-import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
-import com.example.hotelmanagement.MainActivity;
 import com.example.hotelmanagement.R;
-import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
 
 
 
-import java.io.File;
 import java.util.List;
 
 public class MealList extends ArrayAdapter<MainMeals> {
     private Activity context;
     private List<MainMeals> mealsList;
     ImageView image;
-    StorageReference storageReference;
 
     public MealList(Activity context,List<MainMeals> mealsList) {
         super(context, R.layout.mm_main_meal_recyclerview, mealsList);

@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import android.content.ContentResolver;
+
 import android.os.Bundle;
 
 import android.app.Dialog;
@@ -14,8 +14,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.view.View;
-import android.webkit.MimeTypeMap;
-import android.widget.AbsListView;
+
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -42,7 +41,7 @@ import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.validation.Validator;
+
 
 import Modal.MainMeals;
 import Modal.MealList;
@@ -54,28 +53,20 @@ public class MM_MealManagement extends AppCompatActivity {
     private EditText mealName, foodType, normalPrice, largePrice, SerchTag;
     private CheckBox breakfast, lunch, dinner;
     private DatabaseReference fb;
-    Dialog myDialog, myDialog2, myDialog3, myDialog4, myDialog5, myDialog6;
-    Button addButton, deleteAll, addMeal, deleteAllfromDb, canselDAll, editDetails;
-    ImageView edit, view, delete , upload, uplodedImage, serchIcon;
+    private Dialog myDialog, myDialog3, myDialog6;
+    private Button addButton, deleteAll, addMeal, deleteAllfromDb, canselDAll;
+    private ImageView  view , upload, uplodedImage, serchIcon;
     private DatabaseReference df;
     private StorageReference storageReference;
-    String primaryKey;
-    ListView listView;
-    ArrayList<MainMeals> list, mList;
-    TextView header;
-    TextView mealNameText, nPrice, lPrice, tFood, d1;
+    private String primaryKey;
     private static final int PICK_FROM_GALLARY = 2;
     private Uri imageUri;
-    private Validator validator;
-    CardView search;
-    List<MainMeals> mealsLists = new ArrayList<>();
-    List<String> mealID = new ArrayList<>();
-    MainMeals mmSer;
-    TextView ID, name, type, lprice, nprice, headerDeletePU;
-    CheckedTextView br,lu, dn;
+    private CardView search;
+    private List<MainMeals> mealsLists = new ArrayList<>();
+    private List<String> mealID = new ArrayList<>();
     private ProgressBar progressBar, addImagePro;
     private ListView lv;
-    String ImagePath;
+    private String ImagePath;
 
 
     @Override
@@ -423,12 +414,11 @@ public class MM_MealManagement extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         addImagePro.setVisibility(View.VISIBLE);
         if(requestCode == PICK_FROM_GALLARY && resultCode == RESULT_OK && data != null && data.getData() != null){
             imageUri = data.getData();
             uplodedImage.setImageURI(imageUri);
-
+            addImagePro.setVisibility(View.VISIBLE);
             final StorageReference sf = storageReference.child("image" + imageUri.getLastPathSegment());
             sf.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -437,7 +427,8 @@ public class MM_MealManagement extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             ImagePath = uri.toString();
-
+                            addImagePro.setVisibility(View.INVISIBLE);
+                            Toast.makeText(getApplicationContext(), "File Uploaded!",Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -446,7 +437,9 @@ public class MM_MealManagement extends AppCompatActivity {
 
 
         }
-        addImagePro.setVisibility(View.GONE);
+
+
+
     }
 
 
