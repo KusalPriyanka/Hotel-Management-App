@@ -351,8 +351,8 @@ public class MM_MealManagement extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mealsLists.clear();
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    String id = ds.child("id").getValue().toString();
-                    mealID.add(id);
+                    MainMeals mainMeals = ds.getValue(MainMeals.class);
+                    mealsLists.add(mainMeals);
                 }
 
         }
