@@ -1,6 +1,7 @@
 package com.example.hotelmanagement;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -8,6 +9,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,12 +23,16 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import Modal.MainMeals;
 
@@ -39,16 +45,24 @@ public class MM_View_Meal_View extends AppCompatActivity {
     ImageView edit, view, delete, image, serchIcon;
     private EditText mealName, foodType, normalPrice, largePrice;
     private CheckBox breakfast, lunch, dinner;
-    ImageView mealimage, back;
+    ImageView mealimage, back, upMealImg;
     CardView search;
     Dialog myDialog6;
     private EditText SerchTag;
-    CheckedTextView br,lu, dn;
+    CheckedTextView br, lu, dn;
+    private static final int PICK_FROM_GALLARY = 2;
+    private Uri imageUri;
+    private ProgressBar uploadImagePro, proSerch;
+    private StorageReference storageReference;
+    private ImageView upload, uplodedImage;
+    String ImagePath;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mm__view__meal__view);
 
+        storageReference = FirebaseStorage.getInstance().getReference("MainMealsImages");
 
         back = (ImageView) findViewById(R.id.backToMa);
         back.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +74,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        final MainMeals mainMeals = (MainMeals)intent.getSerializableExtra("MainMeals");
+        final MainMeals mainMeals = (MainMeals) intent.getSerializableExtra("MainMeals");
 
         mealimage = (ImageView) findViewById(R.id.meallImage);
         Glide.with(MM_View_Meal_View.this).load(mainMeals.getImageName()).into(mealimage);
@@ -77,13 +91,13 @@ public class MM_View_Meal_View extends AppCompatActivity {
         name.setText(mainMeals.getMealName());
         nprice.setText("Rs " + mainMeals.getNormalPrice() + "0/-");
 
-        if (mainMeals.isBrakfast() == true){
+        if (mainMeals.isBrakfast() == true) {
             br.setCheckMarkDrawable(R.drawable.ic_check_circle_black_24dp);
         }
-        if (mainMeals.isLunch() == true){
+        if (mainMeals.isLunch() == true) {
             lu.setCheckMarkDrawable(R.drawable.ic_check_circle_black_24dp);
         }
-        if (mainMeals.isDinner() == true){
+        if (mainMeals.isDinner() == true) {
             dn.setCheckMarkDrawable(R.drawable.ic_check_circle_black_24dp);
         }
 
@@ -95,7 +109,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
             public void onClick(View view) {
                 TextView txtclose1;
                 myDialog2.setContentView(R.layout.activity_mm__edit__meal__pu);
-                txtclose1 =(TextView) myDialog2.findViewById(R.id.txtclose1);
+                txtclose1 = (TextView) myDialog2.findViewById(R.id.txtclose1);
                 txtclose1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -112,75 +126,91 @@ public class MM_View_Meal_View extends AppCompatActivity {
                 breakfast = myDialog2.findViewById(R.id.b);
                 lunch = myDialog2.findViewById(R.id.l);
                 dinner = myDialog2.findViewById(R.id.d);
+                upMealImg = myDialog2.findViewById(R.id.imageView16);
 
                 mealName.setText(mainMeals.getMealName());
                 foodType.setText(mainMeals.getType());
                 normalPrice.setText(mainMeals.getNormalPrice() + "0");
                 largePrice.setText(mainMeals.getLargePrice() + "0");
-                if(mainMeals.isBrakfast() == true){
+                if (mainMeals.isBrakfast() == true) {
                     breakfast.setChecked(true);
                 }
-                if(mainMeals.isLunch() == true){
+                if (mainMeals.isLunch() == true) {
                     lunch.setChecked(true);
                 }
-                if(mainMeals.isDinner() == true){
+                if (mainMeals.isDinner() == true) {
                     dinner.setChecked(true);
                 }
+                Glide.with(MM_View_Meal_View.this).load(mainMeals.getImageName()).into(upMealImg);
+                ImagePath = mainMeals.getImageName();
 
-                editDetails =(Button) myDialog2.findViewById(R.id.updateDetails);
+                upload = myDialog2.findViewById(R.id.upload);
+                upload.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent();
+                        intent.setType("image/*");
+                        intent.setAction(Intent.ACTION_GET_CONTENT);
+                        startActivityForResult(intent, PICK_FROM_GALLARY);
+                    }
+
+                });
+
+                uplodedImage = myDialog2.findViewById(R.id.imageView16);
+                uploadImagePro = myDialog2.findViewById(R.id.editPro);
+                uploadImagePro.setVisibility(View.INVISIBLE);
+
+
+                editDetails = (Button) myDialog2.findViewById(R.id.updateDetails);
                 editDetails.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
-                        if(mealName.getText().toString().isEmpty()) {
+                        if (mealName.getText().toString().isEmpty()) {
 
                             mealName.setError("Please Enter Meal Name!");
                             mealName.clearFocus();
 
-                        }else if(foodType.getText().toString().isEmpty()) {
+                        } else if (foodType.getText().toString().isEmpty()) {
 
                             foodType.setError("Please Enter Meal Type!");
 
-                        }else if(normalPrice.getText().toString().isEmpty()) {
+                        } else if (normalPrice.getText().toString().isEmpty()) {
 
                             normalPrice.setError("Please Enter Meal Normal Price!");
 
-                        }else if(Float.parseFloat(normalPrice.getText().toString()) == 0) {
+                        } else if (Float.parseFloat(normalPrice.getText().toString()) == 0) {
 
                             normalPrice.setError("Normal Price Can Not Be 0!");
 
-                        }else if(Float.parseFloat(normalPrice.getText().toString()) < 0) {
+                        } else if (Float.parseFloat(normalPrice.getText().toString()) < 0) {
 
                             normalPrice.setError("Normal Price Can Not Be Negative!");
 
-                        }else if(largePrice.getText().toString().isEmpty()) {
+                        } else if (largePrice.getText().toString().isEmpty()) {
 
                             largePrice.setError("Please Enter Meal largePrice Price!");
 
-                        }
-
-                        else if(Float.parseFloat(largePrice.getText().toString()) == 0) {
+                        } else if (Float.parseFloat(largePrice.getText().toString()) == 0) {
 
                             largePrice.setError("Large Price Can Not Be 0!");
 
-                        }else if(Float.parseFloat(largePrice.getText().toString()) < 0) {
+                        } else if (Float.parseFloat(largePrice.getText().toString()) < 0) {
 
                             largePrice.setError("Large Price Can Not Be Negative!");
 
-                        }
-
-
-                        else if(largePrice.getText().toString().isEmpty()) {
+                        } else if (largePrice.getText().toString().isEmpty()) {
 
                             largePrice.setError("Please Enter Meal Large Price!");
 
-                        }else if (breakfast.isChecked() == false && lunch.isChecked() == false && dinner.isChecked() == false){
+                        } else if (breakfast.isChecked() == false && lunch.isChecked() == false && dinner.isChecked() == false) {
                             Toast.makeText(getApplicationContext(), "Please Enter Meal Time!", Toast.LENGTH_LONG).show();
                             breakfast.setError("!");
                             lunch.setError("!");
                             dinner.setError("!");
-                        }
-                        else {
+                        } else {
+
+                            uploadImagePro.setVisibility(View.VISIBLE);
                             MainMeals mm = new MainMeals();
                             mm.setId(mainMeals.getId());
                             mm.setMealName(mealName.getText().toString());
@@ -190,16 +220,19 @@ public class MM_View_Meal_View extends AppCompatActivity {
                             mm.setBrakfast(breakfast.isChecked());
                             mm.setLunch(lunch.isChecked());
                             mm.setDinner(dinner.isChecked());
+                            mm.setImageName(ImagePath);
 
                             df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child(mm.getId());
                             df.setValue(mm).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful()){
+                                    if (task.isSuccessful()) {
+                                        uploadImagePro.setVisibility(View.GONE);
                                         Toast.makeText(getApplicationContext(), "Data Updated Successfully!", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(MM_View_Meal_View.this, MM_MealManagement.class);
                                         startActivity(intent);
-                                    }else {
+                                    } else {
+                                        uploadImagePro.setVisibility(View.GONE);
                                         Toast.makeText(getApplicationContext(), "Data Not Updated Successfully!", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(MM_View_Meal_View.this, MM_MealManagement.class);
                                         startActivity(intent);
@@ -225,7 +258,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
                 myDialog4.setContentView(R.layout.activity_mm__delete__all__pu);
                 headerDeletePU = myDialog4.findViewById(R.id.header);
                 headerDeletePU.setText("Are You Want To delete");
-                txtclose =(TextView) myDialog4.findViewById(R.id.txtclose3);
+                txtclose = (TextView) myDialog4.findViewById(R.id.txtclose3);
                 txtclose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -253,10 +286,6 @@ public class MM_View_Meal_View extends AppCompatActivity {
                 });
 
 
-
-
-
-
             }
         });
 
@@ -282,20 +311,19 @@ public class MM_View_Meal_View extends AppCompatActivity {
                 type.setText(mainMeals.getType());
                 nprice.setText("RS - " + mainMeals.getNormalPrice() + "0");
                 lprice.setText("RS - " + mainMeals.getLargePrice() + "0");
-                if(mainMeals.isBrakfast() == true){
+                if (mainMeals.isBrakfast() == true) {
                     br.setCheckMarkDrawable(R.drawable.ic_check_circle_gold_24dp);
                 }
-                if(mainMeals.isLunch() == true){
+                if (mainMeals.isLunch() == true) {
                     lu.setCheckMarkDrawable(R.drawable.ic_check_circle_gold_24dp);
                 }
-                if(mainMeals.isDinner() == true){
+                if (mainMeals.isDinner() == true) {
                     dn.setCheckMarkDrawable(R.drawable.ic_check_circle_gold_24dp);
                 }
-                Glide.with(MM_View_Meal_View.this).load(mainMeals.getImageName()).into(mealimage);
+                Glide.with(MM_View_Meal_View.this).load(mainMeals.getImageName()).into(image);
 
             }
         });
-
 
 
         myDialog6 = new Dialog(this);
@@ -319,16 +347,14 @@ public class MM_View_Meal_View extends AppCompatActivity {
                     public void onClick(View view) {
 
 
-
                         SerchTag = myDialog6.findViewById(R.id.offerName);
 
 
-                        String id =  SerchTag.getText().toString();
-                        if(id.isEmpty()){
+                        String id = SerchTag.getText().toString();
+                        if (id.isEmpty()) {
                             SerchTag.setError("");
                             Toast.makeText(getApplicationContext(), "Please Enter Key For Search", Toast.LENGTH_LONG).show();
-                        }
-                        else {
+                        } else {
                             proSerch.setVisibility(View.VISIBLE);
                             df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child(id);
                             df.addValueEventListener(new ValueEventListener() {
@@ -337,12 +363,12 @@ public class MM_View_Meal_View extends AppCompatActivity {
 
                                     MainMeals mainMeals = dataSnapshot.getValue(MainMeals.class);
 
-                                    if(mainMeals != null){
+                                    if (mainMeals != null) {
                                         proSerch.setVisibility(View.GONE);
-                                        Intent intent =  new Intent(MM_View_Meal_View.this,  MM_View_Meal_View.class);
+                                        Intent intent = new Intent(MM_View_Meal_View.this, MM_View_Meal_View.class);
                                         intent.putExtra("MainMeals", mainMeals);
                                         startActivity(intent);
-                                    }else {
+                                    } else {
                                         proSerch.setVisibility(View.GONE);
                                         Toast.makeText(getApplicationContext(), "Please Enter Valid Id!", Toast.LENGTH_LONG).show();
                                     }
@@ -357,36 +383,29 @@ public class MM_View_Meal_View extends AppCompatActivity {
                         }
 
 
-
-
-
                     }
 
 
-
                 });
-
-
-
 
 
             }
         });
 
 
-
     }
 
-    public void DeleteMainMeal(String id){
+
+    public void DeleteMainMeal(String id) {
         df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child(id);
         df.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), "Deleted Successfully!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MM_View_Meal_View.this, MM_MealManagement.class);
                     startActivity(intent);
-                }else {
+                } else {
                     Toast.makeText(getApplicationContext(), "Error!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MM_View_Meal_View.this, MM_MealManagement.class);
                     startActivity(intent);
@@ -395,4 +414,36 @@ public class MM_View_Meal_View extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        uploadImagePro.setVisibility(View.VISIBLE);
+        if(requestCode == PICK_FROM_GALLARY && resultCode == RESULT_OK && data != null && data.getData() != null){
+            imageUri = data.getData();
+            uplodedImage.setImageURI(imageUri);
+            uploadImagePro.setVisibility(View.VISIBLE);
+            final StorageReference sf = storageReference.child("image" + imageUri.getLastPathSegment());
+            sf.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    sf.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            ImagePath = uri.toString();
+                            uploadImagePro.setVisibility(View.INVISIBLE);
+                            Toast.makeText(getApplicationContext(), "File Uploaded!",Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            });
+
+
+
+        }
+
+
+
+    }
+
 }

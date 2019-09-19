@@ -9,7 +9,7 @@
     android:orientation="vertical"
     tools:context=".MM_Add_Main_Meal_PU">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/uplodedImage"
         android:layout_width="30dp"
         android:layout_height="30dp"

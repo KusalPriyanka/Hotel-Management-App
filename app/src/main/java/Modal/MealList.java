@@ -42,7 +42,7 @@ public class MealList extends ArrayAdapter<MainMeals> {
         MainMeals mainMeals = mealsList.get(position);
 
         mealName.setText(mainMeals.getMealName());
-        price.setText("RS - " +mainMeals.getNormalPrice() + "0");
+        price.setText("RS - " +mainMeals.getNormalPrice() + "0/-");
         if (mainMeals.isBrakfast() == true){
             brakfast.setCheckMarkDrawable(R.drawable.ic_check_circle_gold_24dp);
         }
