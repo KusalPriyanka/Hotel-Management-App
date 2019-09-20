@@ -116,6 +116,8 @@ public class MM_View_Meal_View extends AppCompatActivity {
                         myDialog2.dismiss();
                     }
                 });
+
+                myDialog2.setCanceledOnTouchOutside(false);
                 myDialog2.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 myDialog2.show();
 
@@ -265,6 +267,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
                         myDialog4.dismiss();
                     }
                 });
+                myDialog4.setCanceledOnTouchOutside(false);
                 myDialog4.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 myDialog4.show();
 

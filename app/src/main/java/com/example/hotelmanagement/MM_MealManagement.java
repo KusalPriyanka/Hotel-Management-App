@@ -18,7 +18,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -52,7 +51,6 @@ public class MM_MealManagement extends AppCompatActivity {
 
     private EditText mealName, foodType, normalPrice, largePrice, SerchTag;
     private CheckBox breakfast, lunch, dinner;
-    private DatabaseReference fb;
     private Dialog myDialog, myDialog3, myDialog6;
     private Button addButton, deleteAll, addMeal, deleteAllfromDb, canselDAll;
     private ImageView  view , upload, uplodedImage, serchIcon;
@@ -180,6 +178,7 @@ public class MM_MealManagement extends AppCompatActivity {
                         myDialog.dismiss();
                     }
                 });
+                myDialog.setCanceledOnTouchOutside(false);
                 myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 myDialog.show();
 
@@ -281,10 +280,10 @@ public class MM_MealManagement extends AppCompatActivity {
         deleteAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myDialog3.setContentView(R.layout.activity_mm__delete__all__pu);
                 TextView txtclose;
                 myDialog3.setContentView(R.layout.activity_mm__delete__all__pu);
                 txtclose =(TextView) myDialog3.findViewById(R.id.txtclose3);
+                myDialog3.setCanceledOnTouchOutside(false);
                 txtclose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -342,8 +341,6 @@ public class MM_MealManagement extends AppCompatActivity {
 
     public void insetDataToDb(){
 
-
-
         addImagePro.setVisibility(View.VISIBLE);
         df = FirebaseDatabase.getInstance().getReference().child("MainMeals");
         df.addValueEventListener(new ValueEventListener() {
@@ -355,7 +352,8 @@ public class MM_MealManagement extends AppCompatActivity {
                     mealsLists.add(mainMeals);
                 }
 
-        }
+
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -363,18 +361,8 @@ public class MM_MealManagement extends AppCompatActivity {
             }
         });
 
-
-
-
-
-        fb = FirebaseDatabase.getInstance().getReference().child("MainMeals");
-        final MainMeals mainMeals = new MainMeals();
-        /*primaryKey = CommonConstants.MAIN_MEALS_PREFIX + CommonConstants.MAIN_MEALS_ID;
-        ++CommonConstants.MAIN_MEALS_ID;*/
-
         primaryKey = CommonFunctions.get_id(CommonConstants.MAIN_MEALS_PREFIX, mealsLists);
-
-
+        final MainMeals mainMeals = new MainMeals();
 
         mainMeals.setId(primaryKey);
         mainMeals.setMealName(mealName.getText().toString());
@@ -386,8 +374,8 @@ public class MM_MealManagement extends AppCompatActivity {
         mainMeals.setDinner(dinner.isChecked());
         mainMeals.setImageName(ImagePath);
 
-
-        fb.child(mainMeals.getId()).setValue(mainMeals)
+        df = FirebaseDatabase.getInstance().getReference().child("MainMeals");
+        df.child(mainMeals.getId()).setValue(mainMeals)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -438,13 +426,7 @@ public class MM_MealManagement extends AppCompatActivity {
 
         }
 
-
-
     }
-
-
-
-
 
     @Override
     protected void onStart() {
