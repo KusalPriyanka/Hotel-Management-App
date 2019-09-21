@@ -52,7 +52,7 @@ public class MM_MealManagement extends AppCompatActivity {
     private EditText mealName, foodType, normalPrice, largePrice, SerchTag;
     private CheckBox breakfast, lunch, dinner;
     private Dialog myDialog, myDialog3, myDialog6;
-    private Button addButton, deleteAll, addMeal, deleteAllfromDb, canselDAll;
+    private Button addButton, deleteAll, addMeal, deleteAllfromDb, canselDAll, pastryShop;
     private ImageView  view , upload, uplodedImage, serchIcon;
     private DatabaseReference df;
     private StorageReference storageReference;
@@ -77,6 +77,16 @@ public class MM_MealManagement extends AppCompatActivity {
 
         lv = (ListView) findViewById(R.id.mmList);
 
+
+
+        pastryShop = findViewById(R.id.pastryShop);
+        pastryShop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MM_MealManagement.this, MM_Short_Eats_Management.class);
+                startActivity(intent);
+            }
+        });
 
 
         myDialog6 = new Dialog(this);
