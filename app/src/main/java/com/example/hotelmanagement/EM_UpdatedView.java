@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckedTextView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class EM_UpdatedView extends AppCompatActivity {
     CheckedTextView passedWed,passedEvent;
     EM_HallManagement em_hallManagement1;
     Button update;
+    ImageView back;
 
 
     @Override
@@ -100,7 +102,14 @@ public class EM_UpdatedView extends AppCompatActivity {
 
             }
         });
-
+        back = findViewById(R.id.backAdd);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EM_UpdatedView.this, EM_Addhalls.class);
+                startActivity(intent);
+            }
+        });
 
 
 
