@@ -29,9 +29,12 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import Modal.EM_HallManagement;
+import Modal.MainMeals;
 import Util.CommonConstants;
+import Util.CommonFunctions;
 
 public class EM_AddhallDetails extends AppCompatActivity {
     EditText hallName,hallPrice,hallType;
@@ -46,6 +49,7 @@ public class EM_AddhallDetails extends AppCompatActivity {
     private Uri hallImageUri;
     private String ImagePath;
     private ProgressBar addHallPro;
+    private List<EM_HallManagement> hallList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,9 +75,6 @@ public class EM_AddhallDetails extends AppCompatActivity {
                 startActivityForResult(intent, PICK_FROM_GALLARY);
             }
         });
-
-
-
 
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
@@ -105,37 +106,7 @@ public class EM_AddhallDetails extends AppCompatActivity {
                 }
 
                 else{
-
-                    id = CommonConstants.EM_PREFIX + CommonConstants.EH_ID;
-                    ++CommonConstants.EH_ID;
-
-                    em = new EM_HallManagement();
-                    em.setId(id);
-                    em.setName(hallName.getText().toString());
-                    em.setPrice(Float.parseFloat(hallPrice.getText().toString()));
-                    em.setDescription(hallType.getText().toString());
-                    em.setWedding(weddingbtn.isChecked());
-                    em.setEvents(eventbtn.isChecked());
-                    em.setImageName(ImagePath);
-
-
-                    dbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement");
-
-                    dbf.child(em.getId()).setValue(em).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(getApplicationContext(), "Data Inserted Successfully!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(EM_AddhallDetails.this, EM_Addhalls.class);
-                                startActivity(intent);
-                            }else {
-                                Toast.makeText(getApplicationContext(), "Data Not Inserted Successfully!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(EM_AddhallDetails.this, EM_Addhalls.class);
-                                startActivity(intent);
-                            }
-
-                        }
-                    });
+                        insertData();
 
                 }
 
@@ -147,13 +118,72 @@ public class EM_AddhallDetails extends AppCompatActivity {
         });
 
     }
+
+    public void insertData(){
+
+        addHallPro.setVisibility(View.VISIBLE);
+        dbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement");
+        dbf.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                hallList.clear();
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    EM_HallManagement em_hallManagement= ds.getValue(EM_HallManagement.class);
+                    hallList.add(em_hallManagement);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+        id =  CommonFunctions.get_EM_Hall_Id(CommonConstants.EM_PREFIX, hallList);
+
+
+        EM_HallManagement em = new EM_HallManagement();
+        em.setId(id);
+        em.setName(hallName.getText().toString());
+        em.setPrice(Float.parseFloat(hallPrice.getText().toString()));
+        em.setDescription(hallType.getText().toString());
+        em.setWedding(weddingbtn.isChecked());
+        em.setEvents(eventbtn.isChecked());
+        em.setImageName(ImagePath);
+
+
+        dbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement");
+
+        dbf.child(em.getId()).setValue(em).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    addHallPro.setVisibility(View.GONE);
+                    Toast.makeText(getApplicationContext(), "Data Inserted Successfully!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(EM_AddhallDetails.this, EM_Addhalls.class);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(getApplicationContext(), "Data Not Inserted Successfully!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(EM_AddhallDetails.this, EM_Addhalls.class);
+                    startActivity(intent);
+                }
+
+            }
+        });
+    }
+
+
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         addHallPro.setVisibility(View.VISIBLE);
         if(requestCode == PICK_FROM_GALLARY && resultCode == RESULT_OK && data != null && data.getData() != null){
             hallImageUri = data.getData();
-            //uplodedImage.setImageURI(imageUri);
 
             addHallPro.setVisibility(View.VISIBLE);
             final StorageReference sf = sr.child("EM" + hallImageUri.getLastPathSegment());
@@ -176,6 +206,8 @@ public class EM_AddhallDetails extends AppCompatActivity {
         }
 
     }
+
+
 
 }
 

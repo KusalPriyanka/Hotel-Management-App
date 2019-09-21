@@ -32,6 +32,7 @@ public class EM_EventView extends AppCompatActivity {
     private DatabaseReference df;
     private List<EM_HallManagement> hallList = new ArrayList<>();
     private ListView hallistView;
+    private Button wedding, events;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,28 @@ public class EM_EventView extends AppCompatActivity {
         hallistView = findViewById(R.id.hallList);
         eventViewPro = findViewById(R.id.eventViewPro);
         hallistView = findViewById(R.id.eventList);
+
+
+        wedding = findViewById(R.id.wedding);
+        events = findViewById(R.id.events);
+
+
+        wedding.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EM_EventView.this,EM_HallView.class);
+                startActivity(intent);
+            }
+        });
+
+
+        events.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EM_EventView.this,EM_EventView.class);
+                startActivity(intent);
+            }
+        });
 
         vievfliper = findViewById(R.id.file);
         int image[] = {R.drawable.emnewfiv, R.drawable.emnewone, R.drawable.emnewtwo,R.drawable.emfirstsix};

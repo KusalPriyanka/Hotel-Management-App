@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -31,6 +32,7 @@ public class EM_HallView extends AppCompatActivity {
     private DatabaseReference df;
     private List<EM_HallManagement> hallList = new ArrayList<>();
     private ListView hallistView;
+    private Button wedding, events;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,26 @@ public class EM_HallView extends AppCompatActivity {
         setContentView(R.layout.activity_em__hall_view);
         hallistView = findViewById(R.id.hallList);
         hallViewPro = findViewById(R.id.hallViewPro);
+        wedding = findViewById(R.id.wedding);
+        events = findViewById(R.id.events);
+
+
+        wedding.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EM_HallView.this,EM_EventManagementHome.class);
+                startActivity(intent);
+            }
+        });
+
+
+        events.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EM_HallView.this,EM_EventView.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
@@ -64,16 +86,7 @@ public class EM_HallView extends AppCompatActivity {
                 hallistView.setAdapter(wedHallList);
                 hallViewPro.setVisibility(View.GONE);
 
-                /*hallistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        MainMeals mainMeals = (MainMeals) adapterView.getAdapter().getItem(i);
 
-
-
-
-                    }
-                });*/
             }
 
             @Override
