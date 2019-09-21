@@ -9,7 +9,7 @@
     android:orientation="vertical"
     tools:context=".MM_Add_Main_Meal_PU">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/uplodedImage"
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -304,8 +304,10 @@
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="8dp"
         android:text="UpLoad Image"
+        android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/upload"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.815" />

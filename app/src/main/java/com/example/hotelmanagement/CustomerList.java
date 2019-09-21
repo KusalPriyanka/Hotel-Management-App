@@ -26,7 +26,7 @@ public class CustomerList extends AppCompatActivity {
         cusList = findViewById(R.id.cusList);
         fb = FirebaseDatabase.getInstance().getReference().child("Customers");
 
-        FirebaseListAdapter<Customer> adapter = new FirebaseListAdapter<Customer>(
+/*        FirebaseListAdapter<Customer> adapter = new FirebaseListAdapter<Customer>(
                 this,
                 Customer.class,
                 android.R.layout.simple_list_item_1,
@@ -40,5 +40,8 @@ public class CustomerList extends AppCompatActivity {
         };
 
         cusList.setAdapter(adapter);
+
+        */
     }
+
 }

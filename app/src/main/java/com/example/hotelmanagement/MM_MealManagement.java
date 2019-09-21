@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import android.content.ContentResolver;
+
 import android.os.Bundle;
 
 import android.app.Dialog;
@@ -14,12 +14,10 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.view.View;
-import android.webkit.MimeTypeMap;
-import android.widget.AbsListView;
+
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -42,7 +40,7 @@ import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.validation.Validator;
+
 
 import Modal.MainMeals;
 import Modal.MealList;
@@ -53,29 +51,20 @@ public class MM_MealManagement extends AppCompatActivity {
 
     private EditText mealName, foodType, normalPrice, largePrice, SerchTag;
     private CheckBox breakfast, lunch, dinner;
-    private DatabaseReference fb;
-    Dialog myDialog, myDialog2, myDialog3, myDialog4, myDialog5, myDialog6;
-    Button addButton, deleteAll, addMeal, deleteAllfromDb, canselDAll, editDetails;
-    ImageView edit, view, delete , upload, uplodedImage, serchIcon;
+    private Dialog myDialog, myDialog3, myDialog6;
+    private Button addButton, deleteAll, addMeal, deleteAllfromDb, canselDAll;
+    private ImageView  view , upload, uplodedImage, serchIcon;
     private DatabaseReference df;
     private StorageReference storageReference;
-    String primaryKey;
-    ListView listView;
-    ArrayList<MainMeals> list, mList;
-    TextView header;
-    TextView mealNameText, nPrice, lPrice, tFood, d1;
+    private String primaryKey;
     private static final int PICK_FROM_GALLARY = 2;
     private Uri imageUri;
-    private Validator validator;
-    CardView search;
-    List<MainMeals> mealsLists = new ArrayList<>();
-    List<String> mealID = new ArrayList<>();
-    MainMeals mmSer;
-    TextView ID, name, type, lprice, nprice, headerDeletePU;
-    CheckedTextView br,lu, dn;
+    private CardView search;
+    private List<MainMeals> mealsLists = new ArrayList<>();
+    private List<String> mealID = new ArrayList<>();
     private ProgressBar progressBar, addImagePro;
     private ListView lv;
-    String ImagePath;
+    private String ImagePath;
 
 
     @Override
@@ -189,6 +178,7 @@ public class MM_MealManagement extends AppCompatActivity {
                         myDialog.dismiss();
                     }
                 });
+                myDialog.setCanceledOnTouchOutside(false);
                 myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 myDialog.show();
 
@@ -290,10 +280,10 @@ public class MM_MealManagement extends AppCompatActivity {
         deleteAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myDialog3.setContentView(R.layout.activity_mm__delete__all__pu);
                 TextView txtclose;
                 myDialog3.setContentView(R.layout.activity_mm__delete__all__pu);
                 txtclose =(TextView) myDialog3.findViewById(R.id.txtclose3);
+                myDialog3.setCanceledOnTouchOutside(false);
                 txtclose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -351,8 +341,6 @@ public class MM_MealManagement extends AppCompatActivity {
 
     public void insetDataToDb(){
 
-
-
         addImagePro.setVisibility(View.VISIBLE);
         df = FirebaseDatabase.getInstance().getReference().child("MainMeals");
         df.addValueEventListener(new ValueEventListener() {
@@ -360,11 +348,12 @@ public class MM_MealManagement extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mealsLists.clear();
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    String id = ds.child("id").getValue().toString();
-                    mealID.add(id);
+                    MainMeals mainMeals = ds.getValue(MainMeals.class);
+                    mealsLists.add(mainMeals);
                 }
 
-        }
+
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -372,18 +361,8 @@ public class MM_MealManagement extends AppCompatActivity {
             }
         });
 
-
-
-
-
-        fb = FirebaseDatabase.getInstance().getReference().child("MainMeals");
-        final MainMeals mainMeals = new MainMeals();
-        /*primaryKey = CommonConstants.MAIN_MEALS_PREFIX + CommonConstants.MAIN_MEALS_ID;
-        ++CommonConstants.MAIN_MEALS_ID;*/
-
         primaryKey = CommonFunctions.get_id(CommonConstants.MAIN_MEALS_PREFIX, mealsLists);
-
-
+        final MainMeals mainMeals = new MainMeals();
 
         mainMeals.setId(primaryKey);
         mainMeals.setMealName(mealName.getText().toString());
@@ -395,8 +374,8 @@ public class MM_MealManagement extends AppCompatActivity {
         mainMeals.setDinner(dinner.isChecked());
         mainMeals.setImageName(ImagePath);
 
-
-        fb.child(mainMeals.getId()).setValue(mainMeals)
+        df = FirebaseDatabase.getInstance().getReference().child("MainMeals");
+        df.child(mainMeals.getId()).setValue(mainMeals)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -423,12 +402,11 @@ public class MM_MealManagement extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         addImagePro.setVisibility(View.VISIBLE);
         if(requestCode == PICK_FROM_GALLARY && resultCode == RESULT_OK && data != null && data.getData() != null){
             imageUri = data.getData();
             uplodedImage.setImageURI(imageUri);
-
+            addImagePro.setVisibility(View.VISIBLE);
             final StorageReference sf = storageReference.child("image" + imageUri.getLastPathSegment());
             sf.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -437,7 +415,8 @@ public class MM_MealManagement extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             ImagePath = uri.toString();
-
+                            addImagePro.setVisibility(View.INVISIBLE);
+                            Toast.makeText(getApplicationContext(), "File Uploaded!",Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -446,12 +425,8 @@ public class MM_MealManagement extends AppCompatActivity {
 
 
         }
-        addImagePro.setVisibility(View.GONE);
+
     }
-
-
-
-
 
     @Override
     protected void onStart() {

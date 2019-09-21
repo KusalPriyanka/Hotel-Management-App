@@ -167,7 +167,7 @@ class VehicleViewAdapter extends RecyclerView.Adapter {
 
         VehicleViewHolder vehicleViewHolder = (VehicleViewHolder) holder;
 
-        vehicleViewHolder.imageView.setVisibility(View.VISIBLE);
+        vehicleViewHolder.imageView.setVisibility(View.INVISIBLE);
 
         vehicleViewHolder.tv_type.setText(vehicle.getName().toUpperCase());
         vehicleViewHolder.tv_price.setText(vehicle.getPrice() + " per KM");

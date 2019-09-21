@@ -197,13 +197,15 @@
                 </LinearLayout>
 
                 <de.hdodenhof.circleimageview.CircleImageView
+
                     android:id="@+id/meallImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:src="@drawable/mm_noodles"
-                    app:civ_border_color="#FCF158"
+                    android:layout_width="170dp"
+                    android:layout_height="170dp"
+                    app:civ_border_color="#fff"
                     app:civ_border_width="2dp"
-                    android:layout_marginTop="20dp"/>
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/mm_noodles"
+                    android:layout_gravity="center"/>
 
 
                 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -322,14 +324,14 @@
 
                                     <CheckedTextView
                                         android:id="@+id/brakfast"
-                                        android:layout_width="60dp"
+                                        android:layout_width="70dp"
                                         android:layout_height="20dp"
                                         android:layout_gravity="center"
                                         android:layout_marginTop="8dp"
                                         android:layout_marginBottom="8dp"
                                         android:text="@string/breakfast"
                                         android:textColor="#000000"
-                                        android:textSize="8dp"
+                                        android:textSize="10dp"
                                         android:textStyle="bold"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toStartOf="@+id/imageView12"
@@ -361,7 +363,7 @@
                                         android:layout_marginBottom="8dp"
                                         android:text="@string/lunch"
                                         android:textColor="#000000"
-                                        android:textSize="8dp"
+                                        android:textSize="10dp"
                                         android:textStyle="bold"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toStartOf="@+id/imageView14"
@@ -395,7 +397,7 @@
                                         android:text="@string/dinner"
 
                                         android:textColor="#000000"
-                                        android:textSize="8dp"
+                                        android:textSize="10dp"
                                         android:textStyle="bold"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
