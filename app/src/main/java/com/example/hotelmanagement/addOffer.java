@@ -38,7 +38,8 @@ public class addOffer extends AppCompatActivity {
     Button addPackage;
     ImageView packImg;
 
-    private Uri uploadImgUri, downloadImgUri;
+    private Uri uploadImgUri;
+    private String ImagePath;
 
     DatabaseReference fb;
     StorageReference st;
@@ -64,7 +65,7 @@ public class addOffer extends AppCompatActivity {
 
         addPackage = findViewById(R.id.addoffers);
 
-        fb = FirebaseDatabase.getInstance().getReference("RoomPackages");
+        fb = FirebaseDatabase.getInstance().getReference().child("RoomPackages");
         st = FirebaseStorage.getInstance().getReference("RoomPackages");
 
         progressDialog = new ProgressDialog(addOffer.this);
@@ -106,40 +107,14 @@ public class addOffer extends AppCompatActivity {
 
     }
 
-    private void uploadImg(){
-
-        final StorageReference storeRef = st.child("Package" + uploadImgUri.getLastPathSegment());
-
-        storeRef.putFile(uploadImgUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                        storeRef.getDownloadUrl()
-                                .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-                                        downloadImgUri = uri;
-                                        progressDialog.setMessage("Package Details Adding To The App... Wait!");
-                                    }
-                                });
-
-                    }
-                });
-
-    }
-
     private void addPackage(){
 
-
         progressDialog.setTitle("Add Package To The App");
-        progressDialog.setMessage("Image Uploading.... Wait!");
+        progressDialog.setMessage("Package Details Adding To The App... Wait!");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        uploadImg();
-
-        Packages packages = new Packages();
+        final Packages packages = new Packages();
         packages.setName(offerName.getText().toString());
         packages.setDes(offerDes.getText().toString());
         packages.setBeds(Integer.parseInt(noOfBeds.getText().toString()));
@@ -159,20 +134,36 @@ public class addOffer extends AppCompatActivity {
             packages.setTv(true);
         }
 
-        packages.setUrl(downloadImgUri + " ");
+        final StorageReference storeRef = st.child("Package" + uploadImgUri.getLastPathSegment());
 
-        fb.setValue(packages)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
+        storeRef.putFile(uploadImgUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                        progressDialog.dismiss();
+                        storeRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                ImagePath = uri.toString();
+                                packages.setUrl(ImagePath);
 
-                        Toast.makeText(getApplicationContext(),"Package Added Succesfully!",Toast.LENGTH_SHORT).show();
+                                fb.push().setValue(packages)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                                progressDialog.dismiss();
+
+                                                Toast.makeText(getApplicationContext(),"Package Added Succesfully!",Toast.LENGTH_SHORT).show();
+
+                                                startActivity(new Intent(addOffer.this,offer_management.class));
+                                            }
+                                        });
+                            }
+                        });
 
                     }
                 });
-
     }
 
 }
