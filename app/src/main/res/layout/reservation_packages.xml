@@ -24,13 +24,26 @@
                 android:layout_height="200dp" />
 
             <TextView
-                android:id="@+id/title"
+            android:id="@+id/title"
+            android:textColor="#262626"
+            android:layout_below="@id/image"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="16dp"
+            android:text="Package Title"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/price"
                 android:textColor="#262626"
                 android:layout_below="@id/image"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="16dp"
-                android:text="Brochure"
-                android:textSize="16sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
+                android:text="LKR 4000.00"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -45,7 +58,8 @@
                 android:ellipsize="end"
                 android:text="Description"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                />
 
         </RelativeLayout>
 
