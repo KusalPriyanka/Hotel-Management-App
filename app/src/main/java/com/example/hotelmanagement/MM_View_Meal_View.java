@@ -26,7 +26,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
+//import com.squareup.picasso.Picasso;
 
 import Modal.MainMeals;
 
@@ -63,7 +63,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
         final MainMeals mainMeals = (MainMeals)intent.getSerializableExtra("MainMeals");
 
         mealimage = (ImageView) findViewById(R.id.meallImage);
-        Picasso.get().load(mainMeals.getImageName()).into(mealimage);
+        //Picasso.get().load(mainMeals.getImageName()).into(mealimage);
 
 
         ID = findViewById(R.id.textView4);
@@ -292,7 +292,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
                 if(mainMeals.isDinner() == true){
                     dn.setCheckMarkDrawable(R.drawable.ic_check_circle_gold_24dp);
                 }
-                Picasso.get().load(mainMeals.getImageName()).into(image);
+                //Picasso.get().load(mainMeals.getImageName()).into(image);
 
             }
         });

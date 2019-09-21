@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +34,7 @@ public class EM_EventDetails extends AppCompatActivity {
     Button update;
     Button delete;
     EM_HallManagement em_hallManagementl;
-
+    ImageView backToView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,31 +84,48 @@ public class EM_EventDetails extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EM_HallManagement em = new EM_HallManagement();
-                em.setId(em_hallManagementl.getId());
-                em.setName(updhallName.getText().toString());
-                em.setPrice(Float.parseFloat(updhallPrice.getText().toString()));
-                em.setDescription(updhallType.getText().toString());
-                em.setWedding(updweddingbtn.isChecked());
-                em.setWedding(updeventbtn.isChecked());
+
+                if(updhallName.getText().toString().isEmpty()){
+                    updhallName.setError("Please Fill Hall Name");
+                }else if(updhallPrice.getText().toString().isEmpty()){
+                    updhallName.setError("Please Fill Hall Price");
 
 
-                dbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement").child(em_hallManagementl.getId());
-                dbf.setValue(em).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(getApplicationContext(), "Data Updating is Successfull", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(EM_EventDetails.this, EM_Addhalls.class);
-                            startActivity(intent);
-                        }else {
-                            Toast.makeText(getApplicationContext(), "Data Updating is Not Successfull", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(EM_EventDetails.this, EM_Addhalls.class);
-                            startActivity(intent);
+                }else if(updhallType.getText().toString().isEmpty()){
+                    updhallType.setError("Please Fill Description");
+
+
+                }else{
+
+                    EM_HallManagement em = new EM_HallManagement();
+                    em.setId(em_hallManagementl.getId());
+                    em.setName(updhallName.getText().toString());
+                    em.setPrice(Float.parseFloat(updhallPrice.getText().toString()));
+                    em.setDescription(updhallType.getText().toString());
+                    em.setWedding(updweddingbtn.isChecked());
+                    em.setWedding(updeventbtn.isChecked());
+
+
+                    dbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement").child(em_hallManagementl.getId());
+                    dbf.setValue(em).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(getApplicationContext(), "Data Updating is Successfull", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(EM_EventDetails.this, EM_Addhalls.class);
+                                startActivity(intent);
+                            }else {
+                                Toast.makeText(getApplicationContext(), "Data Updating is Not Successfull", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(EM_EventDetails.this, EM_Addhalls.class);
+                                startActivity(intent);
+                            }
+
                         }
+                    });
 
-                    }
-                });
+
+                }
+
 
 
 
@@ -122,6 +140,7 @@ public class EM_EventDetails extends AppCompatActivity {
                 deleteHalls();
             }
         });
+
 
 
 
