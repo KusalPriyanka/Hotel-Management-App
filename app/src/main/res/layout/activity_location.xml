@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
-        android:text="@string/travel_options2"
+        android:text="@string/travel_options3"
         android:textColor="@color/white"
         android:textSize="24dp"
         android:textStyle="bold"
