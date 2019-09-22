@@ -79,16 +79,6 @@ public class MM_MealManagement extends AppCompatActivity {
 
 
 
-        pastryShop = findViewById(R.id.pastryShop);
-        pastryShop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MM_MealManagement.this, MM_Short_Eats_Management.class);
-                startActivity(intent);
-            }
-        });
-
-
         myDialog6 = new Dialog(this);
         search = findViewById(R.id.searchCard);
         search.setOnClickListener(new View.OnClickListener() {

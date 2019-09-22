@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MM_Short_Eats_Management"></activity>
         <activity android:name=".MM_View_Meal_View" />
         <activity android:name=".MM_Search_Bar" />
         <activity android:name=".MM_Delete_All_PU" />

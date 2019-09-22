@@ -117,43 +117,42 @@ android:background="#fff"
                 android:layout_marginTop="10dp">
 
                 <Button
-                    android:id="@+id/mainMeal"
+                    android:id="@+id/addMeal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="8dp"
                     android:background="@drawable/button_style"
                     android:padding="15dp"
-                    android:text="@string/MainMeals"
+                    android:text="Add Meal"
                     android:textColor="@android:color/background_light"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/pastryShop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/deleteAll"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <Button
-                    android:id="@+id/pastryShop"
+                    android:id="@+id/deleteAll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/button_style"
+                    android:layout_marginEnd="44dp"
+                    android:background="@drawable/button_style_delete"
                     android:padding="15dp"
-                    android:text="@string/Pastry_Shop"
+                    android:text="Delete All"
                     android:textColor="@android:color/background_light"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/mainMeal"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintStart_toEndOf="@+id/addMeal" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
             <LinearLayout
@@ -229,47 +228,6 @@ android:background="#fff"
 
             </LinearLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp">
-
-                <Button
-                    android:id="@+id/addMeal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/button_style"
-                    android:padding="15dp"
-                    android:text="Add Meal"
-                    android:textColor="@android:color/background_light"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/deleteAll"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <Button
-                    android:id="@+id/deleteAll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="44dp"
-                    android:background="@drawable/button_style_delete"
-                    android:padding="15dp"
-                    android:text="Delete All"
-                    android:textColor="@android:color/background_light"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/addMeal" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
