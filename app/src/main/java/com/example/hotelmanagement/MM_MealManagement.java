@@ -4,8 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import android.app.Dialog;
@@ -62,9 +66,10 @@ public class MM_MealManagement extends AppCompatActivity {
     private CardView search;
     private List<MainMeals> mealsLists = new ArrayList<>();
     private List<String> mealID = new ArrayList<>();
-    private ProgressBar progressBar, addImagePro;
+    private ProgressBar progressBar;
     private ListView lv;
     private String ImagePath;
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -72,11 +77,11 @@ public class MM_MealManagement extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mm__meal_management);
 
+        progressDialog = new ProgressDialog(MM_MealManagement.this);
+
         storageReference = FirebaseStorage.getInstance().getReference("MainMealsImages");
 
-
         lv = (ListView) findViewById(R.id.mmList);
-
 
 
         myDialog6 = new Dialog(this);
@@ -170,8 +175,6 @@ public class MM_MealManagement extends AppCompatActivity {
                 TextView txtclose;
                 myDialog.setContentView(R.layout.activity_mm__add__main__meal__pu);
                 txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
-                addImagePro = (ProgressBar) myDialog.findViewById(R.id.addPro);
-                addImagePro.setVisibility(View.INVISIBLE);
                 txtclose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -341,7 +344,11 @@ public class MM_MealManagement extends AppCompatActivity {
 
     public void insetDataToDb(){
 
-        addImagePro.setVisibility(View.VISIBLE);
+        progressDialog.setTitle("Adding Main Meal");
+        progressDialog.setMessage("Data Uploading.Please Wait...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
         df = FirebaseDatabase.getInstance().getReference().child("MainMeals");
         df.addValueEventListener(new ValueEventListener() {
             @Override
@@ -364,6 +371,9 @@ public class MM_MealManagement extends AppCompatActivity {
         primaryKey = CommonFunctions.get_id(CommonConstants.MAIN_MEALS_PREFIX, mealsLists);
         final MainMeals mainMeals = new MainMeals();
 
+
+
+
         mainMeals.setId(primaryKey);
         mainMeals.setMealName(mealName.getText().toString());
         mainMeals.setType(mealName.getText().toString());
@@ -372,26 +382,43 @@ public class MM_MealManagement extends AppCompatActivity {
         mainMeals.setBrakfast(breakfast.isChecked());
         mainMeals.setLunch(lunch.isChecked());
         mainMeals.setDinner(dinner.isChecked());
-        mainMeals.setImageName(ImagePath);
 
-        df = FirebaseDatabase.getInstance().getReference().child("MainMeals");
-        df.child(mainMeals.getId()).setValue(mainMeals)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
+
+
+        final StorageReference sf = storageReference.child("image" + imageUri.getLastPathSegment());
+        sf.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                sf.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            progressBar.setVisibility(View.GONE);
-                            Toast.makeText(getApplicationContext(), "Data Inserted Successfully!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(MM_MealManagement.this, MM_MealManagement.class);
-                            startActivity(intent);
-                        }else {
-                            Toast.makeText(getApplicationContext(), "Data Not Inserted Successfully!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(MM_MealManagement.this, MM_MealManagement.class);
-                            startActivity(intent);
-                        }
+                    public void onSuccess(Uri uri) {
+                        ImagePath = uri.toString();
+                        mainMeals.setImageName(ImagePath);
+                        df = FirebaseDatabase.getInstance().getReference().child("MainMeals");
+                        df.child(mainMeals.getId()).setValue(mainMeals)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            progressDialog.dismiss();
+                                            Toast.makeText(getApplicationContext(), "Data Inserted Successfully!" + "Created Main meal Id : " + primaryKey, Toast.LENGTH_LONG).show();
+                                            Intent intent = new Intent(MM_MealManagement.this, MM_MealManagement.class);
+                                            startActivity(intent);
+                                        }else {
+                                            progressDialog.dismiss();
+                                            Toast.makeText(getApplicationContext(), "Data Not Inserted Successfully!", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(MM_MealManagement.this, MM_MealManagement.class);
+                                            startActivity(intent);
+                                        }
 
+                                    }
+                                });
                     }
                 });
+            }
+        });
+
+
 
 
 
@@ -402,28 +429,9 @@ public class MM_MealManagement extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        addImagePro.setVisibility(View.VISIBLE);
         if(requestCode == PICK_FROM_GALLARY && resultCode == RESULT_OK && data != null && data.getData() != null){
             imageUri = data.getData();
             uplodedImage.setImageURI(imageUri);
-            addImagePro.setVisibility(View.VISIBLE);
-            final StorageReference sf = storageReference.child("image" + imageUri.getLastPathSegment());
-            sf.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    sf.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            ImagePath = uri.toString();
-                            addImagePro.setVisibility(View.INVISIBLE);
-                            Toast.makeText(getApplicationContext(), "File Uploaded!",Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
-            });
-
-
-
         }
 
     }

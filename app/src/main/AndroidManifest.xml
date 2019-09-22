@@ -51,7 +51,6 @@
         <activity android:name=".activity_payment_details" />
         <activity android:name=".activity_payment_account" />
         <activity android:name=".travel_option" />
-        <activity android:name=".EM_UpdatedView" />
     </application>
 
 </manifest>
