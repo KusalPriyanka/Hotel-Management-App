@@ -70,7 +70,7 @@ public class MM_MealManagement extends AppCompatActivity {
     private ListView lv;
     private String ImagePath;
     private ProgressDialog progressDialog;
-
+    private TextView uploadText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,7 +171,6 @@ public class MM_MealManagement extends AppCompatActivity {
         addMeal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myDialog.setContentView(R.layout.activity_mm__add__main__meal__pu);
                 TextView txtclose;
                 myDialog.setContentView(R.layout.activity_mm__add__main__meal__pu);
                 txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
@@ -213,6 +212,7 @@ public class MM_MealManagement extends AppCompatActivity {
                         breakfast = myDialog.findViewById(R.id.brakfast);
                         lunch = myDialog.findViewById(R.id.lunch);
                         dinner = myDialog.findViewById(R.id.dinner);
+                        uploadText  = myDialog.findViewById(R.id.textView25);
                         if(mealName.getText().toString().isEmpty()) {
 
                             mealName.setError("Please Enter Meal Name!");
@@ -260,6 +260,8 @@ public class MM_MealManagement extends AppCompatActivity {
                             breakfast.setError("!");
                             lunch.setError("!");
                             dinner.setError("!");
+                        }else if(imageUri == null){
+                            uploadText.setError("!");
                         }
 
                         else {
