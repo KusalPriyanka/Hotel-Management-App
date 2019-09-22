@@ -1,6 +1,8 @@
 package Adapter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,21 +15,36 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
+import com.example.hotelmanagement.MainActivity;
 import com.example.hotelmanagement.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
 import Modal.Packages;
+import Modal.Reservation;
 
 public class AdapterForPackage extends PagerAdapter {
 
     private List<Packages> models;
     private LayoutInflater layoutInflater;
     private Context context;
+    private Intent intent;
 
     public AdapterForPackage(List<Packages> models, Context context) {
         this.models = models;
         this.context = context;
+    }
+
+    public Intent getIntent() {
+        return intent;
+    }
+
+    public void setIntent(Intent intent) {
+        this.intent = intent;
     }
 
     @Override
@@ -67,7 +84,33 @@ public class AdapterForPackage extends PagerAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,models.get(position).getName(),Toast.LENGTH_SHORT).show();
+
+                if(intent != null){
+
+                    final ProgressDialog progressDialog = new ProgressDialog(context);
+
+                    progressDialog.setTitle("Make Reservation");
+                    progressDialog.setMessage("Make New Reservation... Wait!");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
+
+                    Reservation reservation = (Reservation) getIntent().getSerializableExtra("Res");
+                    reservation.setPackageId(models.get(position).getId());
+
+                    DatabaseReference fb = FirebaseDatabase.getInstance().getReference().child("Reservation");
+
+                    fb.push().setValue(reservation)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    progressDialog.dismiss();
+                                    Toast.makeText(context,"Make Reservation Sucessfully!",Toast.LENGTH_SHORT).show();
+                                    context.startActivity(new Intent(context, MainActivity.class));
+                                }
+                            });
+                }
+
             }
         });
 

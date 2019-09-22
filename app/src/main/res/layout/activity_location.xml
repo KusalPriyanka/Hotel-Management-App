@@ -13,20 +13,20 @@
         android:layout_width="64dp"
         android:layout_height="53dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="56dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/travel2_place" />
 
     <TextView
         android:id="@+id/text11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="224dp"
+        android:layout_height="62dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
-        android:text="@string/you_will_travel_by"
+        android:text="@string/travel_option4"
         android:textColor="@color/white"
-        android:textSize="24dp"
+        android:textSize="35dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

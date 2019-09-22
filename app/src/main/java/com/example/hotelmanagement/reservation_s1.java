@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -22,7 +24,7 @@ import Modal.Reservation;
 public class reservation_s1 extends AppCompatActivity {
 
     private final Calendar myCalendar = Calendar.getInstance();
-    private EditText checkin , checkout , checkintime , checkouttime , adults , child , rooms;
+    private EditText checkin , checkout , checkintime , checkouttime , adults , child;
     private Button addReservation;
     private int hour = -1, min = -1;
 
@@ -62,7 +64,6 @@ public class reservation_s1 extends AppCompatActivity {
         checkouttime = findViewById(R.id.checkouttime);
         adults = findViewById(R.id.adults);
         child = findViewById(R.id.children);
-        rooms = findViewById(R.id.rooms);
         addReservation = findViewById(R.id.addReservation);
 
         checkintime.setOnClickListener(new View.OnClickListener() {
@@ -108,7 +109,7 @@ public class reservation_s1 extends AppCompatActivity {
         reservation.setCheckOutTime(checkouttime.getText().toString());
         reservation.setNoOfAdults(Integer.parseInt(adults.getText().toString()));
         reservation.setNoOfChild(Integer.parseInt(child.getText().toString()));
-        reservation.setNoOfRooms(Integer.parseInt(rooms.getText().toString()));
+        reservation.setCusID(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         startActivity(new Intent(reservation_s1.this,showOffers.class).putExtra("Res",reservation));
 

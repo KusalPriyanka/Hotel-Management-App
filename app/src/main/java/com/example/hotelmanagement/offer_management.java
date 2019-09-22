@@ -53,11 +53,6 @@ public class offer_management extends AppCompatActivity {
             }
         });
 
-        progressDialog.setTitle("Load Package Details");
-        progressDialog.setMessage("Package Details Loading... Wait!");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-
         readAll();
 
         adapterForPackage = new AdapterForPackage(models,offer_management.this);
@@ -69,6 +64,11 @@ public class offer_management extends AppCompatActivity {
 
 
     private void readAll(){
+
+        progressDialog.setTitle("Load Package Details");
+        progressDialog.setMessage("Package Details Loading... Wait!");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
 
         models = new ArrayList<>();
 
@@ -82,6 +82,7 @@ public class offer_management extends AppCompatActivity {
                 }
 
                 adapterForPackage.notifyDataSetChanged();
+                progressDialog.dismiss();
             }
 
             @Override
@@ -90,7 +91,7 @@ public class offer_management extends AppCompatActivity {
             }
         });
 
-        progressDialog.dismiss();
+
     }
 
 }

@@ -12,47 +12,85 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="296dp"
+        android:layout_marginTop="160dp"
         android:layout_marginEnd="20dp"
         android:text="@string/admin_home2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_toption"
+        android:background="@drawable/button_style"
+        android:textColor="#fff"
+        android:textSize="25dp"
+        android:textStyle="bold"
+
+        />
 
     <Button
         android:id="@+id/btn_toption"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="300dp"
         android:layout_marginEnd="20dp"
         android:text="@string/travel_home"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_adminh" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/button_style"
+        android:textColor="#fff"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        />
 
     <TextView
         android:id="@+id/textView28"
-        android:layout_width="179dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="194dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:text="@string/blue_dragon_hotel"
         android:textColor="@android:color/white"
         android:textScaleX="1.2"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="179dp"
+        android:layout_height="50dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/travel_home_travel_admin_home"
+        android:textColor="@android:color/background_light"
+        android:textScaleX="1.2"
+        android:textSize="18sp"
+        android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_toption"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.076"
+        app:layout_constraintHorizontal_bias="0.086"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView28"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.39" />
+
+    <ImageView
+        android:id="@+id/imageView15"
+        android:layout_width="58dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="268dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.011" />
+        app:layout_constraintVertical_bias="0.038"
+        app:srcCompat="@drawable/travel2_place" />
+
+
+    />
 
     />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".showOffers"
+    tools:context=".reservationlist"
     android:background="@drawable/background">
 
     <RelativeLayout
@@ -28,7 +28,7 @@
             android:layout_below="@+id/back"
             android:layout_marginLeft="25dp"
             android:fontFamily="sans-serif-black"
-            android:text="Reservation"
+            android:text="Reservation List"
             android:textColor="@android:color/background_light"
             android:textSize="30sp"
             android:textStyle="bold" />
@@ -41,7 +41,7 @@
             android:layout_marginLeft="25dp"
             android:layout_marginTop="5dp"
             android:fontFamily="sans-serif-condensed"
-            android:text="Choose Your Own Package"
+            android:text="All Details About Reservation"
             android:textColor="@android:color/background_light"
             android:textSize="20sp" />
 
@@ -56,14 +56,10 @@
 
     </RelativeLayout>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:clipToPadding="false"
-        android:foregroundGravity="center"
-        android:overScrollMode="never"
         android:layout_below="@+id/topBar"
         android:layout_marginTop="50dp"/>
 
