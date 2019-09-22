@@ -65,4 +65,20 @@
         app:srcCompat="@drawable/car1"
         tools:visibility="invisible" />
 
+    <ImageView
+        android:id="@+id/imgview_vtype2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_vtypeview"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/travel2_place"
+        tools:visibility="invisible" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

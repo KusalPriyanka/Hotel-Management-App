@@ -198,6 +198,7 @@ class VehicleViewHolder extends RecyclerView.ViewHolder {
     public Button btn_remove;
     public ConstraintLayout cons_lay;
     public ImageView imageView;
+    public ImageView imageView2;
 
     public VehicleViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -207,6 +208,7 @@ class VehicleViewHolder extends RecyclerView.ViewHolder {
         btn_remove = itemView.findViewById(R.id.btn_removevtype);
         cons_lay = itemView.findViewById(R.id.cons_lay_v_view);
         imageView = itemView.findViewById(R.id.imgview_vtype);
+        imageView2 = itemView.findViewById(R.id.imgview_vtype2);
 
     }
 }
