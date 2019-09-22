@@ -7,13 +7,13 @@
     tools:context=".addOffer"
     android:background="@drawable/background">
 
-
     <RelativeLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="-1dp">
+        android:layout_marginTop="-1dp"
+        android:layout_marginBottom="60dp">
 
         <ImageView
             android:id="@+id/back"
@@ -61,7 +61,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@+id/topBar"
-    android:layout_marginTop="60dp">
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"

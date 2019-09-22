@@ -87,7 +87,7 @@ public class Login extends AppCompatActivity {
         }
         else if(un.equals("admin") && pwd.equals("admin")){
 
-            startActivity(new Intent(Login.this,MainActivity.class));
+            startActivity(new Intent(Login.this,adminDashboard.class));
 
         }
         else{
