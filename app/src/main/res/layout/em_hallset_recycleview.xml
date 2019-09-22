@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp">
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_height="150dp"
+
+       >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -16,13 +20,13 @@
             android:orientation="horizontal">
 
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
 
                 android:id="@+id/hallImage"
                 android:layout_width="167dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
-                android:background="#000"
+                app:civ_border_color="#000"
                 />
 
             <LinearLayout
@@ -35,27 +39,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:text="Blue Diamond"
-                    android:textColor="#000"
+                    android:textColor="#2874A6"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/price"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="5dp"
                     android:text="10000/= only"
-                    android:textColor="#000"
+                    android:textColor="#E74C3C"
                     android:textSize="15dp"
                     android:textStyle="italic" />
 
                 <TextView
                     android:id="@+id/descrip"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="80dp"
                     android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="8dp"
                     android:text="Showcase your wedding space."
                     android:textColor="#000"
                     android:textSize="15dp"
