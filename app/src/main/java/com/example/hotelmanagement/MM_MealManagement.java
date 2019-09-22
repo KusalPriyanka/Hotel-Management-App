@@ -52,7 +52,7 @@ public class MM_MealManagement extends AppCompatActivity {
     private EditText mealName, foodType, normalPrice, largePrice, SerchTag;
     private CheckBox breakfast, lunch, dinner;
     private Dialog myDialog, myDialog3, myDialog6;
-    private Button addButton, deleteAll, addMeal, deleteAllfromDb, canselDAll;
+    private Button addButton, deleteAll, addMeal, deleteAllfromDb, canselDAll, pastryShop;
     private ImageView  view , upload, uplodedImage, serchIcon;
     private DatabaseReference df;
     private StorageReference storageReference;

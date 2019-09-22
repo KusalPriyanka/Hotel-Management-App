@@ -1,205 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:orientation="vertical"
-    tools:context=".travel_option"
-    android:background="@drawable/background">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="center"
-
-        >
-
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="24dp"
-            android:text="@string/travel_place"
-            android:textColor="#fff"
+    tools:context=".travel_option">
 
 
-            android:textSize="40dp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="64dp"
-            android:layout_height="53dp"
-            android:layout_alignRight="@+id/text"
-            android:layout_alignBottom="@+id/text"
-            android:layout_marginRight="86dp"
-            android:layout_marginBottom="-7dp"
-            app:srcCompat="@drawable/travel2_place" />
-
-    </RelativeLayout>
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-
-        >
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="80dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <androidx.cardview.widget.CardView
-
-                    android:id="@+id/Jaffna"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_marginRight="30dp">
-
-                    <ImageView
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/images8" />
-
-                    <TextView
-                        android:id="@+id/jaffna"
-                        android:layout_width="151dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="130dp"
-                        android:text="@string/jaffna"
-                        android:textAlignment="center"
-                        android:textColor="#000"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
-
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-
-                    android:id="@+id/Sigiriya"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="#888b77">
-
-                    <ImageView
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/sigiriya" />
-
-
-                    <TextView
-                        android:id="@+id/sigiriya"
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:layout_marginTop="130dp"
-                        android:text="@string/sigiriya"
-                        android:textAlignment="center"
-                        android:textColor="#000"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
-
-
-                </androidx.cardview.widget.CardView>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <androidx.cardview.widget.CardView
-
-                    android:id="@+id/Colombo"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-
-
-                    android:layout_marginRight="30dp"
-                    android:background="#888b77">
-
-                    <ImageView
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/train" />
-
-                    <TextView
-                        android:id="@+id/colombo"
-                        android:layout_width="151dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="130dp"
-                        android:text="@string/colombo"
-                        android:textAlignment="center"
-                        android:textColor="#000"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
-
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-
-                    android:id="@+id/Kandy"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_marginLeft="20dp">
-
-
-                    <ImageView
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/nuwara" />
-
-                    <TextView
-                        android:id="@+id/kandy"
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:layout_marginTop="130dp"
-                        android:text="@string/kandy"
-                        android:textAlignment="center"
-                        android:textColor="#000"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
-
-
-                </androidx.cardview.widget.CardView>
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="64dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/travel2_place" />
 
     <TextView
-        android:id="@+id/textView29"
-        android:layout_width="match_parent"
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
 
 
-</LinearLayout>
+        android:text="@string/travel_place"
+        android:textColor="#fff"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_plviewcus"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
