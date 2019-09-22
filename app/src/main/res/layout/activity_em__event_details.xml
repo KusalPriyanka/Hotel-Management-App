@@ -8,9 +8,7 @@
     android:orientation="vertical">
 
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -221,7 +219,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:textSize="20dp"
-                            android:text="Hall Type"
+                            android:text="Details"
                             android:textColor="#145A32"
                             android:layout_marginLeft="30dp"
                             />
@@ -253,7 +251,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="50dp"
                     >
 
                     <LinearLayout
@@ -297,50 +295,63 @@
                     android:layout_height="170dp"
                    >
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="170dp"
-                        android:orientation="vertical"
-                        >
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="421dp"
+                        android:layout_height="119dp">
 
                         <Button
                             android:id="@+id/udatepagebtn"
-                            android:layout_width="150dp"
+                            android:layout_width="132dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="90dp"
+
+
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
                             android:background="@drawable/mm_edit_button"
+                            android:foregroundGravity="center"
+
                             android:gravity="center"
                             android:text="UPDATE"
-                            android:textStyle="bold"
                             android:textColor="#ffff"
                             android:textSize="20dp"
-                            android:foregroundGravity="center"
-                            android:layout_marginRight="80dp"
-
-                            />
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/deletebtn"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0" />
 
                         <Button
                             android:id="@+id/deletebtn"
-                            android:layout_width="150dp"
+                            android:layout_width="132dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="90dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
                             android:background="@drawable/button_style_delete"
+
+                            android:foregroundGravity="center"
                             android:gravity="center"
                             android:text="DELETE"
-                            android:layout_marginTop="20dp"
-                            android:textStyle="bold"
                             android:textColor="#ffff"
                             android:textSize="20dp"
-                            android:foregroundGravity="center"
-                            android:layout_marginRight="80dp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/udatepagebtn"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0" />
 
-                            />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
-                    </LinearLayout>
+
+
 
 
 
@@ -381,7 +392,7 @@
 
 
 
-    </ScrollView>
+
 
 
 </LinearLayout>

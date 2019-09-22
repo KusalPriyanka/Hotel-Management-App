@@ -53,7 +53,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:fontFamily="sans-serif-black"
-                        android:text="Weddig Halls"
+                        android:text="Wedding Halls"
                         android:textColor="@android:color/background_light"
                         android:textSize="30sp"
                         android:textStyle="bold"
