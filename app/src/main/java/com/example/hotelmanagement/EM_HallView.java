@@ -1,72 +1,101 @@
 package com.example.hotelmanagement;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.ViewFlipper;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import Modal.EM_HallManagement;
+import Modal.MainMeals;
+import Modal.MealList;
+import Modal.WedHallList;
+
 public class EM_HallView extends AppCompatActivity {
-    ViewFlipper vievfliper1, vievfliper2, vievfliper3;
+    private ProgressBar hallViewPro;
+    private DatabaseReference df;
+    private List<EM_HallManagement> hallList = new ArrayList<>();
+    private ListView hallistView;
+    private Button wedding, events;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_em__hall_view);
+        hallistView = findViewById(R.id.hallList);
+        hallViewPro = findViewById(R.id.hallViewPro);
+        wedding = findViewById(R.id.wedding);
+        events = findViewById(R.id.events);
 
-        vievfliper1 = findViewById(R.id.blueRay);
-        int image[] = {R.drawable.emblueone, R.drawable.emblutwo};
-        for(int i = 0; i < image.length; i++){
-            showSlider1(image[i]);
-        }
 
-        vievfliper2 = findViewById(R.id.redview);
-        int image2[] = {R.drawable.emredone, R.drawable.emredtwo};
-        for(int i = 0; i < image.length; i++){
-            showSlider2(image2[i]);
-        }
+        wedding.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EM_HallView.this,EM_EventManagementHome.class);
+                startActivity(intent);
+            }
+        });
 
-        vievfliper3 = findViewById(R.id.royal);
-        int image3[] = {R.drawable.emluxone, R.drawable.emluxtwo};
-        for(int i = 0; i < image.length; i++){
-            showSlider3(image3[i]);
-        }
+
+        events.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EM_HallView.this,EM_EventView.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
-    public void showSlider1(int image){
-        ImageView im = new ImageView(this);
-        im.setBackgroundResource(image);
-        vievfliper1.setAutoStart(true);
-        vievfliper1.setFlipInterval(3000);
-        vievfliper1.addView(im);
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        hallViewPro.setVisibility(View.VISIBLE);
+        df = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement");
+        df.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                hallList.clear();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    EM_HallManagement em_hallManagement = ds.getValue(EM_HallManagement.class);
+                    if(em_hallManagement.isWedding() == true){
+                        hallList.add(em_hallManagement);
+                    }
+                }
+
+                WedHallList wedHallList = new WedHallList(EM_HallView.this, hallList);
+
+                hallistView.setAdapter(wedHallList);
+                hallViewPro.setVisibility(View.GONE);
 
 
-        vievfliper1.setInAnimation(this, android.R.anim.slide_in_left);
-        vievfliper1.setOutAnimation(this,android.R.anim.slide_out_right);
-    }
+            }
 
-    public void showSlider2(int image){
-        ImageView im = new ImageView(this);
-        im.setBackgroundResource(image);
-        vievfliper2.setAutoStart(true);
-        vievfliper2.setFlipInterval(3000);
-        vievfliper2.addView(im);
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
-        vievfliper2.setInAnimation(this, android.R.anim.slide_in_left);
-        vievfliper2.setOutAnimation(this,android.R.anim.slide_out_right);
-    }
-
-    public void showSlider3(int image){
-        ImageView im = new ImageView(this);
-        im.setBackgroundResource(image);
-        vievfliper3.setAutoStart(true);
-        vievfliper3.setFlipInterval(3000);
-        vievfliper3.addView(im);
-
-
-        vievfliper3.setInAnimation(this, android.R.anim.slide_in_left);
-        vievfliper3.setOutAnimation(this,android.R.anim.slide_out_right);
     }
 }
 

@@ -1,12 +1,10 @@
 package com.example.hotelmanagement;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+
+
 
 
 import android.app.Dialog;
@@ -14,55 +12,51 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
+
 import android.view.View;
-import android.view.ViewGroup;
+
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CheckBox;
+
 import android.widget.CheckedTextView;
-import android.widget.EditText;
+
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-//import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.ChildEventListener;
+
+import com.bumptech.glide.Glide;
+
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-//import com.squareup.picasso.Picasso;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Modal.Customer;
+
 import Modal.MainMeals;
 import Modal.MealList;
-import ViewHolder.MainMealsViewHolder;
+
 
 
 public class MM_Main_Meals extends AppCompatActivity {
 
 
-    ImageView im;
+
     Button mainMeals, pastryShop;
-    private RecyclerView mainMeal;
+
     private DatabaseReference df;
     List<MainMeals> mealsLists;
-    RecyclerView mainMealsRV;
-    FirebaseRecyclerAdapter<MainMeals, MainMealsViewHolder> adapter;
+
     private ProgressBar progressBar;
     Dialog myDialog5;
-    private CheckBox breakfast, lunch, dinner;
-    TextView ID, name, type, lprice, nprice, headerDeletePU;
+    TextView  name, type, lprice, nprice;
     CheckedTextView br,lu, dn;
     ListView lv;
     ImageView image;
@@ -150,8 +144,7 @@ public class MM_Main_Meals extends AppCompatActivity {
                         if(mainMeals.isDinner() == true){
                             dn.setCheckMarkDrawable(R.drawable.check_view);
                         }
-                     //   Picasso.get().load(mainMeals.getImageName()).into(image);
-
+                        Glide.with(MM_Main_Meals.this).load(mainMeals.getImageName()).into(image);
 
                     }
                 });

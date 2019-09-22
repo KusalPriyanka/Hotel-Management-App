@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         reservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,reservation_s1.class);
+                Intent intent = new Intent(MainActivity.this,offer_management.class);
                 startActivity(intent);
             }
         });

@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MM_View_Meal_View"></activity>
+        <activity android:name=".MM_View_Meal_View" />
         <activity android:name=".MM_Search_Bar" />
         <activity android:name=".MM_Delete_All_PU" />
         <activity android:name=".MM_Edit_Meal_PU" />
@@ -51,6 +51,7 @@
         <activity android:name=".activity_payment_details" />
         <activity android:name=".activity_payment_account" />
         <activity android:name=".travel_option" />
+        <activity android:name=".EM_UpdatedView" />
     </application>
 
 </manifest>

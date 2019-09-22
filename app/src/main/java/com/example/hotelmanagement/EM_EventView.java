@@ -1,5 +1,6 @@
 package com.example.hotelmanagement;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,23 +8,61 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import Modal.EM_HallManagement;
+import Modal.WedHallList;
 
 public class EM_EventView extends AppCompatActivity {
 
     ViewFlipper vievfliper;
-    Button viewlight, viewCoffe,viewPeo,viewCalm;
-    TextView txh11,txf11,txf22;
+    private ProgressBar eventViewPro;
+    private DatabaseReference df;
+    private List<EM_HallManagement> hallList = new ArrayList<>();
+    private ListView hallistView;
+    private Button wedding, events;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_em__event_view);
+        hallistView = findViewById(R.id.hallList);
+        eventViewPro = findViewById(R.id.eventViewPro);
+        hallistView = findViewById(R.id.eventList);
 
 
+        wedding = findViewById(R.id.wedding);
+        events = findViewById(R.id.events);
 
 
+        wedding.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EM_EventView.this,EM_HallView.class);
+                startActivity(intent);
+            }
+        });
+
+
+        events.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EM_EventView.this,EM_EventView.class);
+                startActivity(intent);
+            }
+        });
 
         vievfliper = findViewById(R.id.file);
         int image[] = {R.drawable.emnewfiv, R.drawable.emnewone, R.drawable.emnewtwo,R.drawable.emfirstsix};
@@ -32,119 +71,6 @@ public class EM_EventView extends AppCompatActivity {
         }
 
 
-        viewlight = findViewById(R.id.viewLight);
-        viewlight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                txh11 = findViewById(R.id.txh1);
-                txf11 = findViewById(R.id.txf1);
-                txf22 = findViewById(R.id.txf2);
-
-                String first_head = txh11.getText().toString();
-                String first_sone = txf11.getText().toString();
-                String first_stwo = txf22.getText().toString();
-
-
-                Intent intent = new Intent(EM_EventView.this,Eventbook.class);
-
-                intent.putExtra("first_head",first_head );
-                intent.putExtra("first_sone",first_sone );
-                intent.putExtra("first_stwo",first_stwo );
-
-                Bundle bundle = new Bundle();
-                bundle.putInt("image",R.drawable.emnewfiv);
-                intent.putExtras(bundle);
-
-
-                startActivity(intent);
-            }
-        });
-
-
-        viewCoffe = findViewById(R.id.viewCoffee);
-        viewCoffe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                txh11 = findViewById(R.id.txh2);
-                txf11 = findViewById(R.id.txs1);
-                txf22 = findViewById(R.id.txs2);
-
-                String first_head = txh11.getText().toString();
-                String first_sone = txf11.getText().toString();
-                String first_stwo = txf22.getText().toString();
-
-
-                Intent intent = new Intent(EM_EventView.this, Eventbook.class);
-
-                intent.putExtra("first_head",first_head );
-                intent.putExtra("first_sone",first_sone );
-                intent.putExtra("first_stwo",first_stwo );
-
-                Bundle bundle = new Bundle();
-                bundle.putInt("image",R.drawable.emnewone);
-                intent.putExtras(bundle);
-
-
-                startActivity(intent);
-            }
-        });
-
-        viewPeo = findViewById(R.id.viewPeo);
-        viewPeo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                txh11 = findViewById(R.id.th3);
-                txf11 = findViewById(R.id.txt1);
-                txf22 = findViewById(R.id.txt2);
-
-                String first_head = txh11.getText().toString();
-                String first_sone = txf11.getText().toString();
-                String first_stwo = txf22.getText().toString();
-
-
-                Intent intent = new Intent(EM_EventView.this, Eventbook.class);
-
-                intent.putExtra("first_head",first_head );
-                intent.putExtra("first_sone",first_sone );
-                intent.putExtra("first_stwo",first_stwo );
-
-                Bundle bundle = new Bundle();
-                bundle.putInt("image",R.drawable.emnewtwo);
-                intent.putExtras(bundle);
-
-
-                startActivity(intent);
-            }
-        });
-
-        viewCalm = findViewById(R.id.viewCalm);
-        viewCalm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                txh11 = findViewById(R.id.txh3);
-                txf11 = findViewById(R.id.txfo1);
-                txf22 = findViewById(R.id.txfo2);
-
-                String first_head = txh11.getText().toString();
-                String first_sone = txf11.getText().toString();
-                String first_stwo = txf22.getText().toString();
-
-
-                Intent intent = new Intent(EM_EventView.this,Eventbook.class);
-
-                intent.putExtra("first_head",first_head );
-                intent.putExtra("first_sone",first_sone );
-                intent.putExtra("first_stwo",first_stwo );
-
-                Bundle bundle = new Bundle();
-                bundle.putInt("image",R.drawable.emfirstsix);
-                intent.putExtras(bundle);
-
-
-                startActivity(intent);
-            }
-        });
 
 
     }
@@ -162,5 +88,47 @@ public class EM_EventView extends AppCompatActivity {
 
         vievfliper.setInAnimation(this, android.R.anim.slide_in_left);
         vievfliper.setOutAnimation(this,android.R.anim.slide_out_right);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        eventViewPro.setVisibility(View.VISIBLE);
+        df = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement");
+        df.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                hallList.clear();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    EM_HallManagement em_hallManagement = ds.getValue(EM_HallManagement.class);
+                    if(em_hallManagement.isEvents() == true){
+                        hallList.add(em_hallManagement);
+                    }
+                }
+
+                WedHallList wedHallList = new WedHallList(EM_EventView.this, hallList);
+
+                hallistView.setAdapter(wedHallList);
+                eventViewPro.setVisibility(View.GONE);
+
+                /*hallistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        MainMeals mainMeals = (MainMeals) adapterView.getAdapter().getItem(i);
+
+
+
+
+                    }
+                });*/
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 }

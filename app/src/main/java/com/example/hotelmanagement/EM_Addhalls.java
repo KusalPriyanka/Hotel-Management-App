@@ -18,11 +18,18 @@ import android.widget.Toast;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import Modal.EM_HallManagement;
 import Modal.MainMeals;
+import Modal.WedHallList;
 
 public class EM_Addhalls extends AppCompatActivity {
     Button button;
@@ -33,6 +40,9 @@ public class EM_Addhalls extends AppCompatActivity {
     ListView listView;
     ImageView emSearchIcon;
     EditText emSearchBar;
+    ImageView backtoSel;
+    ProgressBar proSerch;
+    private List<EM_HallManagement> hallList = new ArrayList<>();
 
 
     @Override
@@ -40,7 +50,8 @@ public class EM_Addhalls extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_em__addhalls);
 
-
+        proSerch = findViewById(R.id.emprogress);
+        proSerch.setVisibility(View.VISIBLE);
         listView = findViewById(R.id.listView);
         emSearchIcon = findViewById(R.id.searchbtn);
         emSearchBar = findViewById(R.id.emsrchbar);
@@ -49,17 +60,37 @@ public class EM_Addhalls extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                final ProgressBar proSerch = findViewById(R.id.emprogress);
-                proSerch.setVisibility(View.INVISIBLE);
-                EM_HallManagement emSrch = new EM_HallManagement();
-
                 emSearchBar = findViewById(R.id.emsrchbar);
                 String serchTag = emSearchBar.getText().toString();
 
-                if(serchTag == null){
+                if(serchTag.isEmpty()){
                     emSearchBar.setError("Please Enter ");
                 }else{
+                    proSerch.setVisibility(View.VISIBLE);
+                    df = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement").child(serchTag);
+                    df.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                            EM_HallManagement em_hallManagement = dataSnapshot.getValue(EM_HallManagement.class);
+
+                            if(em_hallManagement != null){
+                                proSerch.setVisibility(View.GONE);
+                                Intent intent =  new Intent(EM_Addhalls.this,  EM_UpdatedView.class);
+                                intent.putExtra("em_hallManagement", em_hallManagement);
+                                startActivity(intent);
+                            }else {
+                                proSerch.setVisibility(View.GONE);
+                                Toast.makeText(getApplicationContext(), "Please Enter Valid Id!", Toast.LENGTH_LONG).show();
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
 
 
                 }
@@ -71,32 +102,16 @@ public class EM_Addhalls extends AppCompatActivity {
 
 
 
-        df = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement");
-        FirebaseListAdapter<EM_HallManagement> adapter = new FirebaseListAdapter<EM_HallManagement>(
-                this,EM_HallManagement.class, android.R.layout.simple_list_item_1, df
-        ) {
+
+
+        backtoSel = findViewById(R.id.backtoselect);
+        backtoSel.setOnClickListener(new View.OnClickListener() {
             @Override
-            protected void populateView(View v, EM_HallManagement model, int position) {
-                TextView textView = v.findViewById(android.R.id.text1);
-                textView.setText(model.toString());
-            }
-        };
-        listView.setAdapter(adapter);
-
-
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                EM_HallManagement em_hallManagement =(EM_HallManagement)adapterView.getAdapter().getItem(i);
-                Intent intent =  new Intent(EM_Addhalls.this, EM_UpdatedView.class);
-                intent.putExtra("em_hallManagement", em_hallManagement);
+            public void onClick(View view) {
+                Intent intent = new Intent(EM_Addhalls.this, EM_SelectionPage.class);
                 startActivity(intent);
             }
         });
-
-
-
 
 
 
@@ -129,6 +144,8 @@ public class EM_Addhalls extends AppCompatActivity {
 
 
     }
+
+
     public void DeleteAllHalls(){
         DatabaseReference deletedbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement");
         deletedbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement");
@@ -149,5 +166,52 @@ public class EM_Addhalls extends AppCompatActivity {
         });
 
     }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        proSerch.setVisibility(View.VISIBLE);
+        df = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement");
+        df.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                hallList.clear();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    EM_HallManagement em_hallManagement = ds.getValue(EM_HallManagement.class);
+                    hallList.add(em_hallManagement);
+
+                }
+
+                WedHallList wedHallList = new WedHallList(EM_Addhalls.this, hallList);
+
+                listView.setAdapter(wedHallList);
+                proSerch.setVisibility(View.GONE);
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        EM_HallManagement em_hallManagement =(EM_HallManagement)adapterView.getAdapter().getItem(i);
+                        Intent intent =  new Intent(EM_Addhalls.this, EM_UpdatedView.class);
+                        intent.putExtra("em_hallManagement", em_hallManagement);
+                        startActivity(intent);
+
+
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+
+
 }
 

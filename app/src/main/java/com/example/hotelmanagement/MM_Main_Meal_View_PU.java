@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 public class MM_Main_Meal_View_PU extends AppCompatActivity {
 
-    ImageView iv;
-    TextView mealName, nPrice, lPrice, tFood, d1, d2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
