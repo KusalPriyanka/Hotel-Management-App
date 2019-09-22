@@ -89,6 +89,8 @@
     <string name="blue_dragon_hotel">Blue Dragon Hotel</string>
     <string name="travel_options3">travel_options3</string>
     <string name="please_enter_meal_types">please_enter_meal_types</string>
+    <string name="travel_home_travel_admin_home">Travel Home ,Travel Admin Home</string>
+    <string name="travel_option4">Travel Option</string>
 
 
 </resources>
