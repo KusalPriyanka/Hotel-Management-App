@@ -43,9 +43,10 @@ public class EM_AddhallDetails extends AppCompatActivity {
     CheckBox weddingbtn,eventbtn;
     DatabaseReference dbf;
     private EM_HallManagement em;
-    ImageView hallImage;
+    ImageView hallImage,backtoaddhall;
     Button buttonAdd;
     String id, primaryKey;
+
     private StorageReference sr;
     private static final int PICK_FROM_GALLARY = 2;
     private Uri hallImageUri;
@@ -126,6 +127,16 @@ public class EM_AddhallDetails extends AppCompatActivity {
 
 
 
+            }
+        });
+
+
+        backtoaddhall = findViewById(R.id.adddetailback);
+        backtoaddhall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EM_AddhallDetails.this, EM_Addhalls.class);
+                startActivity(intent);
             }
         });
 

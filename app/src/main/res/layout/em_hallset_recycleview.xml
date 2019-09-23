@@ -32,6 +32,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
                 app:civ_border_color="#000"
+                android:scaleType="centerCrop"
+
                 />
 
             <LinearLayout
@@ -45,30 +47,33 @@
                     android:layout_height="30dp"
                     android:text="Blue Diamond"
                     android:textColor="#2874A6"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="14dp"/>
 
                 <TextView
                     android:id="@+id/price"
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
-                    android:layout_marginBottom="5dp"
+
+
                     android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="20dp"
                     android:text="10000/= only"
                     android:textColor="#E74C3C"
-                    android:textSize="15dp"
+                    android:textSize="18dp"
                     android:textStyle="italic" />
 
                 <TextView
                     android:id="@+id/descrip"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="30dp"
                     android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="8dp"
+
+                    android:layout_marginTop="14dp"
                     android:text="Showcase your wedding space."
                     android:textColor="#000"
-                    android:textSize="15dp"
+                    android:textSize="18dp"
                     android:textStyle="italic" />
 
 

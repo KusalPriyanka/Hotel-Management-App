@@ -32,5 +32,14 @@ public class adminDashboard extends AppCompatActivity {
             }
         });
 
+        eventMH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(adminDashboard.this,EM_Addhalls.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 }
