@@ -145,34 +145,50 @@ public class EM_AddhallDetails extends AppCompatActivity {
         id =  CommonFunctions.get_EM_Hall_Id(CommonConstants.EM_PREFIX, hallList);
 
 
-        EM_HallManagement em = new EM_HallManagement();
-        em.setId(id);
-        em.setName(hallName.getText().toString());
-        em.setPrice(Float.parseFloat(hallPrice.getText().toString()));
-        em.setDescription(hallType.getText().toString());
-        em.setWedding(weddingbtn.isChecked());
-        em.setEvents(eventbtn.isChecked());
-        em.setImageName(ImagePath);
-
-
-        dbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement");
-
-        dbf.child(em.getId()).setValue(em).addOnCompleteListener(new OnCompleteListener<Void>() {
+        final StorageReference sf = sr.child("EM" + hallImageUri.getLastPathSegment());
+        sf.putFile(hallImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    addHallPro.setVisibility(View.GONE);
-                    Toast.makeText(getApplicationContext(), "Data Inserted Successfully!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(EM_AddhallDetails.this, EM_Addhalls.class);
-                    startActivity(intent);
-                }else {
-                    Toast.makeText(getApplicationContext(), "Data Not Inserted Successfully!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(EM_AddhallDetails.this, EM_Addhalls.class);
-                    startActivity(intent);
-                }
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                sf.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        ImagePath = uri.toString();
 
+                        EM_HallManagement em = new EM_HallManagement();
+                        em.setId(id);
+                        em.setName(hallName.getText().toString());
+                        em.setPrice(Float.parseFloat(hallPrice.getText().toString()));
+                        em.setDescription(hallType.getText().toString());
+                        em.setWedding(weddingbtn.isChecked());
+                        em.setEvents(eventbtn.isChecked());
+                        em.setImageName(ImagePath);
+
+
+                        dbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement");
+
+                        dbf.child(em.getId()).setValue(em).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    addHallPro.setVisibility(View.GONE);
+                                    Toast.makeText(getApplicationContext(), "Data Inserted Successfully!", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(EM_AddhallDetails.this, EM_Addhalls.class);
+                                    startActivity(intent);
+                                }else {
+                                    Toast.makeText(getApplicationContext(), "Data Not Inserted Successfully!", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(EM_AddhallDetails.this, EM_Addhalls.class);
+                                    startActivity(intent);
+                                }
+
+                            }
+                        });
+                    }
+                });
             }
         });
+
+
+
     }
 
 
@@ -181,27 +197,8 @@ public class EM_AddhallDetails extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        addHallPro.setVisibility(View.VISIBLE);
         if(requestCode == PICK_FROM_GALLARY && resultCode == RESULT_OK && data != null && data.getData() != null){
             hallImageUri = data.getData();
-
-            addHallPro.setVisibility(View.VISIBLE);
-            final StorageReference sf = sr.child("EM" + hallImageUri.getLastPathSegment());
-            sf.putFile(hallImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    sf.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            ImagePath = uri.toString();
-                            addHallPro.setVisibility(View.INVISIBLE);
-                            Toast.makeText(getApplicationContext(), "File Uploaded!",Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
-            });
-
-
 
         }
 

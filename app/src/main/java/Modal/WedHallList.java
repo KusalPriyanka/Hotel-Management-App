@@ -37,7 +37,7 @@ public class WedHallList  extends ArrayAdapter<EM_HallManagement> {
         EM_HallManagement em_hallManagement = wedList.get(position);
 
         hallName.setText(em_hallManagement.getName());
-        hallPrice.setText(em_hallManagement.getPrice()+"");
+        hallPrice.setText(em_hallManagement.getPrice()+"0");
         hallDesc.setText(em_hallManagement.getDescription());
         Glide.with(getContext()).load(em_hallManagement.getImageName()).into(hallImage);
 

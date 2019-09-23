@@ -3,7 +3,10 @@ package com.example.hotelmanagement;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,7 +37,7 @@ import Modal.WedHallList;
 public class EM_Addhalls extends AppCompatActivity {
     Button button;
 
-    Button deleteAllbtn;
+    Button deleteAllbtn,popupdelete,popupcancel;
     DatabaseReference df;
 
     ListView listView;
@@ -42,6 +45,7 @@ public class EM_Addhalls extends AppCompatActivity {
     EditText emSearchBar;
     ImageView backtoSel;
     ProgressBar proSerch;
+    private Dialog deleteAllDialog;
     private List<EM_HallManagement> hallList = new ArrayList<>();
 
 
@@ -133,17 +137,45 @@ public class EM_Addhalls extends AppCompatActivity {
 
 
 
+
+
         deleteAllbtn = findViewById(R.id.buttondelete);
+        deleteAllDialog = new Dialog(this);
         deleteAllbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DeleteAllHalls();
+
+                deleteAllDialog.setContentView(R.layout.em_popup_deleteall);
+                deleteAllDialog.setCanceledOnTouchOutside(true);
+                deleteAllDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                deleteAllDialog.show();
+
+
+                popupdelete = deleteAllDialog.findViewById(R.id.empopdel);
+                popupdelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        DeleteAllHalls();
+                    }
+                });
+
+                popupcancel = deleteAllDialog.findViewById(R.id.empopcancel);
+                popupcancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        deleteAllDialog.dismiss();
+                    }
+                });
+
             }
         });
 
 
-
     }
+
+
+
+
 
 
     public void DeleteAllHalls(){
