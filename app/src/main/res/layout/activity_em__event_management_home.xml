@@ -191,7 +191,7 @@
                             android:textColor="#000"
                             android:textStyle="italic"
                             android:layout_marginTop="15dp"
-                            android:text="Showcase your wedding space with beautiful surroundings to comfort the feeling for real "/>
+                            android:text="Showcase your wedding space with beautiful surroundings."/>
 
                     </LinearLayout>
 
@@ -240,7 +240,7 @@
                             android:textStyle="italic"
                             android:layout_marginTop="15dp"
                             android:layout_marginRight="10dp"
-                            android:text="A virtual tour of your wedding reception area will spark the imagination and inspiration."/>
+                            android:text="A virtual tour of your wedding reception area will spark."/>
 
                     </LinearLayout>
 
@@ -288,7 +288,7 @@
                             android:textColor="#000"
                             android:textStyle="italic"
                             android:layout_marginTop="15dp"
-                            android:text="Portray those perfect photo opportunities and stunning with a walk-around of your terrace and gardens. "/>
+                            android:text="Portray those perfect photo opportunities and stunning with a walk-around. "/>
 
                     </LinearLayout>
 
@@ -330,7 +330,7 @@
                             android:textStyle="bold"/>
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="60dp"
+                            android:layout_height="50dp"
                             android:textSize="15dp"
                             android:textColor="#000"
                             android:textStyle="italic"
@@ -339,22 +339,24 @@
 
                         <Button
                             android:id="@+id/viewhalls"
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginLeft="120dp"
+                            android:layout_width="150dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="20dp"
                             android:layout_marginTop="12dp"
-                            android:layout_marginRight="5dp"
+                            android:layout_marginRight="85dp"
                             android:layout_marginBottom="2dp"
 
-                            android:background="#3498DB"
-                            android:paddingTop="5dp"
+                            android:background="@drawable/button_style"
 
 
-                            android:paddingBottom="5dp"
+
+
+
 
                             android:text="View More"
+                            android:textStyle="bold"
                             android:textColor="#fff"
-                            android:textSize="8dp" />
+                            android:textSize="20dp" />
 
 
                     </LinearLayout>

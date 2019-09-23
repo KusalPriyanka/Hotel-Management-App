@@ -33,6 +33,7 @@ public class EM_HallView extends AppCompatActivity {
     private List<EM_HallManagement> hallList = new ArrayList<>();
     private ListView hallistView;
     private Button wedding, events;
+    ImageView backtohome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,15 @@ public class EM_HallView extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(EM_HallView.this,EM_EventView.class);
+                startActivity(intent);
+            }
+        });
+
+        backtohome = findViewById(R.id.wedback);
+        backtohome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EM_HallView.this, EM_EventManagementHome.class);
                 startActivity(intent);
             }
         });
