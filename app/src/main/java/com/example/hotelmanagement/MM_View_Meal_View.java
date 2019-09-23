@@ -53,7 +53,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
     private CheckedTextView br, lu, dn;
     private static final int PICK_FROM_GALLARY = 2;
     private Uri imageUri;
-    private ProgressBar uploadImagePro, proSerch;
+    private ProgressBar  proSerch;
     private StorageReference storageReference;
     private ImageView upload, uplodedImage;
     private String ImagePath;
@@ -164,8 +164,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
                 });
 
                 uplodedImage = myDialog2.findViewById(R.id.imageView16);
-                uploadImagePro = myDialog2.findViewById(R.id.editPro);
-                uploadImagePro.setVisibility(View.INVISIBLE);
+
 
 
                 editDetails = (Button) myDialog2.findViewById(R.id.updateDetails);
@@ -291,13 +290,13 @@ public class MM_View_Meal_View extends AppCompatActivity {
                 nprice.setText("RS - " + mainMeals.getNormalPrice() + "0");
                 lprice.setText("RS - " + mainMeals.getLargePrice() + "0");
                 if (mainMeals.isBrakfast() == true) {
-                    br.setCheckMarkDrawable(R.drawable.ic_check_circle_gold_24dp);
+                    br.setCheckMarkDrawable(R.drawable.check_view);
                 }
                 if (mainMeals.isLunch() == true) {
-                    lu.setCheckMarkDrawable(R.drawable.ic_check_circle_gold_24dp);
+                    lu.setCheckMarkDrawable(R.drawable.check_view);
                 }
                 if (mainMeals.isDinner() == true) {
-                    dn.setCheckMarkDrawable(R.drawable.ic_check_circle_gold_24dp);
+                    dn.setCheckMarkDrawable(R.drawable.check_view);
                 }
                 Glide.with(MM_View_Meal_View.this).load(mainMeals.getImageName()).into(image);
 

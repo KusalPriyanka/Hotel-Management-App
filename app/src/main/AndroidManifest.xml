@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".adminDashboard"></activity>
+        <activity android:name=".MM_Short_Eats_View"></activity>
+        <activity android:name=".MM_Short_Eats_Management" />
+        <activity android:name=".adminDashboard" />
         <activity android:name=".reservationlist" />
         <activity android:name=".MM_View_Meal_View" />
         <activity android:name=".MM_Search_Bar" />

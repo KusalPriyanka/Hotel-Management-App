@@ -77,6 +77,15 @@ public class MM_MealManagement extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mm__meal_management);
 
+        pastryShop = findViewById(R.id.pastryShop);
+        pastryShop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MM_MealManagement.this, MM_Short_Eats_Management.class);
+                startActivity(intent);
+            }
+        });
+
         progressDialog = new ProgressDialog(MM_MealManagement.this);
 
         storageReference = FirebaseStorage.getInstance().getReference("MainMealsImages");
