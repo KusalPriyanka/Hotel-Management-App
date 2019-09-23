@@ -107,7 +107,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
             dn.setCheckMarkDrawable(R.drawable.ic_check_circle_black_24dp);
         }
 
-
+    //edit data in here
         myDialog2 = new Dialog(this);
         edit = findViewById(R.id.back);
         edit.setOnClickListener(new View.OnClickListener() {
@@ -225,7 +225,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
             }
         });
 
-
+        //delete selected one
         delete = findViewById(R.id.imageView);
         myDialog4 = new Dialog(this);
         delete.setOnClickListener(new View.OnClickListener() {
@@ -311,7 +311,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
 
 
 
-
+        //search
         myDialog6 = new Dialog(this);
         search = findViewById(R.id.searchCard);
         search.setOnClickListener(new View.OnClickListener() {

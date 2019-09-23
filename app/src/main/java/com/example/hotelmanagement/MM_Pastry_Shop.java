@@ -30,16 +30,17 @@ import Util.ShortEatsAdapter;
 
 public class MM_Pastry_Shop extends AppCompatActivity {
     private ViewPager pastryVP, pizzaVP, drinksVP;
-    Button mainMeals, pastryShop;
+    private Button mainMeals, pastryShop;
     private DatabaseReference df;
     private List<ShortEats> mealsLists = new ArrayList<>();
     private List<ShortEats> pizzaList = new ArrayList<>();
     private List<ShortEats> drinkslist = new ArrayList<>();
-    ViewFlipper vf;
+    private ViewFlipper vf;
     private ProgressDialog pd;
     private ShortEatsAdapter shortEatsAdapter;
     private PizzaAdapter pizzaAdapter;
     private DrinksAdapter drinksAdapter;
+    private ImageView back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,15 +55,17 @@ public class MM_Pastry_Shop extends AppCompatActivity {
             }
         });
 
-        pastryShop = findViewById(R.id.pastryShop);
-        pastryShop.setOnClickListener(new View.OnClickListener() {
+        back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MM_Pastry_Shop.this, MM_Pastry_Shop.class);
+                Intent intent =  new Intent(MM_Pastry_Shop.this, MainActivity.class);
                 startActivity(intent);
             }
         });
 
+
+        //pastry adapter used in here
         pastryVP = findViewById(R.id.pastry);
         pizzaVP = findViewById(R.id.pizza);
         drinksVP = findViewById(R.id.drinks);
@@ -98,7 +101,7 @@ public class MM_Pastry_Shop extends AppCompatActivity {
         pastryVP.setPadding(130, 0, 130, 0);
 
 
-
+        //pizza adapter used in here
         df = FirebaseDatabase.getInstance().getReference().child("ShortEats");
         df.addValueEventListener(new ValueEventListener() {
             @Override
@@ -125,7 +128,7 @@ public class MM_Pastry_Shop extends AppCompatActivity {
         pizzaVP.setPadding(130, 0, 130, 0);
 
 
-
+        //drinks adapter used in here
         df = FirebaseDatabase.getInstance().getReference().child("ShortEats");
         df.addValueEventListener(new ValueEventListener() {
             @Override

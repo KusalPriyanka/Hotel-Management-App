@@ -89,7 +89,7 @@ public class MM_Short_Eats_View extends AppCompatActivity {
         price = findViewById(R.id.price);
         price.setText("RS - "+ shortEats.getPrice() + "0/-");
 
-
+        //search bar
         myDialog6 = new Dialog(this);
         search = findViewById(R.id.searchCard);
         search.setOnClickListener(new View.OnClickListener() {
@@ -201,7 +201,7 @@ public class MM_Short_Eats_View extends AppCompatActivity {
             }
         });
 
-
+        //delete selected item
         delete = findViewById(R.id.imageView);
         myDialog4 = new Dialog(this);
         delete.setOnClickListener(new View.OnClickListener() {
@@ -249,7 +249,7 @@ public class MM_Short_Eats_View extends AppCompatActivity {
 
 
 
-
+        //edit
        myDialog2 = new Dialog(this);
        edit = findViewById(R.id.back);
        edit.setOnClickListener(new View.OnClickListener() {

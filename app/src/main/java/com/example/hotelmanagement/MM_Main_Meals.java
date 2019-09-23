@@ -34,12 +34,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-
 import java.util.ArrayList;
 import java.util.List;
-
-
 import Modal.MainMeals;
 import Modal.MealList;
 
@@ -56,7 +52,7 @@ public class MM_Main_Meals extends AppCompatActivity {
     private TextView  name, type, lprice, nprice;
     private CheckedTextView br,lu, dn;
     private ListView lv;
-    private ImageView image;
+    private ImageView image, back;
     private ProgressDialog pd;
 
 
@@ -71,15 +67,6 @@ public class MM_Main_Meals extends AppCompatActivity {
         lv = (ListView) findViewById(R.id.mmList);
 
 
-        mainMeals = findViewById(R.id.mainMeal);
-        mainMeals.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MM_Main_Meals.this, MM_MealManagement.class);
-                startActivity(intent);
-            }
-        });
-
         pastryShop = findViewById(R.id.pastryShop);
         pastryShop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,11 +76,22 @@ public class MM_Main_Meals extends AppCompatActivity {
             }
         });
 
+        back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =  new Intent(MM_Main_Meals.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+
+        //creating the adapter view in on create
         pd = new ProgressDialog(MM_Main_Meals.this);
         pd.setTitle("Welcome to Blue Dragon Dining");
         pd.setMessage("Feel The Taste Of Heaven");
@@ -114,6 +112,7 @@ public class MM_Main_Meals extends AppCompatActivity {
                 lv.setAdapter(mealList);
                 pd.dismiss();
 
+                //creating the view popup in here
                 lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

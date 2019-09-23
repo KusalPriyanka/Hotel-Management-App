@@ -48,13 +48,13 @@ public class MM_Short_Eats_Management extends AppCompatActivity {
     private ViewPager pastryVP;
     private DatabaseReference df;
     private ShortEatsAdapter shortEatsAdapter;
-    private Button addMeal, addButton, deleteAll, deleteAllfromDb, canselDAll;
+    private Button addMeal, addButton, deleteAll, deleteAllfromDb, canselDAll, maimMealsBtn;
     private List<ShortEats> mealsLists = new ArrayList<>();
     private List<String> idList = new ArrayList<>();
     private Dialog myDialog, myDialog3;
     private EditText name, price;
     private CheckBox pastry, pizza, drinks;
-    private ImageView uplodedImage, upload;
+    private ImageView uplodedImage, upload, back;
     private TextView uploadText, deleteHeader;
     private static final int PICK_FROM_GALLARY = 2;
     private ProgressDialog progressDialog;
@@ -72,8 +72,27 @@ public class MM_Short_Eats_Management extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mm__short__eats__management);
 
+        maimMealsBtn =  findViewById(R.id.mainMeals);
+        maimMealsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =  new Intent(MM_Short_Eats_Management.this, MM_MealManagement.class);
+                startActivity(intent);
+            }
+        });
+
+        back = findViewById(R.id.arrow);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =  new Intent(MM_Short_Eats_Management.this, adminDashboard.class);
+                startActivity(intent);
+            }
+        });
+
         storageReference = FirebaseStorage.getInstance().getReference("PastryShopImages");
 
+        //add short eats
         progressDialog = new ProgressDialog(this);
         myDialog = new Dialog(this);
         addMeal = findViewById(R.id.addMeal);
@@ -180,18 +199,11 @@ public class MM_Short_Eats_Management extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
-
-
+        //pastry horizontal view created
         pastryVP = findViewById(R.id.pastry);
         pd = new ProgressDialog(MM_Short_Eats_Management.this);
-        pd.setTitle("ssdsd");
-        pd.setMessage("ssdsd");
+        pd.setTitle("Short Eats Management");
+        pd.setMessage("Please wait.Data is loading...");
         pd.show();
         df = FirebaseDatabase.getInstance().getReference().child("ShortEats");
         df.addValueEventListener(new ValueEventListener() {
@@ -217,7 +229,7 @@ public class MM_Short_Eats_Management extends AppCompatActivity {
         pastryVP.setAdapter(shortEatsAdapter);
         pastryVP.setPadding(130, 0, 130, 0);
 
-
+        //search bar in here
         myDialog6 = new Dialog(this);
         search = findViewById(R.id.searchCard);
         search.setOnClickListener(new View.OnClickListener() {
@@ -329,15 +341,7 @@ public class MM_Short_Eats_Management extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
-
-
-
+        //delete all
         myDialog3 = new Dialog(this);
         deleteAll = findViewById(R.id.deleteAll);
         deleteAll.setOnClickListener(new View.OnClickListener() {
@@ -410,10 +414,10 @@ public class MM_Short_Eats_Management extends AppCompatActivity {
 
 
 
-
+    //insert data
     public void insetDataToDb(){
 
-        progressDialog.setTitle("Adding Main Meal");
+        progressDialog.setTitle("Adding Short Eat");
         progressDialog.setMessage("Data Uploading.Please Wait...");
         progressDialog.setCancelable(false);
         progressDialog.show();

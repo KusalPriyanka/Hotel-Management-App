@@ -58,7 +58,7 @@ public class MM_MealManagement extends AppCompatActivity {
     private CheckBox breakfast, lunch, dinner;
     private Dialog myDialog, myDialog3, myDialog6;
     private Button addButton, deleteAll, addMeal, deleteAllfromDb, canselDAll, pastryShop;
-    private ImageView  view , upload, uplodedImage, serchIcon;
+    private ImageView  view , upload, uplodedImage, serchIcon, back;
     private DatabaseReference df;
     private StorageReference storageReference;
     private String primaryKey;
@@ -87,13 +87,22 @@ public class MM_MealManagement extends AppCompatActivity {
             }
         });
 
+        back = findViewById(R.id.arrow);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =  new Intent(MM_MealManagement.this, adminDashboard.class);
+                startActivity(intent);
+            }
+        });
+
         progressDialog = new ProgressDialog(MM_MealManagement.this);
 
         storageReference = FirebaseStorage.getInstance().getReference("MainMealsImages");
 
         lv = (ListView) findViewById(R.id.mmList);
 
-
+        //search Bar created in here
         myDialog6 = new Dialog(this);
         search = findViewById(R.id.searchCard);
         search.setOnClickListener(new View.OnClickListener() {
@@ -211,7 +220,7 @@ public class MM_MealManagement extends AppCompatActivity {
 
 
 
-
+        //add main meal by popup
         myDialog = new Dialog(this);
         addMeal = findViewById(R.id.addMeal);
         addMeal.setOnClickListener(new View.OnClickListener() {
@@ -325,7 +334,7 @@ public class MM_MealManagement extends AppCompatActivity {
         });
 
 
-
+        //delete all main meals
         deleteAll = findViewById(R.id.deleteAll);
         myDialog3 = new Dialog(this);
         deleteAll.setOnClickListener(new View.OnClickListener() {
@@ -368,6 +377,7 @@ public class MM_MealManagement extends AppCompatActivity {
     }
 
 
+    //delete all function in here
     public void DeleteAllMainMeals(){
         df = FirebaseDatabase.getInstance().getReference().child("MainMeals");
         df.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -389,7 +399,7 @@ public class MM_MealManagement extends AppCompatActivity {
 
 
 
-
+    //inserting values in to Db
     public void insetDataToDb(){
 
         progressDialog.setTitle("Adding Main Meal");
@@ -473,7 +483,7 @@ public class MM_MealManagement extends AppCompatActivity {
 
     }
 
-
+    //get the images
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -484,6 +494,7 @@ public class MM_MealManagement extends AppCompatActivity {
 
     }
 
+    //main meal view
     @Override
     protected void onStart() {
         super.onStart();
