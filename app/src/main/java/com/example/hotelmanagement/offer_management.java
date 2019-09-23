@@ -58,8 +58,6 @@ public class offer_management extends AppCompatActivity {
         adapterForPackage = new AdapterForPackage(models,offer_management.this);
         viewPager.setAdapter(adapterForPackage);
         viewPager.setPadding(130, 0, 130, 0);
-
-
     }
 
 
