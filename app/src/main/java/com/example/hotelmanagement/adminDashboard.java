@@ -3,7 +3,9 @@ package com.example.hotelmanagement;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 public class adminDashboard extends AppCompatActivity {
 
@@ -21,6 +23,15 @@ public class adminDashboard extends AppCompatActivity {
         mainMeals = findViewById(R.id.mainMeals);
         eventMH = findViewById(R.id.eventManagement);
         tpart = findViewById(R.id.tpart);
+
+
+        eventMH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(adminDashboard.this,EM_Addhalls.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
