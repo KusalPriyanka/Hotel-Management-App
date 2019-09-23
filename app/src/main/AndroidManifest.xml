@@ -45,7 +45,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".addOffer" />
+        <activity android:name=".addOffer" android:windowSoftInputMode="stateAlwaysHidden|adjustResize|adjustPan"/>
         <activity android:name=".showOffers" />
         <activity android:name=".offer_management" />
         <activity android:name=".reservation_s1" />
