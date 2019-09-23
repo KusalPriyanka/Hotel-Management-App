@@ -121,7 +121,7 @@ public class EM_AddhallDetails extends AppCompatActivity {
 
     public void insertData(){
 
-        addHallPro.setVisibility(View.VISIBLE);
+
         dbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement");
         dbf.addValueEventListener(new ValueEventListener() {
             @Override
@@ -170,7 +170,7 @@ public class EM_AddhallDetails extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
-                                    addHallPro.setVisibility(View.GONE);
+
                                     Toast.makeText(getApplicationContext(), "Data Inserted Successfully!", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(EM_AddhallDetails.this, EM_Addhalls.class);
                                     startActivity(intent);
