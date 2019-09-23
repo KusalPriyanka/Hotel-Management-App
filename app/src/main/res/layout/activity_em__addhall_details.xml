@@ -184,6 +184,7 @@
                         android:layout_width="200dp"
                         android:layout_height="50dp"
                         android:hint="Enter Hall Price"
+                        android:inputType="number"
                         android:layout_marginLeft="20dp"
                         android:background="@drawable/edittext_style"
 
@@ -304,11 +305,6 @@
                     android:layout_gravity="center"
                     android:gravity="center">
 
-                    <ProgressBar
-                        android:id="@+id/uploadImagePro"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp" />
-
                     <ImageView
                         android:id="@+id/upload"
                         android:layout_width="30dp"
@@ -320,6 +316,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/uploadText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Choose Image"/>

@@ -192,6 +192,7 @@
                             android:layout_width="200dp"
                             android:layout_height="50dp"
                             android:hint="Enter Hall Price"
+                            android:inputType="number"
                             android:layout_marginLeft="20dp"
                             android:background="@drawable/edittext_style"
 
@@ -308,10 +309,10 @@
         android:gravity="center"
         android:layout_marginTop="10dp">
 
-        <ProgressBar
-            android:id="@+id/uploadImagePro"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose Image" />
 
         <ImageView
             android:id="@+id/upload"
@@ -321,11 +322,6 @@
             android:src="@drawable/ic_cloud_upload_black_24dp"
             android:background="@drawable/mm_edit_rec"
             />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Choose Image" />
 
     </LinearLayout>
 
@@ -337,7 +333,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="170dp"
-                    android:layout_marginTop="15dp"
+
                    >
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -352,40 +348,19 @@
                             android:layout_gravity="center"
 
 
-                            android:layout_marginBottom="8dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
                             android:background="@drawable/mm_edit_button"
                             android:foregroundGravity="center"
                             android:gravity="center"
-                            android:text="UPDATE"
+                            android:text="@string/update"
                             android:textColor="#ffff"
                             android:textSize="20dp"
                             android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/deletebtn"
-                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.498"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
-
-                        <Button
-                            android:id="@+id/deletebtn"
-                            android:layout_width="132dp"
-                            android:layout_height="45dp"
-                            android:layout_gravity="center"
-
-                            android:layout_marginBottom="8dp"
-                            android:background="@drawable/button_style_delete"
-                            android:foregroundGravity="center"
-                            android:gravity="center"
-                            android:text="DELETE"
-                            android:textColor="#ffff"
-                            android:textSize="20dp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/udatepagebtn"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.0" />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

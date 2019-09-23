@@ -45,7 +45,7 @@ public class EM_EventDetails extends AppCompatActivity {
     private Uri hallImageUri;
     private String ImagePath;
     private ProgressBar addHallPro;
-    ImageView hallImage;
+    ImageView hallImage,backtoupdatedview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,22 +149,37 @@ public class EM_EventDetails extends AppCompatActivity {
                     });
 
 
+
+
                 }
 
 
 
 
 
+
+
+                //back icon image link
+                backtoupdatedview = findViewById(R.id.backView);
+                backtoupdatedview.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(EM_EventDetails.this, EM_UpdatedView.class);
+                        startActivity(intent);
+                    }
+                });
+
+
+
+
+
+
             }
         });
 
-        delete = findViewById(R.id.deletebtn);
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                deleteHalls();
-            }
-        });
+
+
+
 
 
 
@@ -174,25 +189,7 @@ public class EM_EventDetails extends AppCompatActivity {
 
     }
 
-    public void deleteHalls(){
-        DatabaseReference deletehalldbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement").child(em_hallManagementl.getId());
-        deletehalldbf.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(getApplicationContext(), "Selected Hall is Deleted Successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(EM_EventDetails.this, EM_Addhalls.class);
-                    startActivity(intent);
-                }else {
-                    Toast.makeText(getApplicationContext(), "Error Occured", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(EM_EventDetails.this, EM_Addhalls.class);
-                    startActivity(intent);
-                }
 
-            }
-        });
-
-    }
 
 
 
