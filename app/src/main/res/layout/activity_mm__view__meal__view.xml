@@ -201,7 +201,7 @@
                     android:id="@+id/meallImage"
                     android:layout_width="170dp"
                     android:layout_height="170dp"
-                    app:civ_border_color="#fff"
+                    app:civ_border_color="#FCF158"
                     app:civ_border_width="2dp"
                     android:layout_marginBottom="10dp"
                     android:src="@drawable/mm_noodles"

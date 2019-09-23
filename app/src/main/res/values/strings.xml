@@ -91,6 +91,8 @@
     <string name="please_enter_meal_types">please_enter_meal_types</string>
     <string name="travel_home_travel_admin_home">Travel Home ,Travel Admin Home</string>
     <string name="travel_option4">Travel Option</string>
+    <string name="enter_price">Enter Price</string>
+    <string name="short_eat_management">Short Eat Management</string>
 
 
 </resources>
