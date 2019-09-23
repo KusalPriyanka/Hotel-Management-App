@@ -11,20 +11,20 @@ public class Reservation implements Serializable {
     private String checkOutTime;
     private int noOfAdults;
     private int noOfChild;
-    private int noOfRooms;
     private String packageId;
+    private String cusID;
 
     public Reservation() { }
 
-    public Reservation(String checkInDate, String checkInTime, String checkOutDate, String checkOutTime, int noOfAdults, int noOfChild, int noOfRooms, String packageId) {
+    public Reservation(String checkInDate, String checkInTime, String checkOutDate, String checkOutTime, int noOfAdults, int noOfChild,String packageId, String cusID) {
         this.checkInDate = checkInDate;
         this.checkInTime = checkInTime;
         this.checkOutDate = checkOutDate;
         this.checkOutTime = checkOutTime;
         this.noOfAdults = noOfAdults;
         this.noOfChild = noOfChild;
-        this.noOfRooms = noOfRooms;
         this.packageId = packageId;
+        this.cusID = cusID;
     }
 
     public String getCheckInDate() {
@@ -75,20 +75,20 @@ public class Reservation implements Serializable {
         this.noOfChild = noOfChild;
     }
 
-    public int getNoOfRooms() {
-        return noOfRooms;
-    }
-
-    public void setNoOfRooms(int noOfRooms) {
-        this.noOfRooms = noOfRooms;
-    }
-
     public String getPackageId() {
         return packageId;
     }
 
     public void setPackageId(String packageId) {
         this.packageId = packageId;
+    }
+
+    public String getCusID() {
+        return cusID;
+    }
+
+    public void setCusID(String cusID) {
+        this.cusID = cusID;
     }
 
     @Override
@@ -100,7 +100,6 @@ public class Reservation implements Serializable {
                 ", checkOutTime='" + checkOutTime + '\'' +
                 ", noOfAdults=" + noOfAdults +
                 ", noOfChild=" + noOfChild +
-                ", noOfRooms=" + noOfRooms +
                 '}';
     }
 }

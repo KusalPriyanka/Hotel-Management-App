@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -38,24 +39,27 @@ import Modal.MainMeals;
 
 
 public class MM_View_Meal_View extends AppCompatActivity {
-    TextView ID, name, type, lprice, nprice, headerDeletePU;
-    DatabaseReference df;
-    Dialog myDialog2, myDialog4, myDialog5;
-    Button editDetails, deleteAllfromDb, canselDAll;
-    ImageView edit, view, delete, image, serchIcon;
+    private TextView ID, name, type, lprice, nprice, headerDeletePU;
+    private DatabaseReference df;
+    private Dialog myDialog2, myDialog4, myDialog5;
+    private Button editDetails, deleteAllfromDb, canselDAll;
+    private ImageView edit, view, delete, image, serchIcon;
     private EditText mealName, foodType, normalPrice, largePrice;
     private CheckBox breakfast, lunch, dinner;
-    ImageView mealimage, back, upMealImg;
-    CardView search;
-    Dialog myDialog6;
+    private ImageView mealimage, back, upMealImg;
+    private CardView search;
+    private Dialog myDialog6;
     private EditText SerchTag;
-    CheckedTextView br, lu, dn;
+    private CheckedTextView br, lu, dn;
     private static final int PICK_FROM_GALLARY = 2;
     private Uri imageUri;
     private ProgressBar uploadImagePro, proSerch;
     private StorageReference storageReference;
     private ImageView upload, uplodedImage;
-    String ImagePath;
+    private String ImagePath;
+    private MainMeals mainMeals;
+    private int count = 0;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +67,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
         setContentView(R.layout.activity_mm__view__meal__view);
 
         storageReference = FirebaseStorage.getInstance().getReference("MainMealsImages");
+        progressDialog = new ProgressDialog(MM_View_Meal_View.this);
 
         back = (ImageView) findViewById(R.id.backToMa);
         back.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +79,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        final MainMeals mainMeals = (MainMeals) intent.getSerializableExtra("MainMeals");
+        mainMeals = (MainMeals) intent.getSerializableExtra("MainMeals");
 
         mealimage = (ImageView) findViewById(R.id.meallImage);
         Glide.with(MM_View_Meal_View.this).load(mainMeals.getImageName()).into(mealimage);
@@ -212,36 +217,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
                             dinner.setError("!");
                         } else {
 
-                            uploadImagePro.setVisibility(View.VISIBLE);
-                            MainMeals mm = new MainMeals();
-                            mm.setId(mainMeals.getId());
-                            mm.setMealName(mealName.getText().toString());
-                            mm.setType(foodType.getText().toString());
-                            mm.setNormalPrice(Float.parseFloat(normalPrice.getText().toString()));
-                            mm.setLargePrice(Float.parseFloat(largePrice.getText().toString()));
-                            mm.setBrakfast(breakfast.isChecked());
-                            mm.setLunch(lunch.isChecked());
-                            mm.setDinner(dinner.isChecked());
-                            mm.setImageName(ImagePath);
-
-                            df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child(mm.getId());
-                            df.setValue(mm).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        uploadImagePro.setVisibility(View.GONE);
-                                        Toast.makeText(getApplicationContext(), "Data Updated Successfully!", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(MM_View_Meal_View.this, MM_MealManagement.class);
-                                        startActivity(intent);
-                                    } else {
-                                        uploadImagePro.setVisibility(View.GONE);
-                                        Toast.makeText(getApplicationContext(), "Data Not Updated Successfully!", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(MM_View_Meal_View.this, MM_MealManagement.class);
-                                        startActivity(intent);
-                                    }
-
-                                }
-                            });
+                            updatedetails();
                         }
                     }
                 });
@@ -421,11 +397,56 @@ public class MM_View_Meal_View extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        uploadImagePro.setVisibility(View.VISIBLE);
         if(requestCode == PICK_FROM_GALLARY && resultCode == RESULT_OK && data != null && data.getData() != null){
             imageUri = data.getData();
             uplodedImage.setImageURI(imageUri);
-            uploadImagePro.setVisibility(View.VISIBLE);
+            count++;
+
+        }
+    }
+
+    public void updatedetails(){
+
+        if (count == 0){
+            progressDialog.setTitle("Updating Main Meal " + mainMeals.getId() );
+            progressDialog.setMessage("Data Uploading.Please Wait...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            MainMeals mm = new MainMeals();
+            mm.setId(mainMeals.getId());
+            mm.setMealName(mealName.getText().toString());
+            mm.setType(foodType.getText().toString());
+            mm.setNormalPrice(Float.parseFloat(normalPrice.getText().toString()));
+            mm.setLargePrice(Float.parseFloat(largePrice.getText().toString()));
+            mm.setBrakfast(breakfast.isChecked());
+            mm.setLunch(lunch.isChecked());
+            mm.setDinner(dinner.isChecked());
+            mm.setImageName(ImagePath);
+
+            df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child(mm.getId());
+            df.setValue(mm).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(), "Data Updated Successfully!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MM_View_Meal_View.this, MM_MealManagement.class);
+                        startActivity(intent);
+                    } else {
+                        progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(), "Data Not Updated Successfully!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MM_View_Meal_View.this, MM_MealManagement.class);
+                        startActivity(intent);
+                    }
+
+                }
+            });
+        }else{
+
+            progressDialog.setTitle("Updating Main Meal " + mainMeals.getId() );
+            progressDialog.setMessage("Data Uploading.Please Wait...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
             final StorageReference sf = storageReference.child("image" + imageUri.getLastPathSegment());
             sf.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -434,8 +455,36 @@ public class MM_View_Meal_View extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             ImagePath = uri.toString();
-                            uploadImagePro.setVisibility(View.INVISIBLE);
-                            Toast.makeText(getApplicationContext(), "File Uploaded!",Toast.LENGTH_LONG).show();
+                            MainMeals mm = new MainMeals();
+                            mm.setId(mainMeals.getId());
+                            mm.setMealName(mealName.getText().toString());
+                            mm.setType(foodType.getText().toString());
+                            mm.setNormalPrice(Float.parseFloat(normalPrice.getText().toString()));
+                            mm.setLargePrice(Float.parseFloat(largePrice.getText().toString()));
+                            mm.setBrakfast(breakfast.isChecked());
+                            mm.setLunch(lunch.isChecked());
+                            mm.setDinner(dinner.isChecked());
+                            mm.setImageName(ImagePath);
+
+                            df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child(mm.getId());
+                            df.setValue(mm).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(getApplicationContext(), "Data Updated Successfully!", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(MM_View_Meal_View.this, MM_MealManagement.class);
+                                        startActivity(intent);
+                                    } else {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(getApplicationContext(), "Data Not Updated Successfully!", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(MM_View_Meal_View.this, MM_MealManagement.class);
+                                        startActivity(intent);
+                                    }
+
+                                }
+                            });
+
                         }
                     });
                 }
@@ -443,7 +492,15 @@ public class MM_View_Meal_View extends AppCompatActivity {
 
 
 
+
+
+
+
+
         }
+
+
+
 
 
 
