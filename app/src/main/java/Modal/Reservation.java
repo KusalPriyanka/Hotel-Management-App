@@ -5,6 +5,7 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Reservation implements Serializable {
 
+    private String Id;
     private String checkInDate;
     private String checkInTime;
     private String checkOutDate;
@@ -89,6 +90,14 @@ public class Reservation implements Serializable {
 
     public void setCusID(String cusID) {
         this.cusID = cusID;
+    }
+
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String id) {
+        Id = id;
     }
 
     @Override
