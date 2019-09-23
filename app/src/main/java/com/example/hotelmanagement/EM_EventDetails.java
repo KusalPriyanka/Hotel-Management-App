@@ -1,17 +1,20 @@
 package com.example.hotelmanagement;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
 import Modal.EM_HallManagement;
 
@@ -35,6 +39,13 @@ public class EM_EventDetails extends AppCompatActivity {
     Button delete;
     EM_HallManagement em_hallManagementl;
     ImageView backToView;
+    String imagePath;
+    private StorageReference sr;
+    private static final int PICK_FROM_GALLARY = 2;
+    private Uri hallImageUri;
+    private String ImagePath;
+    private ProgressBar addHallPro;
+    ImageView hallImage,backtoupdatedview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +62,8 @@ public class EM_EventDetails extends AppCompatActivity {
         updhallType = findViewById(R.id.descripudate);
         updweddingbtn = findViewById(R.id.wedcheckupdate);
         updeventbtn = findViewById(R.id.eventcheckupdate);
-
+        hallImage = findViewById(R.id.upload);
+        imagePath = em_hallManagementl.getImageName();
 
 
 
@@ -81,6 +93,18 @@ public class EM_EventDetails extends AppCompatActivity {
         });
 
 
+        hallImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =  new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, PICK_FROM_GALLARY);
+            }
+        });
+
+
+
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,7 +127,8 @@ public class EM_EventDetails extends AppCompatActivity {
                     em.setPrice(Float.parseFloat(updhallPrice.getText().toString()));
                     em.setDescription(updhallType.getText().toString());
                     em.setWedding(updweddingbtn.isChecked());
-                    em.setWedding(updeventbtn.isChecked());
+                    em.setEvents(updeventbtn.isChecked());
+                    em.setImageName(imagePath);
 
 
                     dbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement").child(em_hallManagementl.getId());
@@ -124,22 +149,37 @@ public class EM_EventDetails extends AppCompatActivity {
                     });
 
 
+
+
                 }
 
 
 
 
 
+
+
+                //back icon image link
+                backtoupdatedview = findViewById(R.id.backView);
+                backtoupdatedview.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(EM_EventDetails.this, EM_UpdatedView.class);
+                        startActivity(intent);
+                    }
+                });
+
+
+
+
+
+
             }
         });
 
-        delete = findViewById(R.id.deletebtn);
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                deleteHalls();
-            }
-        });
+
+
+
 
 
 
@@ -149,23 +189,17 @@ public class EM_EventDetails extends AppCompatActivity {
 
     }
 
-    public void deleteHalls(){
-        DatabaseReference deletehalldbf = FirebaseDatabase.getInstance().getReference().child("EM_HallManagement").child(em_hallManagementl.getId());
-        deletehalldbf.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(getApplicationContext(), "Selected Hall is Deleted Successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(EM_EventDetails.this, EM_Addhalls.class);
-                    startActivity(intent);
-                }else {
-                    Toast.makeText(getApplicationContext(), "Error Occured", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(EM_EventDetails.this, EM_Addhalls.class);
-                    startActivity(intent);
-                }
 
-            }
-        });
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == PICK_FROM_GALLARY && resultCode == RESULT_OK && data != null && data.getData() != null){
+            hallImageUri = data.getData();
+
+        }
 
     }
 

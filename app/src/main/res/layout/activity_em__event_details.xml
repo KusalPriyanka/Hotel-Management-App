@@ -135,7 +135,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp">
 
                         <TextView
                             android:layout_width="100dp"
@@ -148,10 +149,13 @@
 
                         <EditText
                             android:id="@+id/hallnameupdate"
-                            android:layout_width="wrap_content"
-                            android:layout_height="100dp"
+                            android:layout_width="200dp"
+                            android:layout_height="50dp"
                             android:hint="Enter Hall Name"
-                            android:layout_marginLeft="50dp"
+                            android:layout_marginLeft="20dp"
+                            android:background="@drawable/edittext_style"
+                            android:layout_marginTop="10dp"
+
 
                             />
 
@@ -185,10 +189,13 @@
 
                         <EditText
                             android:id="@+id/hallpriceupdate"
-                            android:layout_width="wrap_content"
-                            android:layout_height="100dp"
+                            android:layout_width="200dp"
+                            android:layout_height="50dp"
                             android:hint="Enter Hall Price"
-                            android:layout_marginLeft="50dp"
+                            android:inputType="number"
+                            android:layout_marginLeft="20dp"
+                            android:background="@drawable/edittext_style"
+
 
                             />
 
@@ -226,10 +233,12 @@
 
                         <EditText
                             android:id="@+id/descripudate"
-                            android:layout_width="wrap_content"
-                            android:layout_height="100dp"
-                            android:hint="Enter Hall Type"
-                            android:layout_marginLeft="50dp"
+                            android:layout_width="200dp"
+                            android:layout_height="50dp"
+                            android:hint="Enter Details"
+                            android:layout_marginLeft="20dp"
+                            android:background="@drawable/edittext_style"
+
 
 
                             />
@@ -251,12 +260,12 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="30dp"
                     >
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                        android:layout_height="30dp"
                         android:orientation="horizontal">
 
                         <CheckBox
@@ -288,62 +297,70 @@
 
 
                 </androidx.cardview.widget.CardView>
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose Image" />
+
+        <ImageView
+            android:id="@+id/upload"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_cloud_upload_black_24dp"
+            android:background="@drawable/mm_edit_rec"
+            />
+
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>
 
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="170dp"
+
                    >
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="421dp"
-                        android:layout_height="119dp">
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
+
 
                         <Button
                             android:id="@+id/udatepagebtn"
                             android:layout_width="132dp"
-                            android:layout_height="50dp"
+                            android:layout_height="45dp"
                             android:layout_gravity="center"
 
 
-                            android:layout_marginTop="8dp"
-                            android:layout_marginBottom="8dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
                             android:background="@drawable/mm_edit_button"
                             android:foregroundGravity="center"
-
                             android:gravity="center"
-                            android:text="UPDATE"
+                            android:text="@string/update"
                             android:textColor="#ffff"
                             android:textSize="20dp"
                             android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/deletebtn"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.0" />
-
-                        <Button
-                            android:id="@+id/deletebtn"
-                            android:layout_width="132dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginBottom="8dp"
-                            android:background="@drawable/button_style_delete"
-
-                            android:foregroundGravity="center"
-                            android:gravity="center"
-                            android:text="DELETE"
-                            android:textColor="#ffff"
-                            android:textSize="20dp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/udatepagebtn"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.0" />
+                            app:layout_constraintHorizontal_bias="0.498"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

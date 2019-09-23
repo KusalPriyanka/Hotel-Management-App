@@ -142,10 +142,12 @@
 
                     <EditText
                         android:id="@+id/hallname"
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
                         android:hint="Enter hall Name"
-                        android:layout_marginLeft="50dp"
+                        android:background="@drawable/edittext_style"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
 
                         />
 
@@ -179,10 +181,13 @@
 
                     <EditText
                         android:id="@+id/hallprice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
                         android:hint="Enter Hall Price"
-                        android:layout_marginLeft="50dp"
+                        android:inputType="number"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/edittext_style"
+
 
 
                         />
@@ -220,10 +225,12 @@
 
                     <EditText
                         android:id="@+id/descrip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
                         android:hint="Enter Details"
-                        android:layout_marginLeft="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/edittext_style"
+
 
 
                         />
@@ -288,30 +295,37 @@
 
             </androidx.cardview.widget.CardView>
 
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_gravity="center"
-                android:gravity="center">
+                android:layout_height="50dp">
 
-                <ProgressBar
-                    android:id="@+id/uploadImagePro"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp" />
-
-                <ImageView
-                    android:id="@+id/upload"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/emhotelico"/>
+                    android:gravity="center">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Choose Image"/>
+                    <ImageView
+                        android:id="@+id/upload"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_cloud_upload_black_24dp"
+                        android:background="@drawable/mm_add_rec"
 
-            </LinearLayout>
+                        />
+
+                    <TextView
+                        android:id="@+id/uploadText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Choose Image"/>
+
+                </LinearLayout>
+
+
+
+            </androidx.cardview.widget.CardView>
 
 
             <androidx.cardview.widget.CardView
@@ -321,7 +335,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginTop="15dp">
 
                     <Button
                         android:id="@+id/addbuttonhall"

@@ -5,6 +5,7 @@ import java.util.List;
 
 import Modal.EM_HallManagement;
 import Modal.MainMeals;
+import Modal.ShortEats;
 
 public class CommonFunctions {
 
@@ -27,7 +28,29 @@ public class CommonFunctions {
         return id;
     }
 
-    public static String get_EM_Hall_Id(String prefix , List<EM_HallManagement> arrayList){
+
+
+    public static String get_short_eats_id(String prefix , List<ShortEats> arrayList){
+
+
+        List<String> list = new ArrayList<>();
+        for (ShortEats se:arrayList){
+            list.add(se.getId());
+        }
+
+        String id;
+        int next = arrayList.size();
+        next++;
+        id = prefix + next;
+        while (list.contains(id)) {
+            next++;
+            id = prefix + next;
+        }
+        return id;
+    }
+
+    public static String get_hall_id(String prefix , List<EM_HallManagement> arrayList){
+
 
         List<String> list = new ArrayList<>();
         for (EM_HallManagement em:arrayList){
@@ -44,12 +67,6 @@ public class CommonFunctions {
         }
         return id;
     }
-
-
-
-
-
-
 
 
 
