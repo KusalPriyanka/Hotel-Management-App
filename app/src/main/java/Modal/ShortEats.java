@@ -1,6 +1,8 @@
 package Modal;
 
-public class ShortEats {
+import java.io.Serializable;
+
+public class ShortEats  implements  Serializable {
     protected String id;
     protected String name;
     protected float price;

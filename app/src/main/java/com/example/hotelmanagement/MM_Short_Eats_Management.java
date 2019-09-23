@@ -3,6 +3,7 @@ package com.example.hotelmanagement;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.Dialog;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +62,10 @@ public class MM_Short_Eats_Management extends AppCompatActivity {
     private ShortEats shortEats;
     private Uri imageUri;
     private StorageReference storageReference;
+    private Dialog myDialog6;
+    private CardView search;
+    private EditText SerchTag;
+    private ImageView serchIcon;;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,14 +137,36 @@ public class MM_Short_Eats_Management extends AppCompatActivity {
 
                             price.setError("Normal Price Can Not Be Negative!");
 
-                        }/*else if (breakfast.isChecked() == false && lunch.isChecked() == false && dinner.isChecked() == false){
-                            Toast.makeText(getApplicationContext(), "Please Enter Meal Time!", Toast.LENGTH_LONG).show();
-                            breakfast.setError("!");
-                            lunch.setError("!");
-                            dinner.setError("!");
-                        }else if(imageUri == null){
+                        }else if (pastry.isChecked() == false && pizza.isChecked() == false && drinks.isChecked() == false){
+                            Toast.makeText(getApplicationContext(), "Please Enter SE Type", Toast.LENGTH_LONG).show();
+                            pastry.setError("!");
+                            pizza.setError("!");
+                            drinks.setError("!");
+                        }else if (pastry.isChecked() == true && pizza.isChecked() == true && drinks.isChecked() == true){
+                            Toast.makeText(getApplicationContext(), "Please Enter One SE Type!", Toast.LENGTH_LONG).show();
+                            pastry.setError("!");
+                            pizza.setError("!");
+                            drinks.setError("!");
+                        }else if (pastry.isChecked() == true && pizza.isChecked() == true && drinks.isChecked() == false){
+                            Toast.makeText(getApplicationContext(), "Please Enter One SE Type!", Toast.LENGTH_LONG).show();
+                            pastry.setError("!");
+                            pizza.setError("!");
+                            drinks.setError("!");
+                        }else if (pastry.isChecked() == true && pizza.isChecked() == false && drinks.isChecked() == true){
+                            Toast.makeText(getApplicationContext(), "Please Enter One SE Type!", Toast.LENGTH_LONG).show();
+                            pastry.setError("!");
+                            pizza.setError("!");
+                            drinks.setError("!");
+                        }else if (pastry.isChecked() == false && pizza.isChecked() == true && drinks.isChecked() == true){
+                            Toast.makeText(getApplicationContext(), "Please Enter One SE Type!", Toast.LENGTH_LONG).show();
+                            pastry.setError("!");
+                            pizza.setError("!");
+                            drinks.setError("!");
+                        }
+
+                        else if(imageUri == null){
                             uploadText.setError("!");
-                        }*/
+                        }
 
                         else {
                             insetDataToDb();
@@ -190,8 +218,116 @@ public class MM_Short_Eats_Management extends AppCompatActivity {
         pastryVP.setPadding(130, 0, 130, 0);
 
 
+        myDialog6 = new Dialog(this);
+        search = findViewById(R.id.searchCard);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
 
+                myDialog6.setContentView(R.layout.activity_mm__search__bar);
+                myDialog6.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                myDialog6.show();
+                final ProgressBar proSerch = myDialog6.findViewById(R.id.pro);
+                proSerch.setVisibility(View.INVISIBLE);
+
+                serchIcon = myDialog6.findViewById(R.id.imageView5);
+
+
+                serchIcon.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+
+
+                        SerchTag = myDialog6.findViewById(R.id.offerName);
+
+
+                        String id =  SerchTag.getText().toString();
+                        if(id.isEmpty()){
+                            SerchTag.setError("");
+                            Toast.makeText(getApplicationContext(), "Please Enter Key For Search", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            if(id.charAt(0) == 'M' && id.charAt(1) == 'M'){
+                                proSerch.setVisibility(View.VISIBLE);
+                                df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child(id);
+                                df.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                        MainMeals mainMeals = dataSnapshot.getValue(MainMeals.class);
+
+                                        if(mainMeals != null){
+                                            proSerch.setVisibility(View.GONE);
+                                            Intent intent =  new Intent(MM_Short_Eats_Management.this,  MM_View_Meal_View.class);
+                                            intent.putExtra("MainMeals", mainMeals);
+                                            startActivity(intent);
+                                        }else {
+                                            proSerch.setVisibility(View.GONE);
+                                            Toast.makeText(getApplicationContext(), "Please Enter Valid Id!", Toast.LENGTH_LONG).show();
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+                            }else if(id.charAt(0) == 'S' && id.charAt(1) == 'E'){
+
+                                proSerch.setVisibility(View.VISIBLE);
+                                df = FirebaseDatabase.getInstance().getReference().child("ShortEats").child(id);
+                                df.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                        ShortEats shortEats = dataSnapshot.getValue(ShortEats.class);
+
+                                        if(shortEats != null){
+                                            proSerch.setVisibility(View.GONE);
+                                            Intent intent =  new Intent(MM_Short_Eats_Management.this,  MM_Short_Eats_View.class);
+                                            intent.putExtra("short_eats", shortEats);
+                                            startActivity(intent);
+                                        }else {
+                                            proSerch.setVisibility(View.GONE);
+                                            Toast.makeText(getApplicationContext(), "Please Enter Valid Id!", Toast.LENGTH_LONG).show();
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+                            }
+
+                            else {
+                                proSerch.setVisibility(View.GONE);
+                                Toast.makeText(getApplicationContext(), "Please Enter Valid Id!", Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+
+
+
+
+                    }
+
+
+
+                });
+
+
+
+
+
+            }
+        });
 
 
 

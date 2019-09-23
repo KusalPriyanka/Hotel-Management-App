@@ -48,6 +48,7 @@ import java.util.List;
 
 import Modal.MainMeals;
 import Modal.MealList;
+import Modal.ShortEats;
 import Util.CommonConstants;
 import Util.CommonFunctions;
 
@@ -124,31 +125,67 @@ public class MM_MealManagement extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Please Enter Key For Search", Toast.LENGTH_LONG).show();
                         }
                         else {
-                            proSerch.setVisibility(View.VISIBLE);
-                            df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child(id);
-                            df.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if(id.charAt(0) == 'M' && id.charAt(1) == 'M'){
+                                proSerch.setVisibility(View.VISIBLE);
+                                df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child(id);
+                                df.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                    MainMeals mainMeals = dataSnapshot.getValue(MainMeals.class);
+                                        MainMeals mainMeals = dataSnapshot.getValue(MainMeals.class);
 
-                                    if(mainMeals != null){
-                                        proSerch.setVisibility(View.GONE);
-                                        Intent intent =  new Intent(MM_MealManagement.this,  MM_View_Meal_View.class);
-                                        intent.putExtra("MainMeals", mainMeals);
-                                        startActivity(intent);
-                                    }else {
-                                        proSerch.setVisibility(View.GONE);
-                                        Toast.makeText(getApplicationContext(), "Please Enter Valid Id!", Toast.LENGTH_LONG).show();
+                                        if(mainMeals != null){
+                                            proSerch.setVisibility(View.GONE);
+                                            Intent intent =  new Intent(MM_MealManagement.this,  MM_View_Meal_View.class);
+                                            intent.putExtra("MainMeals", mainMeals);
+                                            startActivity(intent);
+                                        }else {
+                                            proSerch.setVisibility(View.GONE);
+                                            Toast.makeText(getApplicationContext(), "Please Enter Valid Id!", Toast.LENGTH_LONG).show();
+                                        }
+
                                     }
 
-                                }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    }
+                                });
 
-                                }
-                            });
+                            }else if(id.charAt(0) == 'S' && id.charAt(1) == 'E'){
+
+                                proSerch.setVisibility(View.VISIBLE);
+                                df = FirebaseDatabase.getInstance().getReference().child("ShortEats").child(id);
+                                df.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                        ShortEats shortEats = dataSnapshot.getValue(ShortEats.class);
+
+                                        if(shortEats != null){
+                                            proSerch.setVisibility(View.GONE);
+                                            Intent intent =  new Intent(MM_MealManagement.this,  MM_Short_Eats_View.class);
+                                            intent.putExtra("short_eats", shortEats);
+                                            startActivity(intent);
+                                        }else {
+                                            proSerch.setVisibility(View.GONE);
+                                            Toast.makeText(getApplicationContext(), "Please Enter Valid Id!", Toast.LENGTH_LONG).show();
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+                            }
+
+                            else {
+                                proSerch.setVisibility(View.GONE);
+                                Toast.makeText(getApplicationContext(), "Please Enter Valid Id!", Toast.LENGTH_LONG).show();
+                            }
                         }
 
 

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -22,7 +23,6 @@ import android.widget.CheckedTextView;
 
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
@@ -49,17 +49,15 @@ public class MM_Main_Meals extends AppCompatActivity {
 
 
 
-    Button mainMeals, pastryShop;
-
+    private Button mainMeals, pastryShop;
     private DatabaseReference df;
-    List<MainMeals> mealsLists;
-
-    private ProgressBar progressBar;
-    Dialog myDialog5;
-    TextView  name, type, lprice, nprice;
-    CheckedTextView br,lu, dn;
-    ListView lv;
-    ImageView image;
+    private List<MainMeals> mealsLists;
+    private Dialog myDialog5;
+    private TextView  name, type, lprice, nprice;
+    private CheckedTextView br,lu, dn;
+    private ListView lv;
+    private ImageView image;
+    private ProgressDialog pd;
 
 
     @Override
@@ -96,8 +94,11 @@ public class MM_Main_Meals extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        progressBar = findViewById(R.id.pro);
-        progressBar.setVisibility(View.VISIBLE);
+        pd = new ProgressDialog(MM_Main_Meals.this);
+        pd.setTitle("Welcome to Blue Dragon Dining");
+        pd.setMessage("Feel The Taste Of Heaven");
+        pd.setCanceledOnTouchOutside(false);
+        pd.show();
         df = FirebaseDatabase.getInstance().getReference().child("MainMeals");
         df.addValueEventListener(new ValueEventListener() {
             @Override
@@ -111,7 +112,7 @@ public class MM_Main_Meals extends AppCompatActivity {
                 MealList mealList = new MealList(MM_Main_Meals.this, mealsLists);
 
                 lv.setAdapter(mealList);
-                progressBar.setVisibility(View.GONE);
+                pd.dismiss();
 
                 lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
