@@ -36,6 +36,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import Modal.MainMeals;
+import Modal.ShortEats;
 
 
 public class MM_View_Meal_View extends AppCompatActivity {
@@ -304,6 +305,13 @@ public class MM_View_Meal_View extends AppCompatActivity {
         });
 
 
+
+
+
+
+
+
+
         myDialog6 = new Dialog(this);
         search = findViewById(R.id.searchCard);
         search.setOnClickListener(new View.OnClickListener() {
@@ -325,46 +333,91 @@ public class MM_View_Meal_View extends AppCompatActivity {
                     public void onClick(View view) {
 
 
+
                         SerchTag = myDialog6.findViewById(R.id.offerName);
 
 
-                        String id = SerchTag.getText().toString();
-                        if (id.isEmpty()) {
+                        String id =  SerchTag.getText().toString();
+                        if(id.isEmpty()){
                             SerchTag.setError("");
                             Toast.makeText(getApplicationContext(), "Please Enter Key For Search", Toast.LENGTH_LONG).show();
-                        } else {
-                            proSerch.setVisibility(View.VISIBLE);
-                            df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child(id);
-                            df.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        }
+                        else {
+                            if(id.charAt(0) == 'M' && id.charAt(1) == 'M'){
+                                proSerch.setVisibility(View.VISIBLE);
+                                df = FirebaseDatabase.getInstance().getReference().child("MainMeals").child(id);
+                                df.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                    MainMeals mainMeals = dataSnapshot.getValue(MainMeals.class);
+                                        MainMeals mainMeals = dataSnapshot.getValue(MainMeals.class);
 
-                                    if (mainMeals != null) {
-                                        proSerch.setVisibility(View.GONE);
-                                        Intent intent = new Intent(MM_View_Meal_View.this, MM_View_Meal_View.class);
-                                        intent.putExtra("MainMeals", mainMeals);
-                                        startActivity(intent);
-                                    } else {
-                                        proSerch.setVisibility(View.GONE);
-                                        Toast.makeText(getApplicationContext(), "Please Enter Valid Id!", Toast.LENGTH_LONG).show();
+                                        if(mainMeals != null){
+                                            proSerch.setVisibility(View.GONE);
+                                            Intent intent =  new Intent(MM_View_Meal_View.this,  MM_View_Meal_View.class);
+                                            intent.putExtra("MainMeals", mainMeals);
+                                            startActivity(intent);
+                                        }else {
+                                            proSerch.setVisibility(View.GONE);
+                                            Toast.makeText(getApplicationContext(), "Please Enter Valid Id!", Toast.LENGTH_LONG).show();
+                                        }
+
                                     }
 
-                                }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    }
+                                });
 
-                                }
-                            });
+                            }else if(id.charAt(0) == 'S' && id.charAt(1) == 'E'){
+
+                                proSerch.setVisibility(View.VISIBLE);
+                                df = FirebaseDatabase.getInstance().getReference().child("ShortEats").child(id);
+                                df.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                        ShortEats shortEats = dataSnapshot.getValue(ShortEats.class);
+
+                                        if(shortEats != null){
+                                            proSerch.setVisibility(View.GONE);
+                                            Intent intent =  new Intent(MM_View_Meal_View.this,  MM_Short_Eats_View.class);
+                                            intent.putExtra("short_eats", shortEats);
+                                            startActivity(intent);
+                                        }else {
+                                            proSerch.setVisibility(View.GONE);
+                                            Toast.makeText(getApplicationContext(), "Please Enter Valid Id!", Toast.LENGTH_LONG).show();
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+                            }
+
+                            else {
+                                proSerch.setVisibility(View.GONE);
+                                Toast.makeText(getApplicationContext(), "Please Enter Valid Id!", Toast.LENGTH_LONG).show();
+                            }
                         }
+
+
+
 
 
                     }
 
 
+
                 });
+
+
+
 
 
             }

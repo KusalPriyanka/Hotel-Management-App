@@ -155,16 +155,6 @@ android:background="#fff"
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ProgressBar
-                android:layout_marginTop="200dp"
-                android:id="@+id/pro"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_gravity="center"
-                android:outlineSpotShadowColor="#000"
-                android:outlineAmbientShadowColor="#000"
-                />
-
             <ListView
                 android:id="@+id/mmList"
                 android:layout_width="match_parent"

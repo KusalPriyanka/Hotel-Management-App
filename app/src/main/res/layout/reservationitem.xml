@@ -16,7 +16,7 @@
             android:focusable="true"
             android:orientation="vertical"
             android:background="?attr/selectableItemBackground"
-            android:padding="16dp">
+            android:padding="10dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img"
@@ -34,16 +34,34 @@
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginLeft="140dp"/>
 
             <TextView
-                android:id="@+id/list_desc"
+                android:id="@+id/checkin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="2dp"
                 android:text="Description"
                 android:layout_below="@+id/list_title"
+                android:layout_marginLeft="140dp"/>
+
+            <TextView
+                android:id="@+id/checkout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Description"
+                android:layout_below="@+id/checkin"
+                android:layout_marginLeft="140dp"/>
+
+            <TextView
+                android:id="@+id/noofperson"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Description"
+                android:layout_below="@+id/checkout"
                 android:layout_marginLeft="140dp"/>
 
             <View

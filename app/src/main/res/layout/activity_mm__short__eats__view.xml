@@ -108,7 +108,7 @@ android:background="#fff"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.559"
-                    app:srcCompat="@drawable/mm_head_noodles" />
+                    app:srcCompat="@drawable/mm_cupcake" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -196,85 +196,88 @@ android:background="#fff"
 
             </LinearLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <androidx.cardview.widget.CardView
-
-                android:layout_width="250dp"
-                android:layout_height="166dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="100dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="15dp"
-                android:clipChildren="false"
-                android:clipToPadding="false"
-                android:layout_gravity="center"
-                app:cardCornerRadius="30dp"
-
-                >
-
-                <LinearLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/image"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:src="@drawable/mm_noodles"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginBottom="2dp"/>
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="20dp"
+                    tools:layout_editor_absoluteX="10dp"
+                    tools:layout_editor_absoluteY="10dp">
 
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <LinearLayout
-                            android:layout_width="150dp"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="end">
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="test dcskhdksdhsdjsahdjsd"
+                            android:textSize="24sp"
+                            android:textColor="#000"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.842" />
 
-                            <TextView
-                                android:id="@+id/name"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginLeft="10dp"
-                                android:gravity="center|left"
-                                android:text="@string/filo_pastry"
-                                android:textColor="#000"
-                                android:textSize="15dp"
-
-                                />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/image"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="#000">
+                            android:layout_height="200dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="8dp"
+                            android:src="@drawable/mm_noodles"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.061"
+                            app:civ_border_width="2dp"
+                            app:civ_border_color="#20CAFF"
 
-                            <TextView
-                                android:id="@+id/price"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginRight="10dp"
-                                android:gravity="center|right"
-                                android:text="@string/_150_00"
-                                android:textColor="@android:color/holo_red_light"
-                                android:textSize="18dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="@string/enter_meal_name"
+                            android:textSize="20sp"
+                            android:textColor="@android:color/holo_red_dark"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.958"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="1.0" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                                />
-                        </LinearLayout>
-
-                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
 
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </LinearLayout>
@@ -284,46 +287,33 @@ android:background="#fff"
             android:layout_height="50dp">
 
             <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:src="@drawable/mm_ic_remove_red_eye_black_24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/back"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
                 android:id="@+id/back"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:src="@drawable/mm_ic_edit_black_24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageView"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginBottom="8dp"
                 android:src="@drawable/mm_ic_delete_black_24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/back"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

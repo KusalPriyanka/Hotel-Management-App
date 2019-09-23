@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MM_Main_Meal_View_PU"
+    tools:context=".MM_View_Meal_View"
     android:background="#fff"
     >
 

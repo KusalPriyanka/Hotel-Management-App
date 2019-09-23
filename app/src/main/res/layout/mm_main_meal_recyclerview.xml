@@ -44,14 +44,11 @@
                 android:layout_height="120dp"
 
                 >
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
+                <ImageView
                     android:id="@+id/img"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:civ_border_color="#FCF158"
-                    app:civ_border_width="2dp"
+                    android:scaleType="centerCrop"
                     />
 
 
