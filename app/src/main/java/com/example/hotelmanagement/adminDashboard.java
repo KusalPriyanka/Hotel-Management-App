@@ -31,6 +31,19 @@ public class adminDashboard extends AppCompatActivity {
             }
         });
 
+        mainMeals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(adminDashboard.this, MM_MealManagement.class));
+            }
+        });
+
+        eventMH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(adminDashboard.this, EM_Addhalls.class));
+            }
+        });
 
     }
 }

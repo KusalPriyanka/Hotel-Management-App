@@ -77,7 +77,7 @@ public class MM_Short_Eats_View extends AppCompatActivity {
         Intent intent = getIntent();
         shortEats = (ShortEats) intent.getSerializableExtra("short_eats");
 
-        id = findViewById(R.id.textView4);
+        id = findViewById(R.id.userNameLabel);
         id.setText(shortEats.getId());
 
         image = findViewById(R.id.image);

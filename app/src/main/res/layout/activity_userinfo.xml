@@ -78,7 +78,7 @@
                 android:id="@+id/logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_style_logout"
+                android:background="@drawable/button_style_delete"
                 android:padding="15dp"
                 android:text="Logout"
                 android:textColor="@android:color/background_light"
