@@ -24,19 +24,10 @@ public class adminDashboard extends AppCompatActivity {
         eventMH = findViewById(R.id.eventManagement);
         tpart = findViewById(R.id.tpart);
 
-        mainMeals.setOnClickListener(new View.OnClickListener() {
+        reservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(adminDashboard.this,MM_MealManagement.class);
-                startActivity(intent);
-            }
-        });
-
-        eventMH.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(adminDashboard.this,EM_Addhalls.class);
-                startActivity(intent);
+                startActivity(new Intent(adminDashboard.this,offer_management.class));
             }
         });
 

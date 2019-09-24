@@ -24,7 +24,7 @@
         app:srcCompat="@drawable/back_icon" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/userNameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.151"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/userNameLabel"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
@@ -97,7 +97,7 @@
         app:layout_constraintVertical_bias="0.105" />
 
     <EditText
-        android:id="@+id/userName"
+        android:id="@+id/userNameUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -131,11 +131,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.108"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userName"
+        app:layout_constraintTop_toBottomOf="@+id/userNameUp"
         app:layout_constraintVertical_bias="0.035" />
 
     <EditText
-        android:id="@+id/mobileNo"
+        android:id="@+id/mobileNoUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -169,11 +169,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.109"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mobileNo"
+        app:layout_constraintTop_toBottomOf="@+id/mobileNoUp"
         app:layout_constraintVertical_bias="0.055" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/emailUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -207,7 +207,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.089"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email"
+        app:layout_constraintTop_toBottomOf="@+id/emailUp"
         app:layout_constraintVertical_bias="0.104" />
 
     <EditText

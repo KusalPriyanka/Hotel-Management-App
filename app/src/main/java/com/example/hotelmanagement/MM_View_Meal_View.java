@@ -85,7 +85,7 @@ public class MM_View_Meal_View extends AppCompatActivity {
         mealimage = (ImageView) findViewById(R.id.meallImage);
         Glide.with(MM_View_Meal_View.this).load(mainMeals.getImageName()).into(mealimage);
 
-        ID = findViewById(R.id.textView4);
+        ID = findViewById(R.id.userNameLabel);
         name = findViewById(R.id.name1);
         nprice = findViewById(R.id.price1);
         br = findViewById(R.id.brakfast);

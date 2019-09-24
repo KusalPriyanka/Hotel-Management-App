@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MM_Short_Eats_View"></activity>
+        <activity android:name=".userinfo"></activity>
+        <activity android:name=".MM_Short_Eats_View" />
         <activity android:name=".MM_Short_Eats_Management" />
         <activity android:name=".adminDashboard" />
         <activity android:name=".reservationlist" />
@@ -45,7 +46,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".addOffer" android:windowSoftInputMode="stateAlwaysHidden|adjustResize|adjustPan"/>
+        <activity
+            android:name=".addOffer"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize|adjustPan" />
         <activity android:name=".showOffers" />
         <activity android:name=".offer_management" />
         <activity android:name=".reservation_s1" />

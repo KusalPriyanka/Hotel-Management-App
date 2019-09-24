@@ -54,7 +54,7 @@ android:background="#fff"
 
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/userNameLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -89,7 +89,7 @@ android:background="#fff"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.155"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView4"
+                    app:layout_constraintTop_toBottomOf="@+id/userNameLabel"
                     app:layout_constraintVertical_bias="0.0" />
 
                 <ImageView

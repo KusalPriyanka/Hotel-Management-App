@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -34,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private CardView tpart;
     private TextView username;
     private CircleImageView userImg;
-    private FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+    private FirebaseUser currentUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
         reservation = findViewById(R.id.reservation);
         username = findViewById(R.id.username);
         userImg = findViewById(R.id.profile_image);
+
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
 
         username.setText(currentUser.getDisplayName());
 
@@ -55,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         reservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,reservationlist.class);
+                Intent intent = new Intent(MainActivity.this,reservation_s1.class);
                 startActivity(intent);
             }
         });
@@ -85,6 +90,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,TravelHome.class);
                 startActivity(intent);
+            }
+        });
+
+        userImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,userinfo.class));
             }
         });
 
