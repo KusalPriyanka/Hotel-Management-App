@@ -307,8 +307,8 @@ public class MM_Short_Eats_View extends AppCompatActivity {
 
 
 
-               editDetails = (Button) myDialog2.findViewById(R.id.edit);
-               editDetails.setOnClickListener(new View.OnClickListener() {
+              //editDetails = (Button) myDialog2.findViewById(R.id.edit);
+/*               editDetails.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View view) {
 
@@ -359,7 +359,7 @@ public class MM_Short_Eats_View extends AppCompatActivity {
                        }
 
                    }
-               });
+               });*/
 
            }
        });

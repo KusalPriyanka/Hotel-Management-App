@@ -3,6 +3,7 @@ package com.example.hotelmanagement;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,7 +28,7 @@ public class signup extends AppCompatActivity {
     private EditText userName, mobileNo, email, password;
     private Button signup;
     private FirebaseAuth mAuth;
-    private ProgressBar progressBar;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +41,9 @@ public class signup extends AppCompatActivity {
         password = findViewById(R.id.password);
         signup = findViewById(R.id.addoffers);
 
-        progressBar = findViewById(R.id.progressbar);
-        progressBar.setVisibility(View.GONE);
-
         mAuth = FirebaseAuth.getInstance();
+
+        progressDialog = new ProgressDialog(signup.this);
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +56,10 @@ public class signup extends AppCompatActivity {
 
     private void registerUser(){
 
-        progressBar.setVisibility(View.VISIBLE);
+        progressDialog.setTitle("User Registration");
+        progressDialog.setMessage("Your Details Add To The App... Wait!");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
 
         final String userEmail = email.getText().toString().trim();
         final String userPass = password.getText().toString().trim();
@@ -87,7 +90,7 @@ public class signup extends AppCompatActivity {
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            progressBar.setVisibility(View.GONE);
+                                            progressDialog.dismiss();
                                             if(task.isSuccessful()){
                                                 Toast.makeText(getApplicationContext(), "Registered Successfully!" ,Toast.LENGTH_LONG).show();
                                                 startActivity(new Intent(signup.this,Login.class));
